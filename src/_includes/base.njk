@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{{ title }} — Pascal Gagnon</title>
+        <meta name="description" content="{{ description or 'Réflexions sur la technologie, les affaires et la vie.' }}">
+          <link rel="stylesheet" href="/assets/style.css">
+          </head>
+          <body>
+            <header class="site-header">
+                <div class="container">
+                      <a href="/" class="site-logo">Pascal Gagnon</a>
+                            <nav class="site-nav">
+                                    <a href="/">Accueil</a>
+                                            <a href="/a-propos/">À propos</a>
+                                                  </nav>
+                                                      </div>
+                                                        </header>
+
+                                                          <main class="main-content">
+                                                              {{ content | safe }}
+                                                                </main>
+
+                                                                  <footer class="site-footer">
+                                                                      <div class="container">
+                                                                            <p>© 2026 Pascal Gagnon — Tous droits réservés</p>
+                                                                                </div>
+                                                                                  </footer>
+                                                                                  </body>
+                                                                                  </html>
