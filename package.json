@@ -1,0 +1,12 @@
+{
+    "name": "pascalgagnon-site",
+    "version": "1.0.0",
+    "description": "Site pascalgagnon.ca",
+    "scripts": {
+          "build": "eleventy",
+          "start": "eleventy --serve"
+    },
+    "dependencies": {
+          "@11ty/eleventy": "^2.0.1"
+    }
+}
