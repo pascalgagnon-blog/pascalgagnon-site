@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ site.name }} — Économie régionale, énergie et PME du Québec</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="home">
+
+  {% include "header.html.j2" %}
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════════════
+         ZONE 1 — HERO : Qui est Pascal, pourquoi ça compte
+    ════════════════════════════════════════════════════ -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-label">Analyste · Conseiller municipal · Roberval</div>
+        <h1 class="hero-title">
+          Le Québec profond produit la richesse.<br>
+          Il est temps qu'il décide comment la dépenser.
+        </h1>
+        <p class="hero-sub">
+          Directeur de compte corporatif chez Desjardins, conseiller municipal à Roberval,
+          ancré au Lac-Saint-Jean. J'écris sur l'économie régionale, l'énergie et les PME
+          avec des données — pas des opinions molles.
+        </p>
+        <a href="/articles/" class="btn-primary">Lire les articles</a>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         ZONE 2 — ARTICLE EN VEDETTE
+    ════════════════════════════════════════════════════ -->
+    <section class="featured-section">
+      <div class="container">
+        <div class="section-label">À LIRE EN PREMIER</div>
+        <article class="featured-card">
+          <div class="featured-meta">
+            <span class="article-tag">{{ articles.featured.tag }}</span>
+          </div>
+          <h2 class="featured-title">
+            <a href="/articles/{{ articles.featured.slug }}/">{{ articles.featured.title }}</a>
+          </h2>
+          <p class="featured-chapeau">{{ articles.featured.chapeau }}</p>
+          <div class="featured-byline">
+            <span>Pascal Gagnon</span>
+            <span class="byline-sep">·</span>
+            <span>{{ articles.featured.date }}</span>
+            <span class="byline-sep">·</span>
+            <span>{{ articles.featured.reading_time }} de lecture</span>
+          </div>
+          <a href="/articles/{{ articles.featured.slug }}/" class="read-more">Lire l'article →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         ZONE 3 — ARTICLES RÉCENTS
+    ════════════════════════════════════════════════════ -->
+    <section class="recent-section">
+      <div class="container">
+        <div class="section-label">ARTICLES RÉCENTS</div>
+        <div class="articles-grid">
+          {% for article in articles.recent %}
+          <article class="article-card">
+            <div class="card-thumb" aria-hidden="true"></div>
+            <div class="card-body">
+              <span class="article-tag">{{ article.tag }}</span>
+              <h3 class="card-title">
+                <a href="/articles/{{ article.slug }}/">{{ article.title }}</a>
+              </h3>
+              <p class="card-chapeau">{{ article.chapeau }}</p>
+              <div class="card-byline">
+                <span>{{ article.date }}</span>
+                <span class="byline-sep">·</span>
+                <span>{{ article.reading_time }}</span>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         ZONE 4 — LES 3 VERTICAUX ÉDITORIAUX
+    ════════════════════════════════════════════════════ -->
+    <section class="verticals-section">
+      <div class="container">
+        <div class="section-label">LES TROIS ANGLES</div>
+        <div class="verticals-grid">
+          {% for v in site.verticaux %}
+          <div class="vertical-card">
+            <h3 class="vertical-title">{{ v.label }}</h3>
+            <p class="vertical-desc">{{ v.description }}</p>
+            <a href="/{{ v.slug }}/" class="vertical-link">Tous les articles →</a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         ZONE 5 — INFOLETTRE
+    ════════════════════════════════════════════════════ -->
+    <section class="newsletter-section">
+      <div class="container">
+        <div class="newsletter-inner">
+          <div class="newsletter-text">
+            <h2 class="newsletter-title">Si ce que tu viens de lire t'a servi</h2>
+            <p class="newsletter-sub">
+              Les prochains articles directement dans ta boîte. Pas de fréquence imposée —
+              un article quand il est prêt, pas avant.
+            </p>
+          </div>
+          <form class="newsletter-form" action="#" method="post">
+            <input
+              type="email"
+              name="email"
+              placeholder="ton@courriel.ca"
+              required
+              class="newsletter-input"
+              aria-label="Adresse courriel"
+            >
+            <button type="submit" class="btn-primary">M'abonner</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════
+       AUTEUR BIO (avant footer)
+  ════════════════════════════════════════════════════ -->
+  <section class="author-section">
+    <div class="container">
+      <div class="author-card">
+        <div class="author-avatar-lg">{{ site.author.initials }}</div>
+        <div class="author-bio">
+          <strong class="author-name">{{ site.author.name }}</strong>
+          <p>{{ site.author.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include "footer.html.j2" %}
+
+</body>
+</html>

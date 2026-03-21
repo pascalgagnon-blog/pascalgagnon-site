@@ -1,0 +1,28 @@
+name: Pascal Gagnon
+tagline: "Directeur de compte, conseiller municipal, Lac-Saint-Jean."
+description: "J'écris sur l'économie régionale, l'énergie et les PME — avec des données, pas des opinions molles."
+url: https://pascalgagnon.ca
+author:
+  name: Pascal Gagnon
+  bio: "Entrepreneur et penseur ancré au Lac-Saint-Jean. J'écris sur la gouvernance régionale, l'économie du Québec profond et les décisions qui façonnent nos territoires — avec des données, pas des opinions molles."
+  initials: PG
+nav:
+  - label: Articles
+    url: /articles/
+  - label: À propos
+    url: /a-propos/
+  - label: Archives
+    url: /archives/
+verticaux:
+  - id: economie-energie
+    label: Économie & Énergie
+    slug: economie-energie
+    description: "La contrainte biophysique que personne ne veut nommer au Québec."
+  - id: terrain-pme
+    label: Terrain PME
+    slug: terrain-pme
+    description: "Ce que les PME régionales font que les consultants ne voient pas."
+  - id: gouvernance-regionale
+    label: Gouvernance régionale
+    slug: gouvernance-regionale
+    description: "Les décisions prises à Québec qui façonnent les territoires."

@@ -1,0 +1,13 @@
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="site-logo">
+      <span class="logo-pascal">Pascal</span>
+      <span class="logo-nom">Gagnon</span>
+    </a>
+    <nav class="site-nav" aria-label="Navigation principale">
+      {% for item in site.nav %}
+      <a href="{{ item.url }}" class="nav-link">{{ item.label }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>
