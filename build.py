@@ -109,6 +109,16 @@ def build():
             (out_dir / "index.html").write_text(html, encoding="utf-8")
             print(f"✓ articles/{slug}/index.html")
 
+    # Copy static directories (any src/ subdir not prefixed with _ and not articles/assets)
+    skip = {"_layouts", "_includes", "_data", "assets", "articles"}
+    for item in SRC.iterdir():
+        if item.is_dir() and item.name not in skip and not item.name.startswith("_"):
+            dest = DIST / item.name
+            if dest.exists():
+                shutil.rmtree(dest)
+            shutil.copytree(item, dest)
+            print(f"✓ static/{item.name}/")
+
     print(f"\n✅ Site généré dans /{DIST}")
 
 if __name__ == "__main__":

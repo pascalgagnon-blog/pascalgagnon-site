@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perdre du poids... encore. La Méthode Reset</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+  :root {
+    --noir: #111010;
+    --blanc: #faf8f5;
+    --creme: #f0ebe3;
+    --or: #b8945a;
+    --or-clair: #e8d5b0;
+    --rouge: #9b2335;
+    --gris: #888;
+    --gris-fonce: #444;
+    --texte: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--blanc);
+    color: var(--texte);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  /* ── BARRE NIVEAUX DE LECTURE ── */
+  .nav-lecture {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--noir);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-bottom: 2px solid var(--or);
+  }
+  .nav-lecture a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    transition: all 0.2s;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav-lecture a:last-child { border-right: none; }
+  .nav-lecture a:hover { color: var(--or); }
+  .nav-lecture a.n1 { color: var(--or); }
+
+  /* ── HÉRO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-texte {
+    background: var(--noir);
+    color: var(--blanc);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-photo {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(30%) contrast(1.1);
+    transition: filter 0.5s;
+  }
+  .hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--noir) 0%, transparent 40%);
+  }
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(36px, 5vw, 62px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--or);
+    display: block;
+  }
+  .hero-sous-titre {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: rgba(250,248,245,0.6);
+    margin: 20px 0 40px;
+    line-height: 1.6;
+    max-width: 380px;
+  }
+  .hero-stat {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-stat-item { text-align: center; }
+  .hero-stat-item .n {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--or);
+    line-height: 1;
+    display: block;
+  }
+  .hero-stat-item .l {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(250,248,245,0.4);
+    margin-top: 4px;
+    display: block;
+  }
+  .btn-hero {
+    display: inline-block;
+    background: var(--or);
+    color: var(--noir);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    text-decoration: none;
+    transition: all 0.25s;
+    align-self: flex-start;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-hero:hover {
+    background: var(--or-clair);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(184,148,90,0.35);
+  }
+  .hero-prix {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(250,248,245,0.4);
+    margin-top: 16px;
+  }
+
+  /* ── CONTAINER ── */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .container-wide {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 100px 0;
+  }
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--or);
+    display: block;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 28px;
+  }
+  h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 36px 0 14px;
+    color: var(--gris-fonce);
+  }
+  p { margin-bottom: 20px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── NIVEAU 1 : SURVOL ── */
+  #survol {
+    background: var(--creme);
+    padding: 80px 0;
+  }
+  .survol-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 40px 0;
+  }
+  .survol-item {
+    background: white;
+    padding: 28px;
+  }
+  .survol-item .ico {
+    font-size: 24px;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .survol-item p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--gris-fonce);
+    margin: 0;
+  }
+
+  /* ── TIMELINE PHOTOS ── */
+  .timeline {
+    padding: 80px 0;
+    background: var(--noir);
+    color: var(--blanc);
+    overflow: hidden;
+  }
+  .timeline-intro {
+    max-width: 680px;
+    margin: 0 auto 60px;
+    padding: 0 32px;
+    text-align: center;
+  }
+  .timeline-intro h2 { color: var(--blanc); }
+  .timeline-intro p {
+    font-family: 'DM Sans', sans-serif;
+    color: rgba(250,248,245,0.6);
+    font-size: 16px;
+  }
+  .photo-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+    padding: 0 32px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .photo-strip-item {
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-strip-item img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(40%) contrast(1.1);
+    transition: all 0.4s;
+    display: block;
+  }
+  .photo-strip-item:hover img {
+    filter: grayscale(0%) contrast(1);
+    transform: scale(1.04);
+  }
+  .photo-strip-item .annee {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    color: var(--or);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding: 20px 10px 10px;
+    text-align: center;
+  }
+  .photo-strip-item .poids {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── ALARME PHOTO ── */
+  .alarme-section {
+    padding: 100px 0;
+  }
+  .alarme-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 48px;
+  }
+  .alarme-photo {
+    position: relative;
+  }
+  .alarme-photo img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(20%);
+  }
+  .alarme-photo .tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--rouge);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+  }
+  .alarme-texte blockquote {
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--gris-fonce);
+    border-left: 3px solid var(--or);
+    padding-left: 24px;
+    margin: 24px 0;
+  }
+
+  /* ── MÉCANISME ── */
+  .mecanisme {
+    background: var(--creme);
+    padding: 100px 0;
+  }
+  .points-liste {
+    list-style: none;
+    padding: 0;
+    margin: 32px 0;
+    counter-reset: point;
+  }
+  .points-liste li {
+    counter-increment: point;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    align-items: start;
+  }
+  .points-liste li:last-child { border-bottom: none; }
+  .points-liste li::before {
+    content: counter(point, decimal-leading-zero);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--or);
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .points-liste li div h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+  .points-liste li div p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--gris-fonce);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ── PROTOCOLES ── */
+  .protocoles {
+    padding: 100px 0;
+  }
+  .protocoles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    margin: 48px 0;
+  }
+  .protocole-card {
+    padding: 48px 40px;
+  }
+  .protocole-card.rapide {
+    background: var(--noir);
+    color: var(--blanc);
+  }
+  .protocole-card.croisiere {
+    background: var(--creme);
+  }
+  .protocole-card .tag-proto {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--or);
+    display: block;
+    margin-bottom: 20px;
+  }
+  .protocole-card h3 {
+    font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: inherit;
+  }
+  .protocole-card .quand {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(250,248,245,0.5);
+    margin-bottom: 28px;
+  }
+  .protocole-card.croisiere .quand {
+    color: var(--gris);
+  }
+  .proto-list {
+    list-style: none;
+    padding: 0;
+  }
+  .proto-list li {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    gap: 12px;
+    line-height: 1.4;
+  }
+  .protocole-card.croisiere .proto-list li {
+    border-bottom-color: rgba(0,0,0,0.08);
+    color: var(--gris-fonce);
+  }
+  .proto-list li::before {
+    content: '→';
+    color: var(--or);
+    flex-shrink: 0;
+    font-weight: bold;
+  }
+  .proto-list li:last-child { border-bottom: none; }
+
+  /* ── PREUVE TEMPS RÉEL ── */
+  .preuve {
+    background: var(--noir);
+    color: var(--blanc);
+    padding: 100px 0;
+  }
+  .preuve-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .preuve-chiffres {
+    text-align: center;
+    border: 1px solid rgba(184,148,90,0.3);
+    padding: 48px;
+  }
+  .preuve-chiffres .grand {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: var(--or);
+    line-height: 1;
+    display: block;
+  }
+  .preuve-chiffres .sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(250,248,245,0.4);
+    margin: 8px 0 32px;
+    display: block;
+  }
+  .preuve-chiffres .ligne {
+    width: 40px;
+    height: 1px;
+    background: var(--or);
+    margin: 24px auto;
+  }
+  .preuve-texte h2 { color: var(--blanc); }
+  .preuve-texte p {
+    font-family: 'DM Sans', sans-serif;
+    color: rgba(250,248,245,0.65);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── POUR QUI ── */
+  .pour-qui {
+    padding: 100px 0;
+    background: var(--creme);
+  }
+  .profils {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3px;
+    margin: 48px 0;
+  }
+  .profil {
+    background: white;
+    padding: 32px 28px;
+  }
+  .profil .ico { font-size: 28px; margin-bottom: 16px; display: block; }
+  .profil p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--gris-fonce);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── CTA FINAL ── */
+  .cta-final {
+    padding: 120px 0;
+    text-align: center;
+    background: var(--noir);
+    color: var(--blanc);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-final::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(184,148,90,0.08) 0%, transparent 70%);
+  }
+  .cta-final .promise {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(20px, 3vw, 30px);
+    font-style: italic;
+    color: rgba(250,248,245,0.8);
+    max-width: 560px;
+    margin: 0 auto 60px;
+    line-height: 1.5;
+    position: relative;
+  }
+  .prix-bloc {
+    position: relative;
+    margin-bottom: 40px;
+  }
+  .prix-bloc .prix {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--or);
+    line-height: 1;
+    display: block;
+  }
+  .prix-bloc .details {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(250,248,245,0.4);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 12px;
+    display: block;
+  }
+  .btn-final {
+    display: inline-block;
+    background: var(--or);
+    color: var(--noir);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 20px 60px;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+    position: relative;
+  }
+  .btn-final:hover {
+    background: var(--or-clair);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 50px rgba(184,148,90,0.4);
+  }
+  .cta-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(250,248,245,0.35);
+    margin-top: 20px;
+    font-style: italic;
+  }
+
+  /* ── PS ── */
+  .ps-section {
+    padding: 60px 0;
+    background: var(--blanc);
+  }
+  .ps-inner {
+    border-left: 3px solid var(--or);
+    padding-left: 28px;
+  }
+  .ps-inner p {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--gris-fonce);
+    margin-bottom: 16px;
+  }
+  .ps-inner .code-promo {
+    display: inline-block;
+    background: var(--or);
+    color: var(--noir);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 4px 14px;
+    letter-spacing: 3px;
+    margin: 0 4px;
+  }
+
+  /* ── BADGE LECTURE ── */
+  .lecture-marker {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .lecture-marker .badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .badge-n1 { border-color: var(--or); color: var(--or); }
+  .badge-n2 { border-color: var(--rouge); color: var(--rouge); }
+  .badge-n3 { border-color: var(--gris); color: var(--gris); }
+  .lecture-marker .ligne {
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.15;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080808;
+    color: rgba(250,248,245,0.25);
+    text-align: center;
+    padding: 40px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  footer a { color: rgba(250,248,245,0.4); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-photo { height: 300px; }
+    .hero-texte { padding: 60px 28px; }
+    .survol-grid { grid-template-columns: 1fr; }
+    .photo-strip { grid-template-columns: repeat(3, 1fr); }
+    .alarme-grid { grid-template-columns: 1fr; gap: 32px; }
+    .protocoles-grid { grid-template-columns: 1fr; }
+    .preuve-grid { grid-template-columns: 1fr; gap: 48px; }
+    .profils { grid-template-columns: 1fr; }
+    .nav-lecture a { font-size: 9px; padding: 10px 12px; letter-spacing: 1px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION NIVEAUX -->
+<nav class="nav-lecture">
+  <a href="#survol" class="n1">⚡ 30 sec</a>
+  <a href="#histoire">⏱ 2 min</a>
+  <a href="#mecanisme">📖 Complet</a>
+  <a href="#cta-final">→ Acheter</a>
+</nav>
+
+<!-- HÉRO -->
+<div class="hero">
+  <div class="hero-texte">
+    <span class="hero-eyebrow">Pascal Gagnon · La Méthode Reset</span>
+    <h1>Perdre<br>du poids...<br><em>encore.</em></h1>
+    <p class="hero-sous-titre">Le guide pour ceux qui l'ont déjà fait — et qui savent exactement quoi faire quand ça recommence.</p>
+    <div class="hero-stat">
+      <div class="hero-stat-item">
+        <span class="n">−12</span>
+        <span class="l">livres</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="n">18</span>
+        <span class="l">jours</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="n">2</span>
+        <span class="l">protocoles</span>
+      </div>
+    </div>
+    <button class="btn-hero">Commencer ce soir — 17 $</button>
+    <p class="hero-prix">PDF · Livraison instantanée · Zéro bullshit</p>
+  </div>
+  <div class="hero-photo">
+    <img src="../photos/19_2025-09_veston-plein-corps.jpg" alt="Pascal Gagnon septembre 2025">
+  </div>
+</div>
+
+<!-- NIVEAU 1 : SURVOL 30 SECONDES -->
+<section id="survol" class="section" style="background:var(--creme);">
+  <div class="container">
+    <div class="lecture-marker">
+      <span class="badge badge-n1">⚡ Niveau 1 — Survol 30 secondes</span>
+      <div class="ligne"></div>
+    </div>
+    <h2>Ce que tu vas avoir</h2>
+    <div class="survol-grid">
+      <div class="survol-item">
+        <span class="ico">🔬</span>
+        <p>Les mécanismes biologiques — pourquoi ton corps accumule et comment lui dire d'arrêter</p>
+      </div>
+      <div class="survol-item">
+        <span class="ico">⚡</span>
+        <p><strong>Protocole Rapide</strong> — 10 à 15 livres en 2 à 4 semaines. Pour les deadlines réelles.</p>
+      </div>
+      <div class="survol-item">
+        <span class="ico">🛳</span>
+        <p><strong>Protocole Croisière</strong> — Tenir dans une vraie vie imparfaite. Tourtière incluse.</p>
+      </div>
+      <div class="survol-item">
+        <span class="ico">🔄</span>
+        <p>Comment recommencer sans repartir à zéro — parce que la vie va encore déraller.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:48px;">
+      <button class="btn-hero" style="background:var(--or); color:var(--noir);">Je veux la Méthode Reset — 17 $</button>
+      <p style="margin-top:14px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--gris);">Livraison instantanée · PDF complet</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE PHOTOS -->
+<div class="timeline">
+  <div class="timeline-intro">
+    <span class="section-label">La preuve en images</span>
+    <h2>Monter. Descendre. Remonter. Redescendre.</h2>
+    <p>C'est ça, une vraie vie. Pas un avant/après figé dans le temps.</p>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-strip-item">
+      <img src="../photos/22_circa-2013_course-champ-gros-plan.jpg" alt="2007 course">
+      <div class="annee">2007
+        <span class="poids">~180 lbs</span>
+      </div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="../photos/26_2014-09_avant-apres-3mois.jpg" alt="2014 avant-après">
+      <div class="annee">2014
+        <span class="poids">−3 mois</span>
+      </div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="../photos/27_circa-2018_course-obstacles-boue.jpg" alt="2018 course boue">
+      <div class="annee">2018
+        <span class="poids">En forme</span>
+      </div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="../photos/15_evenement-public-surpoids.jpg" alt="2025 alarme">
+      <div class="annee">Mai 2025
+        <span class="poids">L'alarme</span>
+      </div>
+    </div>
+    <div class="photo-strip-item">
+      <img src="../photos/33_recent_avant-apres-comparaison.jpg" alt="2026 reset">
+      <div class="annee">Mars 2026
+        <span class="poids">−12 lbs</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NIVEAU 2 : LECTURE RAPIDE -->
+<section id="histoire" class="alarme-section">
+  <div class="container-wide">
+    <div class="container" style="padding:0;">
+      <div class="lecture-marker">
+        <span class="badge badge-n2">⏱ Niveau 2 — Lecture 2 minutes</span>
+        <div class="ligne" style="color:var(--rouge);"></div>
+      </div>
+    </div>
+    <div class="alarme-grid" style="max-width:960px; margin:0 auto; padding:0 32px;">
+      <div class="alarme-photo">
+        <img src="../photos/15_evenement-public-surpoids.jpg" alt="Mai 2025 - le signal d'alarme">
+        <div class="tag">Mai 2025 · Le signal</div>
+      </div>
+      <div class="alarme-texte">
+        <span class="section-label">Le moment de vérité</span>
+        <h2>Cette photo a tout changé.</h2>
+        <p>Événement public. Mai 2025. Quelqu'un m'a envoyé la photo le lendemain.</p>
+        <p>Je savais déjà que j'avais repris du poids. Mais voir la photo — c'est différent. C'est le moment où tu ne peux plus te dire que c'est "pas si pire".</p>
+        <blockquote>Ce n'est pas la honte qui pousse à agir. C'est la clarté.</blockquote>
+        <p>J'ai été à 270 lbs en 2006. J'ai couru un 30 km en août 2007 à ~180 lbs. J'ai repris, reperdu, repris encore. La vie change. Les habitudes glissent. C'est normal.</p>
+        <p>Ce que ce guide t'apprend, c'est pas à ne jamais reprendre. C'est à savoir exactement quoi faire quand tu vois ta propre photo et que tu te dis : <em>OK. C'est le temps.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NIVEAU 3 : LECTURE COMPLÈTE -->
+<section id="mecanisme" class="mecanisme">
+  <div class="container">
+    <div class="lecture-marker">
+      <span class="badge badge-n3">📖 Niveau 3 — Lecture complète</span>
+      <div class="ligne"></div>
+    </div>
+    <span class="section-label">Les mécanismes</span>
+    <h2>Ton corps n'est pas ton ennemi.<br>Il fait son travail.</h2>
+    <p>Le problème, c'est que son travail a été conçu pour une savane africaine — pas pour une épicerie ouverte 24h/24 avec une section de boulangerie à l'entrée.</p>
+
+    <ul class="points-liste">
+      <li>
+        <div>
+          <h3>L'insuline — le mécanisme de base</h3>
+          <p>Quand tu manges des glucides, l'insuline monte. Tant qu'elle est haute, ton corps stocke — il n'utilise pas ses réserves. Peu importe ta volonté. C'est biologique, pas moral.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>La volonté — pourquoi ça ne fonctionne pas</h3>
+          <p>La volonté s'épuise. Les habitudes et les ancres identitaires, non. Ce guide t'apprend à remplacer la résistance par des systèmes simples que tu n'as pas à penser.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Le brouillard mental — le signal le plus important</h3>
+          <p>Tu tiens un tournevis. Tu sais ce que c'est. Le mot ne vient pas. Ce n'est pas l'âge. C'est l'insuline chroniquement élevée qui affecte le cerveau. C'est réversible.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Le redémarrage — sans repartir à zéro</h3>
+          <p>La plupart des guides te promettent que tu ne reprendras plus jamais de poids. Moi je te promets quelque chose de plus utile : tu ne paniqueras plus jamais quand ça arrive.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROTOCOLES -->
+<section class="protocoles">
+  <div class="container">
+    <span class="section-label">Les deux outils</span>
+    <h2>Un système à deux vitesses.</h2>
+    <p>Pas un régime. Deux modes que tu actives selon où tu en es dans ta vie.</p>
+  </div>
+  <div class="protocoles-grid" style="max-width:960px; margin:48px auto; padding:0 32px;">
+    <div class="protocole-card rapide">
+      <span class="tag-proto">Mode 1</span>
+      <h3>Protocole Rapide</h3>
+      <p class="quand">Quand utiliser : tu as dérivé, tu veux des résultats en 2 à 4 semaines</p>
+      <ul class="proto-list">
+        <li>Café noir ou eau le matin — rien d'autre</li>
+        <li>Pas de déjeuner, pas de dîner</li>
+        <li>Souper normal — tu manges vraiment</li>
+        <li>Pas de collation le soir</li>
+        <li>Fenêtre de jeûne : 20 à 24 heures</li>
+        <li>Résultat attendu : 8 à 15 livres</li>
+      </ul>
+    </div>
+    <div class="protocole-card croisiere">
+      <span class="tag-proto" style="color:var(--gris-fonce);">Mode 2</span>
+      <h3>Protocole Croisière</h3>
+      <p class="quand">Quand utiliser : vie normale, maintien à long terme</p>
+      <ul class="proto-list" style="--or:#b8945a;">
+        <li>Café noir ou eau le matin</li>
+        <li>Skip le dîner quand possible</li>
+        <li>Mange normalement quand la vie l'impose</li>
+        <li>Souper en famille — sans restriction</li>
+        <li>Fenêtre de jeûne : 16 à 18 heures naturellement</li>
+        <li>Résultat : maintien, perte lente et stable</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <div style="background:var(--creme); padding:32px; margin-top:8px;">
+      <p style="font-family:'DM Sans',sans-serif; font-size:15px; color:var(--gris-fonce); margin:0; text-align:center; font-style:italic;">
+        "Les autres guides te promettent de ne plus jamais reprendre de poids.<br>
+        Moi je te promets de ne plus jamais paniquer quand ça arrive."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PREUVE EN TEMPS RÉEL -->
+<section class="preuve">
+  <div class="container-wide">
+    <div class="preuve-grid" style="max-width:860px; margin:0 auto; padding:0 32px;">
+      <div class="preuve-chiffres">
+        <span class="grand">−12</span>
+        <span class="sub">livres perdues</span>
+        <div class="ligne"></div>
+        <span class="grand" style="font-size:48px;">18</span>
+        <span class="sub">jours · 3 mars au 21 mars 2026</span>
+        <div class="ligne"></div>
+        <p style="font-family:'DM Sans',sans-serif; font-size:13px; color:rgba(250,248,245,0.4); font-style:italic; margin:0;">Sans gym. Sans calories comptées.<br>Sans réorganiser ma vie.</p>
+      </div>
+      <div class="preuve-texte">
+        <span class="section-label">La preuve en temps réel</span>
+        <h2>Écrit pendant que ça se passe.</h2>
+        <p>Ce guide n'a pas été écrit par quelqu'un qui a perdu du poids il y a 10 ans et qui s'en souvient vaguement.</p>
+        <p>Il a été écrit le 21 mars 2026, un samedi matin, pendant que je repassais des rideaux à l'étage pour ne pas descendre sentir les brochettes de la veille que ma conjointe réchauffait.</p>
+        <p>255 lbs le 3 mars. 243 lbs ce matin. Le protocole est actif pendant que tu lis ces lignes.</p>
+        <div style="margin-top:32px;">
+          <img src="../photos/18_2025-08_selfie-lunettes.jpg" alt="Pascal août 2025" style="width:100%; max-height:260px; object-fit:cover; object-position:top; filter:grayscale(10%);">
+          <p style="font-family:'DM Sans',sans-serif; font-size:12px; color:rgba(250,248,245,0.35); margin-top:8px; font-style:italic;">Août 2025 · En cours de reset</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POUR QUI -->
+<section class="pour-qui">
+  <div class="container">
+    <span class="section-label">Pour qui</span>
+    <h2>Tu es probablement la bonne personne<br>si tu reconnais ça.</h2>
+  </div>
+  <div class="profils" style="max-width:960px; margin:48px auto; padding:0 32px;">
+    <div class="profil">
+      <span class="ico">🔄</span>
+      <p>Tu as déjà perdu du poids — et tu sais que la vie va encore faire déraller tes habitudes. Tu veux un système, pas une promesse.</p>
+    </div>
+    <div class="profil">
+      <span class="ico">⏰</span>
+      <p>Tu n'as pas le temps de passer trois heures au gym. Tu as une vraie vie chargée — famille, travail, implications. Le protocole s'adapte à ça.</p>
+    </div>
+    <div class="profil">
+      <span class="ico">🧠</span>
+      <p>Tu as remarqué des changements : brouillard mental, mots qui glissent, énergie qui fluctue. Tu veux comprendre pourquoi — pas juste suivre des règles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final" class="cta-final">
+  <div class="container" style="position:relative;">
+    <span class="section-label" style="display:block; text-align:center; margin-bottom:32px;">La décision</span>
+    <p class="promise">
+      "Ce n'est pas un régime où il faut recommencer à zéro à chaque fois.<br>C'est un système que tu comprends suffisamment pour le réactiver n'importe quand."
+    </p>
+    <div class="prix-bloc">
+      <span class="prix">17 $</span>
+      <span class="details">Un PDF · Deux protocoles · Zéro bullshit</span>
+    </div>
+    <button class="btn-final">Je veux la Méthode Reset</button>
+    <p class="cta-note">Livraison instantanée. Tu commences ce soir si tu veux.</p>
+  </div>
+</section>
+
+<!-- PS -->
+<section class="ps-section">
+  <div class="container">
+    <div class="ps-inner">
+      <p><strong>P.S.</strong> — Ce soir je mange de la tourtière du Lac chez mes beaux-parents. Deux assiettes, probablement. Demain matin — café noir, pas de déjeuner, je continue. C'est ça le système.</p>
+      <p><strong>P.P.S.</strong> — Si tu as lu jusqu'ici, tu mérites une récompense. Code promo <span class="code-promo">YOYO</span> pour 10% de rabais. Parce que le poids, ça monte et ça descend — et toi t'as compris le principe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Pascal Gagnon · <a href="https://pascalgagnon.ca">pascalgagnon.ca</a></p>
+  <p style="margin-top:12px; max-width:560px; margin-left:auto; margin-right:auto;">
+    Ce guide n'est pas un avis médical. Je suis un gars de 50 ans du Lac-Saint-Jean, pas ton médecin. Si tu as des conditions de santé particulières — diabète, troubles alimentaires, maladies chroniques — parles-en à un professionnel de santé avant de modifier tes habitudes alimentaires.
+  </p>
+  <p style="margin-top:12px;"><a href="#">Politique de confidentialité</a> · <a href="#">Remboursement</a> · <a href="#">Contact</a></p>
+</footer>
+
+</body>
+</html>

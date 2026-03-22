@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perdre du poids... encore. La Méthode Reset</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap');
+
+  :root {
+    --noir: #0f0f0f;
+    --blanc: #f7f3ee;
+    --or: #c8a96e;
+    --rouge: #c0392b;
+    --gris: #6b6b6b;
+    --gris-clair: #e8e4df;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--blanc);
+    color: var(--noir);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--noir);
+    color: var(--blanc);
+    text-align: center;
+    padding: 60px 20px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(200,169,110,0.04) 40px,
+      rgba(200,169,110,0.04) 41px
+    );
+  }
+  .header-eyebrow {
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 8vw, 80px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--or);
+  }
+  .header-subtitle {
+    font-size: 20px;
+    color: rgba(247,243,238,0.7);
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+
+  /* NIVEAU DE LECTURE BADGE */
+  .lecture-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .badge-survol { background: var(--or); color: var(--noir); }
+  .badge-rapide { background: var(--rouge); color: white; }
+  .badge-complet { background: #2c3e50; color: white; }
+
+  /* CONTAINER */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--gris-clair);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  /* CTA BLOC */
+  .cta-bloc {
+    background: var(--noir);
+    color: var(--blanc);
+    text-align: center;
+    padding: 50px 40px;
+    margin: 0 -24px;
+    position: relative;
+  }
+  .cta-bloc .prix {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--or);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .cta-bloc .sous-prix {
+    font-size: 14px;
+    color: rgba(247,243,238,0.6);
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+  }
+  .btn-achat {
+    display: inline-block;
+    background: var(--or);
+    color: var(--noir);
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 18px 48px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-achat::after {
+    content: ' →';
+  }
+  .btn-achat:hover {
+    background: #e0bb78;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(200,169,110,0.4);
+  }
+  .livraison {
+    font-size: 13px;
+    color: rgba(247,243,238,0.5);
+    margin-top: 16px;
+    font-style: italic;
+  }
+
+  /* TEXTE */
+  p { margin-bottom: 20px; }
+  p:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    border-left: 4px solid var(--or);
+    padding: 20px 28px;
+    margin: 32px 0;
+    background: rgba(200,169,110,0.06);
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* TÉMOIGNAGE */
+  .temoignage {
+    background: var(--gris-clair);
+    padding: 28px 32px;
+    margin: 32px 0;
+    position: relative;
+  }
+  .temoignage::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    color: var(--or);
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    line-height: 1;
+    opacity: 0.4;
+  }
+  .temoignage p {
+    font-style: italic;
+    padding-top: 20px;
+    color: #333;
+  }
+  .temoignage .auteur {
+    font-style: normal;
+    font-size: 14px;
+    color: var(--gris);
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+
+  /* PHOTOS GALERIE */
+  .photo-timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 32px 0;
+  }
+  .photo-timeline img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(20%);
+    transition: all 0.3s;
+  }
+  .photo-timeline img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.02);
+  }
+  .photo-duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 32px 0;
+  }
+  .photo-duo img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+  }
+  .photo-full {
+    width: 100%;
+    margin: 32px 0;
+  }
+  .photo-full img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .photo-caption {
+    font-size: 13px;
+    color: var(--gris);
+    font-style: italic;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* LISTE PROMESSES */
+  .promesses {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+  }
+  .promesses li {
+    padding: 12px 0 12px 36px;
+    position: relative;
+    border-bottom: 1px solid var(--gris-clair);
+    font-size: 17px;
+  }
+  .promesses li:last-child { border-bottom: none; }
+  .promesses li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--or);
+    font-weight: bold;
+  }
+
+  /* VERSUS BLOC */
+  .versus {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 32px 0;
+  }
+  .versus-col {
+    padding: 24px;
+  }
+  .versus-col.eux {
+    background: #f0ece7;
+  }
+  .versus-col.moi {
+    background: var(--noir);
+    color: var(--blanc);
+  }
+  .versus-col .label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--or);
+  }
+  .versus-col p {
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  /* PREUVE STATS */
+  .stats-bloc {
+    background: var(--noir);
+    color: var(--blanc);
+    padding: 40px;
+    margin: 32px 0;
+    text-align: center;
+  }
+  .stats-bloc .chiffre {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 900;
+    color: var(--or);
+    line-height: 1;
+  }
+  .stats-bloc .chiffre-label {
+    font-size: 14px;
+    color: rgba(247,243,238,0.6);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* POUR QUI */
+  .pour-qui {
+    background: var(--gris-clair);
+    padding: 32px;
+    margin: 32px 0;
+  }
+  .pour-qui p {
+    padding-left: 24px;
+    border-left: 2px solid var(--or);
+    margin-bottom: 16px;
+  }
+
+  /* PS */
+  .ps-bloc {
+    background: #f9f5f0;
+    border: 1px solid var(--gris-clair);
+    padding: 28px 32px;
+    margin: 32px 0;
+    font-size: 16px;
+  }
+  .ps-bloc strong { color: var(--rouge); }
+
+  /* FOOTER */
+  footer {
+    background: var(--noir);
+    color: rgba(247,243,238,0.4);
+    text-align: center;
+    padding: 32px;
+    font-size: 13px;
+  }
+
+  /* SEPARATEUR */
+  .sep {
+    width: 60px;
+    height: 3px;
+    background: var(--or);
+    margin: 28px auto;
+  }
+
+  @media (max-width: 600px) {
+    .photo-timeline { grid-template-columns: repeat(2, 1fr); }
+    .versus { grid-template-columns: 1fr; }
+    .cta-bloc { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- EN-TÊTE -->
+<div class="header">
+  <div class="container">
+    <p class="header-eyebrow">Pascal Gagnon · La Méthode Reset</p>
+    <h1>Perdre du poids...<br><em>encore.</em></h1>
+    <p class="header-subtitle">Le guide pour ceux qui l'ont déjà fait — et qui savent que ça va revenir.</p>
+  </div>
+</div>
+
+<!-- NIVEAU 1 : SURVOL 30 SECONDES -->
+<div class="container">
+  <section>
+    <span class="lecture-badge badge-survol">⚡ Survol — 30 secondes</span>
+    <h2>TL;DR — Ce que tu vas avoir</h2>
+
+    <ul class="promesses">
+      <li>2 protocoles simples : le Rapide et le Croisière</li>
+      <li>Comprendre pourquoi ça fonctionne — pas juste des règles à suivre</li>
+      <li>Comment recommencer sans repartir à zéro quand la vie déraille</li>
+      <li>Écrit par un gars de 50 ans qui l'a fait plusieurs fois — pas un gourou</li>
+    </ul>
+
+    <div class="cta-bloc">
+      <span class="prix">17 $</span>
+      <p class="sous-prix">Un PDF · Deux protocoles · Zéro bullshit</p>
+      <button class="btn-achat">Je veux la Méthode Reset</button>
+      <p class="livraison">Livraison instantanée. Tu commences ce soir si tu veux.</p>
+    </div>
+  </section>
+
+<!-- NIVEAU 2 : LECTURE RAPIDE -->
+  <section>
+    <span class="lecture-badge badge-rapide">⏱ Lecture rapide — 2 minutes</span>
+    <h2>Tu l'as déjà fait. Tu le sais. Ça marche.</h2>
+    <p>Puis la vie a changé.</p>
+    <p>Une nouvelle relation. Une famille recomposée. Un boulot qui mange tout. Les habitudes que tu avais mis des années à calibrer — ce que tu mangeais, ce que tu ne mangeais pas, quand tu bougeais — ont glissé une par une.</p>
+    <p>Le poids est revenu. Pas catastrophiquement. Juste... tranquillement. Comme ça arrive.</p>
+
+    <div class="photo-timeline">
+      <img src="../photos/02_2021-10_costume-mince.jpg" alt="Pascal 2021, mince">
+      <img src="../photos/04_2021-12_cuisine-noel.jpg" alt="Pascal Noël 2021">
+      <img src="../photos/15_evenement-public-surpoids.jpg" alt="Pascal événement public">
+    </div>
+    <p class="photo-caption">La même personne. Des années différentes. C'est ça, la vraie vie.</p>
+
+    <div class="versus">
+      <div class="versus-col eux">
+        <p class="label">Les autres guides promettent</p>
+        <p>« Tu ne reprendras plus jamais de poids. »</p>
+      </div>
+      <div class="versus-col moi">
+        <p class="label">Ce que moi je promets</p>
+        <p>« Tu ne paniqueras plus jamais quand ça arrive. »</p>
+      </div>
+    </div>
+
+    <div class="stats-bloc">
+      <div class="chiffre">−12 lbs</div>
+      <div class="chiffre-label">en 18 jours · mars 2026</div>
+      <p style="font-size:15px; color:rgba(247,243,238,0.7); font-style:italic;">Sans gym. Sans compter les calories. Sans réorganiser ma vie.<br>Écrit pendant que je repassais des rideaux un samedi matin.</p>
+    </div>
+
+    <div class="cta-bloc">
+      <span class="prix">17 $</span>
+      <p class="sous-prix">Un PDF · Deux protocoles · Zéro bullshit</p>
+      <button class="btn-achat">Je veux la Méthode Reset</button>
+      <p class="livraison">On dirait que je suis en train de lire un roman, tu peux juste me l'envoyer?<br>Oui, livraison instantanée.</p>
+    </div>
+  </section>
+
+<!-- NIVEAU 3 : LECTURE COMPLÈTE -->
+  <section>
+    <span class="lecture-badge badge-complet">📖 Lecture complète — L'histoire vraie</span>
+    <h2>Le tournevis</h2>
+
+    <p>Tu tiens un tournevis dans ta main.</p>
+    <p>Tu sais ce que c'est. Tu l'as utilisé mille fois. Le mot ne vient pas.</p>
+    <p>La première fois, je me suis donné des excuses. Le premier mois pareil. Mais à un moment donné, il a bien fallu me rendre compte que je n'étais pas capable de nommer la boîte de mouchoirs que j'avais au bout de la table. Des mots simples, dans mon champ de vision.</p>
+    <p>Pas le nom de l'espèce d'oiseau dans une niche d'arbre aux îles Galapagos — non. Le mot <em>crayon</em> que je voulais pour ma liste d'épicerie.</p>
+    <p>Mon beau-père fait de l'Alzheimer.</p>
+    <p>Toi, est-ce que tu paniquerais autant que moi?</p>
+
+    <div class="pull-quote">
+      Ce n'est pas l'âge. Ce n'est pas le stress. C'est l'insuline. Et ça se règle.
+    </div>
+
+    <h2>Mon histoire — en photos</h2>
+    <p>J'ai eu 270 livres en novembre 2006. J'ai couru un 30 km en août 2007. J'avais gagné.</p>
+    <p>Puis c'est recommencé. Repris en 2011, perdu en 2015-2016. La vie m'a malmené, changé, j'ai changé de vie amoureuse, déménagé, appris de nouveaux métiers.</p>
+    <p>Regarde l'album.</p>
+
+    <div class="photo-duo">
+      <div>
+        <img src="../photos/22_circa-2013_course-champ-gros-plan.jpg" alt="Course 2013">
+        <p class="photo-caption">~2013 — En forme, en train de courir</p>
+      </div>
+      <div>
+        <img src="../photos/26_2014-09_avant-apres-3mois.jpg" alt="Avant-après 2014">
+        <p class="photo-caption">Sept. 2014 — 3 mois de travail, 81 likes sur Facebook</p>
+      </div>
+    </div>
+
+    <div class="photo-duo">
+      <div>
+        <img src="../photos/27_circa-2018_course-obstacles-boue.jpg" alt="Course obstacles boue 2018">
+        <p class="photo-caption">~2018 — Course d'obstacles dans la boue. Sourire.</p>
+      </div>
+      <div>
+        <img src="../photos/28_circa-2019_gym-tapis-10km.jpg" alt="Gym 10km 2019">
+        <p class="photo-caption">2019 — Gym, tapis roulant, 10 km</p>
+      </div>
+    </div>
+
+    <div class="photo-duo">
+      <div>
+        <img src="../photos/15_evenement-public-surpoids.jpg" alt="Événement public surpoids">
+        <p class="photo-caption">La photo qu'on préfère ne pas voir</p>
+      </div>
+      <div>
+        <img src="../photos/33_recent_avant-apres-comparaison.jpg" alt="Avant-après récent">
+        <p class="photo-caption">La même recette. Ça refonctionne.</p>
+      </div>
+    </div>
+
+    <p>La photo avant et après, tu l'as vue. Tu l'as même mise en ligne, toi aussi. Et là, tu es après la photo <em>après</em>... genre un peu comme la photo avant.</p>
+
+    <div class="temoignage">
+      <p>Mon frère perd régulièrement du poids — ou non — en tout cas, c'est toujours impressionnant et il nous en parle beaucoup. Il m'a mis ici comme témoignage à mon insu, parce qu'il sait que je vais trouver ça drôle de me trouver ici. Je n'ai jamais suivi ses trucs, je n'ai pas de problèmes de poids, mais je vous garantis qu'il sait comment en perdre et recommencer encore!</p>
+      <p class="auteur">— Joël Gagnon, frère de Pascal (et fondateur d'Éditions Randolph)</p>
+    </div>
+
+    <h2>Ce que tu vas apprendre</h2>
+
+    <h3>Pourquoi ton corps accumule même quand tu manges "bien"</h3>
+    <p>Ton corps ne pense pas, il agit. Il traite les aliments exactement comme ton ancêtre dans la savane le faisait. La volonté, c'est quoi ça de toute manière? Est-ce que tu penses que si tu fais de la méditation, tes cellules de gras vont fonctionner autrement? Est-ce que tu penses changer des millions d'années d'évolution pour survivre une famine qui n'arrive jamais?</p>
+
+    <h3>Le Protocole Rapide</h3>
+    <p>Pour perdre 10 à 15 livres en 2 à 4 semaines quand tu as besoin de résultats vite — avant le voyage, le mariage, l'événement. C'est ça que j'ai utilisé. 12 livres en 18 jours.</p>
+
+    <h3>Le Protocole Croisière</h3>
+    <p>Pour maintenir dans une vraie vie imparfaite — avec des soupers chez la belle-maman, des festivals, des congrès et des vendredis soir avec des amis. Ce n'est pas un régime. C'est ta vie normale avec deux ajustements.</p>
+
+    <div class="photo-full">
+      <img src="../photos/06_2022-07_course-bleu-slim.jpg" alt="Course été 2022">
+      <p class="photo-caption">Juillet 2022 — Le Protocole Croisière en action. Course, soleil, sourire.</p>
+    </div>
+
+    <h2>Pour qui c'est fait</h2>
+
+    <div class="pour-qui">
+      <p>Pour toi qui as déjà perdu du poids — et qui sais que ça va revenir.</p>
+      <p>Pour toi qui n'as pas le temps de passer trois heures au gym mais qui veux quand même que ça marche.</p>
+      <p>Pour toi qui as remarqué que tu cherches tes mots un peu plus souvent qu'avant. Que tu es brumeux en après-midi. Que tu as moins d'énergie qu'il y a cinq ans.</p>
+      <p>Ce n'est pas l'âge. C'est l'insuline. Et ça se règle avec deux protocoles simples dans ta vraie vie.</p>
+    </div>
+
+    <div class="temoignage">
+      <p>Pascal a commencé à écrire ce guide le matin du 21 mars 2026 et il espère le mettre en vente au plus tard le 22 mars 2026 — donc il n'a pas encore de vrais témoignages. Mais comme tous les sites de vente ont des faux témoignages, je suis là pour prouver que Pascal invente totalement les siens, preuve à l'appui.</p>
+      <p class="auteur">— Justin Bedford, totally real fake</p>
+    </div>
+
+    <div class="cta-bloc">
+      <span class="prix">17 $</span>
+      <p class="sous-prix">Un PDF · Deux protocoles · Zéro bullshit</p>
+      <button class="btn-achat">Je veux la Méthode Reset</button>
+      <p class="livraison">Livraison instantanée. Tu commences ce soir si tu veux.</p>
+    </div>
+
+    <div class="temoignage">
+      <p>Les 10 premières personnes qui m'envoient un témoignage avec photo pour que je l'ajoute sur cette page de vente auront un remboursement complet de leur achat.</p>
+      <p class="auteur">— Pascal Gagnon. Pas une joke.</p>
+    </div>
+
+    <div class="ps-bloc">
+      <p><strong>P.S.</strong> — Ce soir je mange de la tourtière du Lac chez mes beaux-parents. Deux assiettes, probablement. Demain matin — café noir, pas de déjeuner, je continue. C'est ça le système.</p>
+      <p style="margin-top:16px;"><strong>P.P.S.</strong> — J'ai mal aux doigts et aux yeux d'avoir écrit autant de mots, et là toi t'es pas encore en train de lire mon protocole. Qu'est-ce que t'attends? Bon, ok, peut-être que tu aimes mon style d'écriture et je suis réellement touché. Donc tu viens de gagner le code promo : <strong style="color:var(--rouge); font-size:20px;">YOYO</strong> pour une réduction de 10%.</p>
+    </div>
+
+  </section>
+</div>
+
+<footer>
+  <p>© 2026 Pascal Gagnon · pascalgagnon.ca</p>
+  <p style="margin-top:8px;">Ce guide n'est pas un avis médical. Consultez un professionnel de santé pour tout changement alimentaire significatif.</p>
+</footer>
+
+</body>
+</html>
