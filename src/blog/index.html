@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles — Pascal Gagnon</title>
+<meta name="description" content="Analyses sur l'économie, l'énergie et les PME du Québec. Écrits depuis le terrain du Lac-Saint-Jean.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --noir: #0a0a0a;
+  --creme: #f5f0e8;
+  --bleu: #0063b2;
+  --bleu-clair: #4d92c9;
+  --bleu-pale: #e6eff7;
+  --gris: #6b6b6b;
+  --gris-clair: #d4cfc6;
+  --max: 1200px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--creme); color: var(--noir); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; font-size: 18px; line-height: 1.7; }
+
+/* ── NAV ── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 4rem; background: rgba(245,240,232,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,99,178,0.15); }
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--noir); text-decoration: none; }
+.nav-logo span { color: var(--bleu); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover { color: var(--bleu); }
+.nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
+.nav-cta:hover { background: var(--bleu); color: #fff; }
+@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+
+/* ── EN-TÊTE ── */
+.page-header { padding-top: 140px; padding-bottom: 4rem; padding-left: 4rem; padding-right: 4rem; max-width: var(--max); margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+@media (max-width: 768px) { .page-header { padding: 120px 1.5rem 3rem; } }
+.page-eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+.page-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--bleu-clair); }
+.page-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 900; line-height: 1.05; color: var(--noir); letter-spacing: -0.02em; }
+.page-title em { font-style: italic; color: var(--bleu); }
+.article-count { font-size: 0.75rem; color: var(--gris); letter-spacing: 0.08em; white-space: nowrap; padding-bottom: 0.5rem; }
+
+/* ── DIVIDER ── */
+.section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--bleu-clair), transparent); margin: 0 4rem; opacity: 0.4; }
+
+/* ── FILTRES ── */
+.filtres { padding: 2.5rem 4rem; max-width: var(--max); margin: 0 auto; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+@media (max-width: 768px) { .filtres { padding: 2rem 1.5rem; } }
+.filtre-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); margin-right: 0.6rem; }
+.filtre-btn { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 1.1rem; border: 1px solid var(--gris-clair); color: var(--gris); background: transparent; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+.filtre-btn:hover, .filtre-btn.actif { border-color: var(--bleu); color: var(--bleu); background: var(--bleu-pale); }
+
+/* ── ARTICLE VEDETTE ── */
+.article-vedette { padding: 4rem 4rem 5rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .article-vedette { padding: 3rem 1.5rem 4rem; } }
+.vedette-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; padding-bottom: 4rem; border-bottom: 1px solid var(--gris-clair); }
+@media (max-width: 768px) { .vedette-inner { grid-template-columns: 1fr; gap: 2rem; } }
+.vedette-meta {}
+.vedette-tag { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bleu); display: block; margin-bottom: 0.8rem; }
+.vedette-badge { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.3rem 0.8rem; border: 1px solid var(--bleu); color: var(--bleu); display: inline-block; margin-bottom: 1.5rem; }
+.vedette-temps { font-size: 0.82rem; color: var(--gris); display: block; }
+.vedette-content {}
+.section-label { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu-clair); display: block; margin-bottom: 1.8rem; }
+.vedette-titre { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+.vedette-titre em { font-style: italic; color: var(--bleu); }
+.vedette-chapeau { font-size: 1.1rem; line-height: 1.85; color: #3a3a3a; margin-bottom: 2rem; }
+.lire-lien { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s; }
+.lire-lien:hover { color: var(--noir); }
+
+/* ── LISTE ARTICLES ── */
+.articles-liste { padding: 4rem 4rem 7rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .articles-liste { padding: 3rem 1.5rem 5rem; } }
+.liste-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; }
+.liste-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; }
+
+.articles-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem 4rem; }
+@media (max-width: 900px) { .articles-grille { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+.article-card { display: flex; flex-direction: column; border-top: 2px solid var(--gris-clair); padding-top: 2rem; transition: border-color 0.25s; }
+.article-card:hover { border-color: var(--bleu); }
+.article-card.a-venir { opacity: 0.45; pointer-events: none; }
+.card-vertical { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bleu); margin-bottom: 0.8rem; }
+.card-titre { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; line-height: 1.25; color: var(--noir); text-decoration: none; display: block; margin-bottom: 0.9rem; transition: color 0.2s; }
+.article-card:hover .card-titre { color: var(--bleu); }
+.card-chapeau { font-size: 1rem; line-height: 1.75; color: #4a4a4a; margin-bottom: 1.2rem; flex: 1; }
+.card-bas { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.card-meta { font-size: 0.75rem; color: var(--gris); letter-spacing: 0.04em; }
+.card-lire { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bleu); text-decoration: none; transition: letter-spacing 0.2s; white-space: nowrap; }
+.card-lire:hover { letter-spacing: 0.2em; }
+
+/* Carte "À venir" */
+.card-titre-venir { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--gris-clair); display: block; margin-bottom: 0.8rem; }
+
+/* ── INFOLETTRE ── */
+.newsletter { padding: 7rem 4rem; border-top: 1px solid var(--gris-clair); }
+@media (max-width: 768px) { .newsletter { padding: 4rem 1.5rem; } }
+.newsletter-inner { max-width: 520px; margin: 0 auto; text-align: center; }
+.nl-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 2.6vw, 2.3rem); font-weight: 700; line-height: 1.2; color: var(--noir); margin-bottom: 1rem; letter-spacing: -0.01em; }
+.nl-h2 em { font-style: italic; color: var(--bleu); }
+.nl-desc { font-size: 1rem; line-height: 1.85; color: var(--gris); margin-bottom: 2.4rem; }
+.nl-form { display: flex; flex-direction: column; gap: 0.8rem; }
+.nl-form input { background: transparent; border: 1px solid var(--gris-clair); padding: 0.95rem 1.2rem; font-size: 1rem; color: var(--noir); font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; text-align: center; }
+.nl-form input::placeholder { color: var(--gris-clair); }
+.nl-form input:focus { border-color: var(--bleu); }
+.nl-form button { background: var(--bleu); color: #fff; border: none; padding: 1rem 1.2rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.25s; }
+.nl-form button:hover { background: var(--noir); }
+.nl-note { font-size: 0.72rem; color: var(--gris-clair); margin-top: 0.6rem; }
+
+/* ── FOOTER ── */
+footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+@media (max-width: 768px) { footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; } }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: rgba(245,240,232,0.5); text-decoration: none; }
+.footer-logo span { color: var(--bleu-clair); }
+.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--bleu-clair); }
+.footer-ref { font-size: 0.65rem; color: rgba(245,240,232,0.18); font-style: italic; }
+.footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); }
+
+/* ── ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="nav-links">
+    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/terrain-pme/">Terrain PME</a></li>
+    <li><a href="/marketing-numerique/">Marketing numérique</a></li>
+  </ul>
+  <a href="#newsletter" class="nav-cta">Infolettre</a>
+</nav>
+
+<!-- EN-TÊTE -->
+<header class="page-header">
+  <div>
+    <p class="page-eyebrow">Articles</p>
+    <h1 class="page-title">Ce que j'observe<br><em>depuis le terrain.</em></h1>
+  </div>
+  <p class="article-count">2 articles publiés</p>
+</header>
+
+<div class="section-divider"></div>
+
+<!-- FILTRES -->
+<div class="filtres reveal">
+  <span class="filtre-label">Thèmes —</span>
+  <button class="filtre-btn actif" onclick="filtrer(this, 'tous')">Tous</button>
+  <button class="filtre-btn" onclick="filtrer(this, 'economie-energie')">Économie &amp; Énergie</button>
+  <button class="filtre-btn" onclick="filtrer(this, 'terrain-pme')">Terrain PME</button>
+  <button class="filtre-btn" onclick="filtrer(this, 'marketing-numerique')">Marketing numérique</button>
+</div>
+
+<!-- ARTICLE VEDETTE -->
+<section class="article-vedette reveal">
+  <span class="section-label">À lire en premier ——</span>
+  <div class="vedette-inner" data-vertical="economie-energie">
+    <div class="vedette-meta">
+      <span class="vedette-tag">◆ Économie &amp; Énergie</span>
+      <span class="vedette-badge">Article de fond</span>
+      <span class="vedette-temps">Lecture : ~8 min</span>
+    </div>
+    <div class="vedette-content">
+      <h2 class="vedette-titre">L'énergie est le fondement de l'économie —<em> et personne n'en parle.</em></h2>
+      <p class="vedette-chapeau">Ce que la théorie économique dominante omet depuis 150 ans — et pourquoi cette omission explique la stagnation, les crises financières, et les limites réelles de la croissance. Un cadre de lecture indispensable pour quiconque prend des décisions économiques aujourd'hui.</p>
+      <a href="/lenergie-est-le-fondement-de-leconomie-pascal-gagnon/" class="lire-lien">Lire l'article →</a>
+    </div>
+  </div>
+</section>
+
+<!-- LISTE ARTICLES -->
+<section class="articles-liste reveal">
+  <div class="liste-header">
+    <h2>Tous les articles</h2>
+  </div>
+  <div class="articles-grille">
+
+    <article class="article-card" data-vertical="economie-energie">
+      <span class="card-vertical">Économie &amp; Énergie</span>
+      <a href="/leolien-forestier-le-chainon-manquant-de-la-decarbonation/" class="card-titre">L'électrification de la machinerie forestière : le chaînon manquant de la décarbonation</a>
+      <p class="card-chapeau">Une éolienne tourne en forêt pendant qu'une abatteuse brûle vingt-cinq litres de diesel à l'heure. L'une est le symbole de la transition. L'autre en est l'angle mort.</p>
+      <div class="card-bas">
+        <span class="card-meta">Mars 2026 &nbsp;·&nbsp; 6 min</span>
+        <a href="/leolien-forestier-le-chainon-manquant-de-la-decarbonation/" class="card-lire">Lire →</a>
+      </div>
+    </article>
+
+    <article class="article-card a-venir" data-vertical="terrain-pme">
+      <span class="card-vertical">Terrain PME</span>
+      <span class="card-titre-venir">Prochain article</span>
+      <p class="card-chapeau" style="color:var(--gris-clair);font-style:italic;">À paraître prochainement.</p>
+      <div class="card-bas">
+        <span class="card-meta">&nbsp;</span>
+      </div>
+    </article>
+
+    <article class="article-card a-venir" data-vertical="marketing-numerique">
+      <span class="card-vertical">Marketing numérique</span>
+      <span class="card-titre-venir">Prochain article</span>
+      <p class="card-chapeau" style="color:var(--gris-clair);font-style:italic;">À paraître prochainement.</p>
+      <div class="card-bas">
+        <span class="card-meta">&nbsp;</span>
+      </div>
+    </article>
+
+    <article class="article-card a-venir" data-vertical="economie-energie">
+      <span class="card-vertical">Économie &amp; Énergie</span>
+      <span class="card-titre-venir">Prochain article</span>
+      <p class="card-chapeau" style="color:var(--gris-clair);font-style:italic;">À paraître prochainement.</p>
+      <div class="card-bas">
+        <span class="card-meta">&nbsp;</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- INFOLETTRE -->
+<section class="newsletter reveal" id="newsletter">
+  <div class="newsletter-inner">
+    <span class="section-label">Infolettre ——</span>
+    <h2 class="nl-h2">Ce que j'observe sur le terrain,<em> une fois par mois.</em></h2>
+    <p class="nl-desc">Pas de contenu recyclé. Pas de promotion. Des analyses qui prennent position sur l'économie, l'énergie et les PME du Québec.</p>
+    <div class="nl-form">
+      <input type="text" placeholder="Votre prénom">
+      <input type="email" placeholder="Votre courriel">
+      <button type="button">Je m'abonne</button>
+      <p class="nl-note">Désabonnement en un clic. Conforme à la Loi 25.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
+    <li><a href="/blog/">Articles</a></li>
+    <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+    <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
+  </ul>
+  <span class="footer-ref">Ibn Khaldoun · Biophysique économique · Terrain québécois</span>
+  <p class="footer-copy">© 2026 Pascal Gagnon</p>
+</footer>
+
+<script>
+// Animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Filtres
+function filtrer(btn, vertical) {
+  document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('actif'));
+  btn.classList.add('actif');
+  const vedette = document.querySelector('.article-vedette');
+  const cards = document.querySelectorAll('.article-card');
+  if (vertical === 'tous') {
+    vedette.style.display = '';
+    cards.forEach(c => c.closest('.article-card') && (c.style.display = ''));
+  } else {
+    const vVertical = vedette.querySelector('[data-vertical]') || vedette;
+    vedette.style.display = vVertical.dataset.vertical === vertical ? '' : 'none';
+    cards.forEach(c => {
+      c.style.display = c.dataset.vertical === vertical ? '' : 'none';
+    });
+  }
+}
+</script>
+</body>
+</html>
