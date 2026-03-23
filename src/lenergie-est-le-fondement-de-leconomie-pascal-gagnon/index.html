@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'énergie comme fondement de l'économie — Pascal Gagnon</title>
+<meta name="description" content="Ce que la théorie économique dominante omet depuis 150 ans — et pourquoi cette omission explique la stagnation, les crises financières, et les limites réelles de la croissance.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --noir: #0a0a0a;
+  --creme: #f5f0e8;
+  --bleu: #0063b2;
+  --bleu-clair: #4d92c9;
+  --bleu-pale: #e6eff7;
+  --gris: #6b6b6b;
+  --gris-clair: #d4cfc6;
+  --max: 740px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--creme); color: var(--noir); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; font-size: 18px; line-height: 1.75; }
+
+/* ── NAV ── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 4rem; background: rgba(245,240,232,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,99,178,0.15); }
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--noir); text-decoration: none; }
+.nav-logo span { color: var(--bleu); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover { color: var(--bleu); }
+.nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
+.nav-cta:hover { background: var(--bleu); color: #fff; }
+@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+
+/* ── HERO ARTICLE ── */
+.hero { background: var(--noir); color: #fff; padding: 6rem 2rem 4.5rem; padding-top: calc(6rem + 80px); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px); }
+.hero-inner { position: relative; max-width: var(--max); margin: 0 auto; }
+.hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.8rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--bleu-clair); }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; font-weight: 900; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: var(--bleu-clair); }
+.hero-chapeau { font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 600px; margin-bottom: 2.5rem; }
+.hero-meta { font-size: 0.72rem; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; display: flex; gap: 2rem; flex-wrap: wrap; }
+.hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+/* ── NIVEAUX DE LECTURE ── */
+.niveaux { background: var(--noir); padding: 0 2rem 3rem; }
+.niveaux-inner { max-width: var(--max); margin: 0 auto; background: var(--bleu-pale); border-left: 3px solid var(--bleu); padding: 1.5rem 2rem; }
+.niveaux-titre { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bleu); margin-bottom: 1rem; }
+.niveaux-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+.niveau { display: flex; flex-direction: column; gap: 0.3rem; }
+.niveau-nom { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gris); font-weight: 500; }
+.niveau-desc { font-size: 0.85rem; color: #3a3a3a; line-height: 1.55; }
+
+/* ── NAVIGATION SECONDAIRE ── */
+.subnav { background: var(--creme); border-bottom: 1px solid var(--gris-clair); padding: 0.8rem 2rem; position: sticky; top: 80px; z-index: 90; }
+.subnav-inner { max-width: var(--max); margin: 0 auto; display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; }
+.subnav a { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.2s; }
+.subnav a:hover { color: var(--bleu); }
+@media (max-width: 600px) { .subnav { display: none; } }
+
+/* ── CORPS ARTICLE ── */
+.article-wrap { max-width: var(--max); margin: 0 auto; padding: 0 2rem 6rem; }
+@media (max-width: 600px) { .article-wrap { padding: 0 1.2rem 4rem; } }
+
+/* Sections */
+.section { margin-top: 4.5rem; padding-top: 2.5rem; border-top: 1px solid var(--gris-clair); }
+.section-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.6rem; }
+.section-label .num { color: var(--gris-clair); }
+
+h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.6rem; letter-spacing: -0.01em; }
+h2 em { font-style: italic; color: var(--bleu); }
+h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.8rem; }
+h4 { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); margin-top: 2rem; margin-bottom: 0.6rem; font-weight: 500; }
+
+p { margin-bottom: 1.3rem; }
+p + p { text-indent: 1.2em; }
+sup { font-size: 0.65rem; color: var(--bleu); }
+sup a { color: var(--bleu); text-decoration: none; }
+
+/* Formule */
+.formula { background: var(--noir); color: #fff; padding: 1.5rem 2rem; margin: 2rem 0; border-left: 4px solid var(--bleu); }
+.formula .eq { font-size: 1.2rem; font-weight: 500; display: block; margin-bottom: 0.8rem; letter-spacing: 0.04em; font-family: 'Playfair Display', serif; font-style: italic; }
+.formula .legend { font-size: 0.75rem; color: rgba(255,255,255,0.55); line-height: 1.9; }
+
+/* Bloc encadré (callout) */
+.callout { background: var(--bleu-pale); border: 1px solid rgba(0,99,178,0.2); border-left: 3px solid var(--bleu); padding: 1.2rem 1.5rem; margin: 2rem 0; }
+.callout-label { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bleu); margin-bottom: 0.5rem; font-weight: 500; }
+.callout p { font-size: 0.95rem; margin-bottom: 0; text-indent: 0 !important; }
+
+/* Citation */
+blockquote { border-left: 3px solid var(--bleu); margin: 2.5rem 0; padding: 1rem 1.5rem; background: var(--bleu-pale); }
+blockquote p { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--noir); line-height: 1.6; margin-bottom: 0.5rem; text-indent: 0 !important; }
+blockquote cite { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris); }
+
+/* Figures */
+.figure-wrap { margin: 2.5rem 0; background: #fff; border: 1px solid var(--gris-clair); padding: 1.5rem; }
+.figure-label { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gris); margin-bottom: 1rem; font-weight: 500; }
+.figure-caption { font-size: 0.82rem; color: var(--gris); font-style: italic; margin-top: 1rem; line-height: 1.55; }
+.graph-svg { width: 100%; height: auto; display: block; }
+
+/* Tableau EROI */
+.eroi-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.88rem; }
+.eroi-table thead tr { background: var(--noir); color: #fff; }
+.eroi-table th { padding: 0.7rem 1rem; text-align: left; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+.eroi-table td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--gris-clair); }
+.eroi-table tr:nth-child(even) td { background: var(--bleu-pale); }
+.eroi-bar { display: inline-block; height: 10px; background: var(--bleu); border-radius: 2px; vertical-align: middle; margin-left: 0.5rem; }
+.eroi-bar.hq { background: #1a6b2a; }
+
+/* Timeline */
+.timeline { margin: 2rem 0; }
+.tl-item { display: grid; grid-template-columns: 80px 1fr; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gris-clair); }
+.tl-item:last-child { border-bottom: none; }
+.tl-year { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--bleu); padding-top: 0.1rem; }
+.tl-content p { margin-bottom: 0.4rem; font-size: 0.92rem; text-indent: 0 !important; }
+.tl-content strong { font-weight: 500; }
+
+/* Références */
+.references {}
+.ref-list { list-style: none; }
+.ref-list li { padding: 0.8rem 0; border-bottom: 1px solid var(--gris-clair); font-size: 0.85rem; color: var(--gris); line-height: 1.6; display: grid; grid-template-columns: 2rem 1fr; gap: 0.5rem; }
+.ref-num { font-size: 0.72rem; color: var(--bleu); padding-top: 0.1rem; font-weight: 500; }
+
+/* Carte auteur */
+.author-card { background: var(--bleu-pale); border: 1px solid rgba(0,99,178,0.2); border-top: 3px solid var(--bleu); padding: 1.5rem; margin-top: 3rem; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start; }
+.author-initial { width: 52px; height: 52px; background: var(--bleu); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-style: italic; }
+.author-info h4 { margin-top: 0; font-size: 0.88rem; color: var(--noir); font-weight: 500; letter-spacing: 0.04em; }
+.author-info p { font-size: 0.82rem; color: var(--gris); margin-bottom: 0; text-indent: 0 !important; }
+
+/* Lien retour */
+.retour { padding: 3rem 2rem 0; max-width: var(--max); margin: 0 auto; }
+.retour a { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.2s; }
+.retour a:hover { gap: 0.8rem; }
+
+/* ── FOOTER ── */
+footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-top: 6rem; }
+@media (max-width: 768px) { footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; } }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: rgba(245,240,232,0.5); text-decoration: none; }
+.footer-logo span { color: var(--bleu-clair); }
+.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--bleu-clair); }
+.footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); }
+
+@media (max-width: 600px) { .tl-item { grid-template-columns: 60px 1fr; } .author-card { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="nav-links">
+    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/terrain-pme/">Terrain PME</a></li>
+    <li><a href="/marketing-numerique/">Marketing numérique</a></li>
+  </ul>
+  <a href="/#newsletter" class="nav-cta">Infolettre</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Économie biophysique</p>
+    <h1>L'énergie comme <em>fondement</em><br>de l'économie</h1>
+    <p class="hero-chapeau">Ce que la théorie économique dominante omet depuis 150 ans — et pourquoi cette omission explique la stagnation, les crises financières, et les limites de la croissance moderne.</p>
+    <div class="hero-meta">
+      <span>Pascal Gagnon</span>
+      <span>Première version : 2006</span>
+      <span>Mis à jour : 2025</span>
+      <span>Lecture : 20–30 min</span>
+    </div>
+  </div>
+</header>
+
+<!-- NIVEAUX DE LECTURE -->
+<div class="niveaux">
+  <div class="niveaux-inner">
+    <p class="niveaux-titre">Niveaux de lecture</p>
+    <div class="niveaux-grille">
+      <div class="niveau">
+        <span class="niveau-nom">Décideur pressé</span>
+        <span class="niveau-desc">Lisez les encadrés bleus et les titres de section. 5 minutes.</span>
+      </div>
+      <div class="niveau">
+        <span class="niveau-nom">Lecteur curieux</span>
+        <span class="niveau-desc">Lisez les sections complètes, ignorez les notes de bas de page. 15 minutes.</span>
+      </div>
+      <div class="niveau">
+        <span class="niveau-nom">Chercheur</span>
+        <span class="niveau-desc">Lecture complète avec références. Consultez la bibliographie. 30 minutes.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV SECONDAIRE -->
+<nav class="subnav">
+  <div class="subnav-inner">
+    <a href="#intro">Introduction</a>
+    <a href="#fondement">Fondement</a>
+    <a href="#eroi">EROI</a>
+    <a href="#stagnation">Stagnation</a>
+    <a href="#regional">Régional</a>
+    <a href="#refs">Références</a>
+  </div>
+</nav>
+
+<!-- LIEN RETOUR -->
+<div class="retour">
+  <a href="/blog/">← Tous les articles</a>
+</div>
+
+<!-- CORPS DE L'ARTICLE -->
+<div class="article-wrap">
+
+  <!-- § 1 INTRODUCTION -->
+  <div class="section" id="intro">
+    <p class="section-label"><span class="num">§ 1</span> Introduction</p>
+    <h2>Ce que l'économie standard<em> ne vous dit pas</em></h2>
+
+    <p>Depuis le début de l'ère industrielle, les économistes ont développé des théories de plus en plus sophistiquées pour expliquer la croissance économique. Ces théories ont en commun une omission remarquable : l'énergie n'y joue qu'un rôle marginal, voire inexistant.</p>
+    <p>La formule canonique de la macroéconomie néoclassique — celle que l'on enseigne dans tous les programmes universitaires — est la suivante :</p>
+
+    <div class="formula">
+      <span class="eq">Y = f ( K, A·N )</span>
+      <span class="legend">
+        Y = Production totale (PIB)<br>
+        K = Capital (machines, infrastructure, bâtiments)<br>
+        N = Travail humain (heures travaillées)<br>
+        A = Progrès technologique (facteur résiduel)
+      </span>
+    </div>
+
+    <p>Dans ce modèle, la croissance économique est le produit du capital et du travail, multipliés par un facteur de progrès technologique. L'énergie, si elle apparaît du tout, est classée sous « capital » ou traitée comme une simple marchandise dont le prix régule automatiquement l'usage. Cette représentation du monde a guidé les politiques économiques des pays industrialisés pendant plus d'un siècle.</p>
+
+    <div class="callout">
+      <div class="callout-label">Thèse centrale</div>
+      <p>L'énergie n'est pas une simple marchandise parmi d'autres. C'est la <strong>condition préalable</strong> à toute activité économique. Sans énergie de qualité suffisante et à un coût accessible, ni le capital ni le travail ne peuvent être mobilisés. La croissance économique des 200 dernières années est, en grande partie, la conséquence directe de l'accès à des sources d'énergie de plus en plus concentrées et bon marché.</p>
+    </div>
+
+    <p>Cette thèse n'est pas nouvelle. Elle a été posée dès 2006 dans un rapport de maîtrise produit à l'Université du Québec à Chicoutimi,<sup><a href="#ref1">[1]</a></sup> puis développée rigoureusement sur plusieurs décennies par des chercheurs comme Charles A.S. Hall, Kent Klitgaard, Robert Ayres et Vaclav Smil. Les données des vingt dernières années ont largement confirmé ses implications.</p>
+  </div>
+
+  <!-- § 2 FONDEMENT -->
+  <div class="section" id="fondement">
+    <p class="section-label"><span class="num">§ 2</span> Le fondement biophysique</p>
+    <h2>Une nouvelle<em> fonction de production</em></h2>
+
+    <p>Le problème fondamental de la théorie néoclassique est qu'elle traite l'économie comme un système fermé — un circuit d'échanges entre entreprises et ménages, où l'argent circule en boucle perpétuelle. Ce modèle ignore que toute production économique nécessite des intrants matériels et énergétiques prélevés dans le monde physique, et génère des déchets qui y retournent.</p>
+
+    <h3>La substitution de l'énergie au progrès technologique</h3>
+
+    <p>Une modification mineure mais fondamentale de la fonction de production révèle ce que la théorie standard masque :</p>
+
+    <div class="formula">
+      <span class="eq">Y = f ( K, E·N )</span>
+      <span class="legend">
+        Y = Production totale<br>
+        K = Capital<br>
+        N = Travail humain<br>
+        E = <strong>Énergie</strong> (en remplacement du facteur A)
+      </span>
+    </div>
+
+    <p>Cette reformulation, proposée initialement dans le rapport de 2006<sup><a href="#ref1">[1]</a></sup> et développée formellement par Hall et Klitgaard,<sup><a href="#ref2">[2]</a></sup> suggère que ce que les économistes appellent « progrès technologique » est, en réalité, la découverte successive de formes d'énergie de plus en plus concentrées et accessibles. Le passage du bois au charbon, puis du charbon au pétrole, n'est pas d'abord une histoire technologique — c'est une histoire énergétique.</p>
+
+    <div class="figure-wrap">
+      <div class="figure-label">Figure 1 — Graphique original, Gagnon (2006)</div>
+      <svg class="graph-svg" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg">
+        <rect width="560" height="320" fill="#ffffff"/>
+        <g stroke="#d4cfc6" stroke-width="0.5">
+          <line x1="80" y1="40" x2="80" y2="260"/>
+          <line x1="80" y1="260" x2="520" y2="260"/>
+          <line x1="80" y1="200" x2="520" y2="200"/>
+          <line x1="80" y1="140" x2="520" y2="140"/>
+          <line x1="80" y1="80" x2="520" y2="80"/>
+          <line x1="190" y1="40" x2="190" y2="260"/>
+          <line x1="300" y1="40" x2="300" y2="260"/>
+          <line x1="410" y1="40" x2="410" y2="260"/>
+          <line x1="520" y1="40" x2="520" y2="260"/>
+        </g>
+        <text x="300" y="295" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b6b6b">Capital par travailleur effectif  K/EN</text>
+        <text x="22" y="160" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b6b6b" transform="rotate(-90,22,160)">Production par travailleur  Y/EN</text>
+        <path d="M 90 250 Q 200 180 310 120 Q 400 80 520 62" fill="none" stroke="#0063b2" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="200" y1="60" x2="200" y2="260" stroke="#4d92c9" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <line x1="350" y1="60" x2="350" y2="260" stroke="#4d92c9" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <line x1="80" y1="175" x2="200" y2="175" stroke="#4d92c9" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="80" y1="112" x2="350" y2="112" stroke="#4d92c9" stroke-width="1" stroke-dasharray="3,3"/>
+        <circle cx="200" cy="175" r="4" fill="#0063b2"/>
+        <circle cx="350" cy="112" r="4" fill="#0063b2"/>
+        <text x="196" y="274" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#0063b2">N₀</text>
+        <text x="346" y="274" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#0063b2">N₁</text>
+        <text x="68" y="178" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#0063b2">Y₀</text>
+        <text x="68" y="115" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#0063b2">Y₁</text>
+        <text x="490" y="55" font-family="DM Sans, sans-serif" font-size="10" fill="#0063b2">f(K/EN)</text>
+        <text x="300" y="22" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="13" fill="#0a0a0a" font-weight="bold">Courbe de croissance et énergie</text>
+      </svg>
+      <p class="figure-caption">La courbe f(K/EN) illustre les rendements décroissants du capital lorsque l'énergie est maintenue constante. Un accroissement du travail de N₀ à N₁ produit une augmentation de production de Y₀ à Y₁, mais chaque unité supplémentaire de travail contribue de moins en moins à la production. Seul un accroissement de E — l'énergie disponible — peut déplacer la courbe vers le haut. <em>Source : Gagnon (2006)</em></p>
+    </div>
+
+    <div class="figure-wrap">
+      <div class="figure-label">Figure 2 — Énergie primaire per capita vs PIB per capita (1820–2020)</div>
+      <svg class="graph-svg" viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg">
+        <rect width="560" height="340" fill="#ffffff"/>
+        <g stroke="#d4cfc6" stroke-width="0.5">
+          <line x1="70" y1="30" x2="70" y2="270"/>
+          <line x1="70" y1="270" x2="530" y2="270"/>
+          <line x1="70" y1="210" x2="530" y2="210"/>
+          <line x1="70" y1="150" x2="530" y2="150"/>
+          <line x1="70" y1="90" x2="530" y2="90"/>
+          <line x1="70" y1="30" x2="530" y2="30"/>
+          <line x1="185" y1="30" x2="185" y2="270"/>
+          <line x1="300" y1="30" x2="300" y2="270"/>
+          <line x1="415" y1="30" x2="415" y2="270"/>
+          <line x1="530" y1="30" x2="530" y2="270"/>
+        </g>
+        <text x="70"  y="288" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#6b6b6b">1820</text>
+        <text x="185" y="288" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#6b6b6b">1900</text>
+        <text x="300" y="288" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#6b6b6b">1950</text>
+        <text x="415" y="288" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#6b6b6b">1973</text>
+        <text x="530" y="288" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#6b6b6b">2020</text>
+        <text x="60" y="273" text-anchor="end" font-family="DM Sans, sans-serif" font-size="8" fill="#6b6b6b">Faible</text>
+        <text x="60" y="153" text-anchor="end" font-family="DM Sans, sans-serif" font-size="8" fill="#6b6b6b">Moyen</text>
+        <text x="60" y="33"  text-anchor="end" font-family="DM Sans, sans-serif" font-size="8" fill="#6b6b6b">Élevé</text>
+        <path d="M 70 262 C 100 258 150 248 185 240 C 220 232 255 215 300 190 C 340 168 385 120 415 90 C 440 68 480 58 530 52" fill="none" stroke="#0063b2" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M 70 265 C 100 260 150 252 185 244 C 225 234 260 218 300 196 C 340 174 385 128 415 98 C 435 82 465 80 530 82" fill="none" stroke="#4d92c9" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6,3"/>
+        <line x1="415" y1="30" x2="415" y2="270" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="418" y="48" font-family="DM Sans, sans-serif" font-size="8.5" fill="#c0392b">Choc pétrolier</text>
+        <text x="418" y="59" font-family="DM Sans, sans-serif" font-size="8.5" fill="#c0392b">1973</text>
+        <text x="432" y="73" font-family="DM Sans, sans-serif" font-size="7.5" fill="#555">PIB continue</text>
+        <text x="432" y="105" font-family="DM Sans, sans-serif" font-size="7.5" fill="#555">Énergie stagne</text>
+        <rect x="80" y="38" width="140" height="44" fill="white" stroke="#d4cfc6"/>
+        <line x1="90" y1="52" x2="110" y2="52" stroke="#0063b2" stroke-width="2.5"/>
+        <text x="115" y="55" font-family="DM Sans, sans-serif" font-size="8.5" fill="#0a0a0a">PIB per capita</text>
+        <line x1="90" y1="70" x2="110" y2="70" stroke="#4d92c9" stroke-width="2.5" stroke-dasharray="6,3"/>
+        <text x="115" y="73" font-family="DM Sans, sans-serif" font-size="8.5" fill="#0a0a0a">Énergie per capita</text>
+        <text x="300" y="315" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#6b6b6b">Sources : Maddison (2003), Our World in Data (2023), Hall &amp; Klitgaard (2018)</text>
+      </svg>
+      <p class="figure-caption">La corrélation entre consommation d'énergie primaire per capita et PIB per capita est remarquablement stable de 1820 à 1973. Après le premier choc pétrolier, le PIB continue d'augmenter en termes nominaux, mais la croissance réelle de la productivité ralentit significativement — ce que l'économiste Tyler Cowen a nommé la « grande stagnation ».<sup><a href="#ref7">[7]</a></sup></p>
+    </div>
+
+    <h3>Le principe du premier thermodynamique appliqué à l'économie</h3>
+
+    <p>Le premier principe de la thermodynamique est sans appel : l'énergie ne se crée pas, elle se transforme. Toute machine, tout procédé chimique, toute activité humaine nécessite un apport d'énergie. Ce qui distingue les différentes sources d'énergie, c'est leur <strong>densité énergétique</strong> — la quantité d'énergie contenue dans une unité de masse ou de volume — et leur <strong>versatilité</strong>.</p>
+    <p>Le pétrole, avec une densité énergétique de 34–37 MJ/litre et une facilité de transport sans équivalent, a permis une industrialisation que les sources d'énergie précédentes — charbon, bois, force animale — ne pouvaient pas soutenir à cette échelle.</p>
+
+    <blockquote>
+      <p>« Pour chaque baril de pétrole investi globalement dans la recherche et la production de nouveau pétrole, environ 10 à 20 barils sont livrés à la société. Ce surplus énergétique a permis le développement de l'ensemble de notre civilisation. »</p>
+      <cite>Hall &amp; Klitgaard, Energy and the Wealth of Nations (2018)</cite>
+    </blockquote>
+  </div>
+
+  <!-- § 3 EROI -->
+  <div class="section" id="eroi">
+    <p class="section-label"><span class="num">§ 3</span> Le concept central</p>
+    <h2>L'EROI : l'énergie retournée<em> sur l'énergie investie</em></h2>
+
+    <p>Le concept d'EROI (<em>Energy Return on Investment</em>) — ou ERFEI en français — est l'instrument analytique le plus puissant pour évaluer la viabilité réelle d'une source d'énergie. Développé par Charles Hall dans les années 1970 et formalisé dans ses travaux ultérieurs,<sup><a href="#ref2">[2]</a></sup> il mesure combien d'unités d'énergie une société reçoit pour chaque unité investie dans l'extraction.</p>
+
+    <div class="formula">
+      <span class="eq">EROI = Énergie produite ÷ Énergie investie</span>
+      <span class="legend">
+        Un EROI de 10:1 signifie que pour 1 baril investi, 10 barils sont récupérés.<br>
+        Un EROI de 1:1 signifie que toute l'énergie produite est consommée pour produire cette énergie.<br>
+        En dessous de ~5:1, la société n'a plus suffisamment de surplus pour maintenir sa complexité.
+      </span>
+    </div>
+
+    <h3>L'évolution de l'EROI des sources d'énergie</h3>
+
+    <table class="eroi-table">
+      <thead>
+        <tr>
+          <th>Source d'énergie</th>
+          <th>EROI estimé</th>
+          <th>Tendance</th>
+          <th>Visualisation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pétrole US (années 1930)</td>
+          <td>~100:1</td>
+          <td>↓ Historique</td>
+          <td><span class="eroi-bar" style="width:100px"></span></td>
+        </tr>
+        <tr>
+          <td>Pétrole mondial (2020)</td>
+          <td>~15–20:1</td>
+          <td>↓ En déclin</td>
+          <td><span class="eroi-bar" style="width:20px"></span></td>
+        </tr>
+        <tr>
+          <td>Pétrole de schiste (US)</td>
+          <td>~5–8:1</td>
+          <td>→ Stable/bas</td>
+          <td><span class="eroi-bar" style="width:8px"></span></td>
+        </tr>
+        <tr>
+          <td>Sables bitumineux (Alberta)</td>
+          <td>~3–5:1</td>
+          <td>↓ Dégradation</td>
+          <td><span class="eroi-bar" style="width:5px"></span></td>
+        </tr>
+        <tr>
+          <td>Éolien terrestre (système complet)</td>
+          <td>~15–20:1</td>
+          <td>↑ En amélioration</td>
+          <td><span class="eroi-bar" style="width:20px"></span></td>
+        </tr>
+        <tr>
+          <td>Solaire photovoltaïque (système)</td>
+          <td>~8–12:1</td>
+          <td>↑ En amélioration</td>
+          <td><span class="eroi-bar" style="width:12px"></span></td>
+        </tr>
+        <tr>
+          <td>Hydroélectricité</td>
+          <td>~40–80:1</td>
+          <td>→ Stable</td>
+          <td><span class="eroi-bar hq" style="width:80px"></span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Sources : Hall et al. (2014),<sup><a href="#ref3">[3]</a></sup> Murphy &amp; Hall (2010),<sup><a href="#ref4">[4]</a></sup> Lambert et al. (2014).<sup><a href="#ref5">[5]</a></sup></p>
+
+    <div class="callout">
+      <div class="callout-label">La falaise de l'énergie nette</div>
+      <p>Hall et Lambert ont démontré que la relation entre EROI et énergie nette disponible n'est pas linéaire — elle est exponentielle. En dessous d'un EROI de 5:1, chaque point de baisse supplémentaire provoque une réduction catastrophique de l'énergie disponible pour la société après déduction des coûts d'extraction. C'est ce qu'ils appellent la « falaise de l'énergie nette ».<sup><a href="#ref5">[5]</a></sup></p>
+    </div>
+
+    <h3>Le paradoxe de Jevons : pourquoi l'efficacité ne résout pas le problème</h3>
+
+    <p>En 1865, l'économiste William Stanley Jevons a observé un phénomène contre-intuitif : l'amélioration de l'efficacité du moteur à vapeur de James Watt n'avait pas réduit la consommation de charbon en Angleterre — elle l'avait augmentée. Un système plus efficace réduit le coût unitaire du travail effectué, ce qui stimule la demande pour ce travail, et finalement augmente la consommation totale de ressources.</p>
+    <p>Ce paradoxe s'applique directement aux politiques d'efficacité énergétique contemporaines : les voitures hybrides, les bâtiments mieux isolés, les appareils électroménagers plus efficaces génèrent des économies qui sont réinvesties dans d'autres formes de consommation. À l'échelle macroéconomique, l'efficacité seule ne suffit pas à réduire la consommation totale d'énergie — elle peut même l'augmenter.</p>
+  </div>
+
+  <!-- § 4 STAGNATION -->
+  <div class="section" id="stagnation">
+    <p class="section-label"><span class="num">§ 4</span> Les implications contemporaines</p>
+    <h2>La stagnation séculaire vue<em> par le prisme énergétique</em></h2>
+
+    <p>Depuis les années 1970, les économistes documentent un ralentissement persistant de la croissance de la productivité dans les pays industrialisés. Tyler Cowen l'a popularisé sous le nom de « grande stagnation »<sup><a href="#ref7">[7]</a></sup> et Larry Summers parle de « stagnation séculaire ».<sup><a href="#ref8">[8]</a></sup> Leurs explications varient : manque d'innovation, démographie, inégalités croissantes, excès d'épargne.</p>
+    <p>Hall et Klitgaard proposent une explication radicalement différente : la stagnation est d'abord un phénomène énergétique. Le pic de production pétrolière américaine en 1970, puis les chocs pétroliers de 1973 et 1979, ont mis fin à l'ère de l'énergie abondante et bon marché qui avait rendu possible la croissance rapide de l'après-guerre.</p>
+
+    <h3>La chronologie des événements</h3>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1956</div>
+        <div class="tl-content">
+          <p><strong>Hubbert prédit le pic pétrolier américain</strong></p>
+          <p>Le géologue M. King Hubbert calcule que la production pétrolière des États-Unis atteindra son maximum entre 1966 et 1971. Il est ridiculisé.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1970</div>
+        <div class="tl-content">
+          <p><strong>Le pic pétrolier américain est atteint</strong></p>
+          <p>La production confirme la prédiction de Hubbert. Les États-Unis deviennent importateurs nets de pétrole. La stagnation des salaires réels commence.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1973</div>
+        <div class="tl-content">
+          <p><strong>Premier choc pétrolier</strong></p>
+          <p>L'embargo de l'OPEP révèle la vulnérabilité des économies industrialisées. La croissance économique ralentit simultanément dans tous les pays développés.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1984</div>
+        <div class="tl-content">
+          <p><strong>Pic pétrolier soviétique</strong></p>
+          <p>Kolodziej et Reynolds démontreront plus tard que le déclin de la production pétrolière soviétique — et non les politiques de Reagan — est la cause principale de l'effondrement de l'URSS en 1991.<sup><a href="#ref6">[6]</a></sup></p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2005</div>
+        <div class="tl-content">
+          <p><strong>Pic du pétrole conventionnel mondial</strong></p>
+          <p>La production mondiale de pétrole léger conventionnel atteint son maximum. Les prix commencent leur ascension vers les niveaux records de 2008.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2008</div>
+        <div class="tl-content">
+          <p><strong>Crise financière</strong></p>
+          <p>Hall et Klitgaard soutiennent que la crise financière de 2008 est, au moins partiellement, une crise énergétique : des prix du pétrole élevés ont comprimé le pouvoir d'achat des ménages, déclenchant les défauts hypothécaires.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2018</div>
+        <div class="tl-content">
+          <p><strong>Hall &amp; Klitgaard publient la 2e édition</strong></p>
+          <p><em>Energy and the Wealth of Nations</em> devient le texte de référence de l'économie biophysique, formalisant mathématiquement et empiriquement la thèse développée intuitivement en 2006.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Le modèle « cheese slicer » de Hall</h3>
+
+    <p>Hall et Klitgaard proposent une représentation visuelle saisissante de l'impact du déclin de l'EROI sur la structure de l'économie. Ils imaginent le PIB comme un fromage tranché en couches successives : d'abord l'énergie nécessaire à l'extraction de l'énergie, puis l'entretien des infrastructures, puis les biens de première nécessité, et enfin — ce qu'il reste — les dépenses discrétionnaires et l'investissement productif.</p>
+    <p>Lorsque l'EROI baisse, la première tranche — l'énergie pour obtenir l'énergie — grossit, et c'est la dernière tranche, celle des investissements discrétionnaires et de la recherche-développement, qui rétrécit. L'économie ralentit non pas parce que les humains sont moins ingénieux, mais parce que la physique réduit mécaniquement la marge de manœuvre.</p>
+
+    <blockquote>
+      <p>« Si la consommation de pétrole per capita est réduite, il y a 30% de chances d'avoir une récession, alors que cette probabilité n'est que de 2% lorsqu'il y a croissance de la consommation de pétrole per capita. »</p>
+      <cite>Samuel Foucher, Graphoilogy (2006) — cité dans Gagnon (2006)</cite>
+    </blockquote>
+  </div>
+
+  <!-- § 5 REGIONAL -->
+  <div class="section" id="regional">
+    <p class="section-label"><span class="num">§ 5</span> Implications régionales</p>
+    <h2>Ce que cela signifie pour<em> le Québec et le Lac-Saint-Jean</em></h2>
+
+    <p>Les principes de l'économie biophysique ne sont pas seulement des abstractions académiques. Ils ont des implications concrètes et urgentes pour les décisions que prennent aujourd'hui les élus, les entrepreneurs et les décideurs régionaux du Québec.</p>
+
+    <h3>L'avantage structurel du Québec</h3>
+
+    <p>Le Québec occupe une position exceptionnelle dans ce contexte mondial. Son hydroélectricité — avec un EROI de 40 à 80:1, parmi les plus élevés de toutes les sources d'énergie — est un actif stratégique dont la valeur relative augmente à mesure que l'EROI des énergies fossiles décline. La région du Lac-Saint-Jean, avec sa ressource forestière considérable et son accès à cette énergie à faible coût, dispose d'une combinaison rare.</p>
+
+    <h4>Questions stratégiques pour les décideurs régionaux</h4>
+
+    <div class="callout">
+      <div class="callout-label">Électrification industrielle</div>
+      <p>Les locomotives diesel-électriques sont parmi les candidats les plus réalistes à une électrification directe. L'exploitation forestière et minière lourde représente un défi différent — mais le potentiel de réduction de la dépendance aux combustibles importés est considérable pour une région éloignée des raffineries.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Valorisation de la biomasse forestière</div>
+      <p>La Finlande a développé des modèles intégrés de valorisation des résidus forestiers — énergie, matériaux, chimie verte — qui transforment ce qui était des déchets en sources de revenus. Pour une région à vocation forestière, l'enjeu n'est pas seulement environnemental : c'est un enjeu de valeur ajoutée locale et de résilience économique face à la volatilité des marchés d'exportation.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Construction en bois et densification urbaine</div>
+      <p>Les villes européennes ont démontré que la densification urbaine autour du transport collectif réduit drastiquement la consommation d'énergie per capita sans réduire le niveau de vie. Pour une ville comme Roberval, la question n'est pas de copier Vienne, mais d'anticiper quels types d'investissements urbains auront encore du sens dans 30 ans dans un contexte d'énergie plus coûteuse.</p>
+    </div>
+
+    <p>Ces questions ne sont pas nouvelles. Elles étaient déjà posées en 2006. Ce qui a changé, c'est que les données disponibles, la maturité des technologies alternatives, et l'urgence climatique ont convergé pour les rendre incontournables — et que les régions qui auront anticipé ces transitions seront celles qui en tireront le plus d'avantages économiques.</p>
+  </div>
+
+  <!-- § 6 CONCLUSION -->
+  <div class="section">
+    <p class="section-label"><span class="num">§ 6</span> Conclusion</p>
+    <h2>Voir la structure<em> avant les données</em></h2>
+
+    <p>Le principe que l'énergie est le fondement physique de toute croissance économique n'est pas une idée marginale ou radicale. C'est une conséquence directe des lois de la thermodynamique, confirmée empiriquement par des décennies de données sur la relation entre consommation énergétique et PIB.</p>
+    <p>Ce qui est remarquable, c'est que cette évidence reste absente de la grande majorité des débats de politique économique. On parle de taux d'intérêt, de déficits budgétaires, de productivité, d'innovation — rarement d'EROI, de densité énergétique ou de surplus net d'énergie. Pourtant, c'est à ce niveau que se jouent les contraintes fondamentales sur ce que les sociétés peuvent ou ne peuvent pas faire.</p>
+    <p>Pour les élus et décideurs régionaux, intégrer ce cadre analytique ne signifie pas adopter une vision catastrophiste. Cela signifie poser les bonnes questions : quelles activités économiques ont un avenir dans un monde d'énergie plus coûteuse? Quels actifs locaux — forêts, hydroélectricité, savoir-faire industriel — ont une valeur qui va croître? Quels investissements d'aujourd'hui auront encore du sens dans 30 ans?</p>
+
+    <blockquote>
+      <p>« L'économie ne peut pas rester intacte sans l'apport d'une source d'énergie polyvalente, portable, fiable et économique. »</p>
+      <cite>Pascal Gagnon, Le déclin de l'économie pétrolière (2006)</cite>
+    </blockquote>
+  </div>
+
+  <!-- § 7 RÉFÉRENCES -->
+  <div class="section references" id="refs">
+    <p class="section-label"><span class="num">§ 7</span> Bibliographie</p>
+    <h2>Références et<em> lectures complémentaires</em></h2>
+
+    <ul class="ref-list">
+      <li id="ref1"><span class="ref-num">[1]</span><span>Gagnon, P. (2006). <em>Le déclin de l'économie pétrolière</em>. Rapport d'étude, Maîtrise en gestion des organisations, Université du Québec à Chicoutimi. Constellation UQAC. https://constellation.uqac.ca/2023/1/13827444T1.pdf</span></li>
+      <li id="ref2"><span class="ref-num">[2]</span><span>Hall, C.A.S. &amp; Klitgaard, K. (2018). <em>Energy and the Wealth of Nations: An Introduction to Biophysical Economics</em> (2e éd.). Springer. https://doi.org/10.1007/978-3-319-66219-0</span></li>
+      <li id="ref3"><span class="ref-num">[3]</span><span>Hall, C.A.S., Lambert, J.G. &amp; Balogh, S.B. (2014). EROI of different fuels and the implications for society. <em>Energy Policy</em>, 64, 141–152.</span></li>
+      <li id="ref4"><span class="ref-num">[4]</span><span>Murphy, D.J. &amp; Hall, C.A.S. (2010). Year in review — EROI or energy return on (energy) invested. <em>Annals of the New York Academy of Sciences</em>, 1185, 102–118.</span></li>
+      <li id="ref5"><span class="ref-num">[5]</span><span>Lambert, J.G., Hall, C.A.S., Balogh, S., Gupta, A. &amp; Arnold, M. (2014). Energy, EROI and quality of life. <em>Energy Policy</em>, 64, 153–167.</span></li>
+      <li id="ref6"><span class="ref-num">[6]</span><span>Kolodziej, M. &amp; Reynolds, D.B. (2005). Former Soviet Union oil production and GDP decline: Granger causality and the multi-cycle Hubbert curve. <em>Energy Economics</em>.</span></li>
+      <li id="ref7"><span class="ref-num">[7]</span><span>Cowen, T. (2011). <em>The Great Stagnation</em>. Dutton.</span></li>
+      <li id="ref8"><span class="ref-num">[8]</span><span>Summers, L.H. (2014). Reflections on the 'New Secular Stagnation Hypothesis'. In C. Teulings &amp; R. Baldwin (éds.), <em>Secular Stagnation: Facts, Causes and Cures</em>. CEPR Press.</span></li>
+      <li><span class="ref-num">[9]</span><span>Ayres, R.U. &amp; Warr, B. (2009). <em>The Economic Growth Engine</em>. Edward Elgar.</span></li>
+      <li><span class="ref-num">[10]</span><span>Smil, V. (2017). <em>Energy and Civilization: A History</em>. MIT Press.</span></li>
+      <li><span class="ref-num">[11]</span><span>Smil, V. (2010). <em>Energy Transitions: History, Requirements, Prospects</em>. Praeger.</span></li>
+      <li><span class="ref-num">[12]</span><span>Jackson, T. (2017). <em>Prosperity Without Growth</em> (2e éd.). Routledge.</span></li>
+      <li><span class="ref-num">[13]</span><span>Maddison, A. (2003). Growth accounts, technological change, and the role of energy in Western growth. <em>Economia e Energia, secc. XIII–XVIII</em>. Istituto Internazionale di Storia Economica, Florence.</span></li>
+      <li><span class="ref-num">[14]</span><span>Koppelear, R.H.E.M. (2005). <em>World Oil Production &amp; Peaking Outlook</em>. Peak Oil Netherlands Foundation.</span></li>
+      <li><span class="ref-num">[15]</span><span>Hirsch, R.L. (2005). <em>Peaking of World Oil Production: Impacts, Mitigation &amp; Risk Management</em>. SAIC / US Department of Energy.</span></li>
+    </ul>
+  </div>
+
+  <!-- CARTE AUTEUR -->
+  <div class="author-card">
+    <div class="author-initial">P</div>
+    <div class="author-info">
+      <h4>Pascal Gagnon</h4>
+      <p>Conseiller municipal, Ville de Roberval. Directeur de compte Desjardins Entreprise, Lac-Saint-Jean. Auteur du rapport <em>Le déclin de l'économie pétrolière</em> (UQAC, 2006).</p>
+    </div>
+  </div>
+
+</div><!-- /article-wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
+    <li><a href="/blog/">Articles</a></li>
+    <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+    <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Pascal Gagnon</p>
+</footer>
+
+<script>
+// Surlignage de la section active dans la subnav
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.subnav a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.style.color = '');
+      const active = document.querySelector(`.subnav a[href="#${e.target.id}"]`);
+      if (active) active.style.color = 'var(--bleu)';
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
