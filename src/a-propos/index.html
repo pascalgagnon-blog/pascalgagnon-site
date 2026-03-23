@@ -53,8 +53,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 
 /* Colonne gauche */
 .colonne-gauche { position: sticky; top: 120px; }
-.photo-placeholder { width: 100%; aspect-ratio: 3/4; background: var(--bleu-pale); display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; border-top: 3px solid var(--bleu); }
-.photo-placeholder span { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bleu-clair); }
 .roles { display: flex; flex-direction: column; gap: 1.2rem; }
 .role-item { display: flex; flex-direction: column; gap: 0.2rem; border-left: 2px solid var(--bleu); padding-left: 1rem; }
 .role-titre { font-size: 0.82rem; font-weight: 500; color: var(--noir); }
@@ -136,9 +134,7 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 
     <!-- COLONNE GAUCHE -->
     <aside class="colonne-gauche">
-      <div class="photo-placeholder">
-        <span>Photo à venir</span>
-      </div>
+      <img src="/assets/images/pascal-gagnon.jpg" alt="Pascal Gagnon" style="width:100%;display:block;border-top:3px solid var(--bleu);">
       <div class="roles">
         <div class="role-item">
           <span class="role-titre">Directeur de compte</span>
