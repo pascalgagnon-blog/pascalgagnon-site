@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À propos — Pascal Gagnon</title>
+<meta name="description" content="Pascal Gagnon est directeur de compte Desjardins Entreprise, conseiller municipal à Roberval et analyste économique ancré au Lac-Saint-Jean.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --noir: #0a0a0a;
+  --creme: #f5f0e8;
+  --bleu: #0063b2;
+  --bleu-clair: #4d92c9;
+  --bleu-pale: #e6eff7;
+  --gris: #6b6b6b;
+  --gris-clair: #d4cfc6;
+  --max: 1200px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--creme); color: var(--noir); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; font-size: 18px; line-height: 1.7; }
+
+/* ── NAV ── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 4rem; background: rgba(245,240,232,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,99,178,0.15); }
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--noir); text-decoration: none; }
+.nav-logo span { color: var(--bleu); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover { color: var(--bleu); }
+.nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
+.nav-cta:hover { background: var(--bleu); color: #fff; }
+@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+
+/* ── EN-TÊTE PAGE ── */
+.page-header { padding-top: 140px; padding-bottom: 5rem; padding-left: 4rem; padding-right: 4rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .page-header { padding: 120px 1.5rem 3rem; } }
+.page-eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+.page-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--bleu-clair); }
+.page-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 900; line-height: 1.05; color: var(--noir); letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+.page-title em { font-style: italic; color: var(--bleu); }
+.page-subtitle { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--gris); }
+
+/* ── DIVIDER ── */
+.section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--bleu-clair), transparent); margin: 0 4rem; opacity: 0.4; }
+
+/* ── CONTENU PRINCIPAL ── */
+.contenu { max-width: var(--max); margin: 0 auto; padding: 6rem 4rem; }
+@media (max-width: 768px) { .contenu { padding: 4rem 1.5rem; } }
+
+.contenu-grille { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start; }
+@media (max-width: 768px) { .contenu-grille { grid-template-columns: 1fr; gap: 3rem; } }
+
+/* Colonne gauche */
+.colonne-gauche { position: sticky; top: 120px; }
+.photo-placeholder { width: 100%; aspect-ratio: 3/4; background: var(--bleu-pale); display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; border-top: 3px solid var(--bleu); }
+.photo-placeholder span { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bleu-clair); }
+.roles { display: flex; flex-direction: column; gap: 1.2rem; }
+.role-item { display: flex; flex-direction: column; gap: 0.2rem; border-left: 2px solid var(--bleu); padding-left: 1rem; }
+.role-titre { font-size: 0.82rem; font-weight: 500; color: var(--noir); }
+.role-org { font-size: 0.75rem; color: var(--gris); }
+
+/* Colonne droite */
+.colonne-droite { display: flex; flex-direction: column; gap: 4rem; }
+
+.bio-section {}
+.section-label { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu-clair); display: block; margin-bottom: 1.8rem; }
+.bio-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+.bio-section h2 em { font-style: italic; color: var(--bleu); }
+.bio-section p { font-size: 1.05rem; line-height: 1.9; color: #3a3a3a; margin-bottom: 1.2rem; }
+.bio-section p:last-child { margin-bottom: 0; }
+
+/* Bloc chiffres */
+.chiffres { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem; background: var(--bleu-pale); border-top: 3px solid var(--bleu); }
+@media (max-width: 480px) { .chiffres { grid-template-columns: 1fr; } }
+.chiffre-item {}
+.chiffre-valeur { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900; color: var(--bleu); line-height: 1; display: block; margin-bottom: 0.3rem; }
+.chiffre-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris); }
+
+/* Thèmes */
+.themes { display: flex; flex-direction: column; gap: 1.2rem; }
+.theme-item { display: grid; grid-template-columns: 2.4rem 1fr; gap: 1.2rem; align-items: start; padding-bottom: 1.2rem; border-bottom: 1px solid var(--gris-clair); }
+.theme-item:last-child { border-bottom: none; padding-bottom: 0; }
+.theme-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--bleu-clair); font-weight: 700; }
+.theme-titre { font-size: 0.88rem; font-weight: 500; color: var(--noir); margin-bottom: 0.25rem; letter-spacing: 0.02em; }
+.theme-desc { font-size: 0.88rem; color: var(--gris); line-height: 1.65; }
+
+/* CTA */
+.cta-bloc { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; padding-top: 1rem; }
+.btn-primary { background: var(--bleu); color: #fff; padding: 1rem 2.2rem; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; font-family: 'DM Sans', sans-serif; border: 1px solid var(--bleu); }
+.btn-primary:hover { background: var(--noir); border-color: var(--noir); color: #fff; }
+.btn-secondary { font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; }
+.btn-secondary:hover { color: var(--bleu); }
+
+/* ── FOOTER ── */
+footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+@media (max-width: 768px) { footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; } }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: rgba(245,240,232,0.5); text-decoration: none; }
+.footer-logo span { color: var(--bleu-clair); }
+.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--bleu-clair); }
+.footer-ref { font-size: 0.65rem; color: rgba(245,240,232,0.18); font-style: italic; }
+.footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); }
+
+/* ── ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="nav-links">
+    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/terrain-pme/">Terrain PME</a></li>
+    <li><a href="/marketing-numerique/">Marketing numérique</a></li>
+  </ul>
+  <a href="/#newsletter" class="nav-cta">Infolettre</a>
+</nav>
+
+<!-- EN-TÊTE -->
+<header class="page-header">
+  <p class="page-eyebrow">À propos</p>
+  <h1 class="page-title">Pascal Gagnon —<br><em>depuis le terrain.</em></h1>
+  <p class="page-subtitle">Directeur de compte · Conseiller municipal · Analyste économique</p>
+</header>
+
+<div class="section-divider"></div>
+
+<!-- CONTENU -->
+<main class="contenu reveal">
+  <div class="contenu-grille">
+
+    <!-- COLONNE GAUCHE -->
+    <aside class="colonne-gauche">
+      <div class="photo-placeholder">
+        <span>Photo à venir</span>
+      </div>
+      <div class="roles">
+        <div class="role-item">
+          <span class="role-titre">Directeur de compte</span>
+          <span class="role-org">Desjardins Entreprise · Lac-Saint-Jean</span>
+        </div>
+        <div class="role-item">
+          <span class="role-titre">Conseiller municipal</span>
+          <span class="role-org">Ville de Roberval · Élu 2021</span>
+        </div>
+        <div class="role-item">
+          <span class="role-titre">Analyste économique</span>
+          <span class="role-org">pascalgagnon.ca · Depuis 2024</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- COLONNE DROITE -->
+    <div class="colonne-droite">
+
+      <section class="bio-section">
+        <span class="section-label">Qui je suis ——</span>
+        <h2>J'observe l'économie québécoise<em> depuis l'intérieur.</em></h2>
+        <p>Je travaille au quotidien avec des entrepreneurs du Lac-Saint-Jean — PME forestières, manufacturiers, détaillants, coopératives agricoles. Depuis mon bureau de directeur de compte chez Desjardins Entreprise, je vois les décisions de financement, les projets d'expansion, les restructurations. Je vois l'économie telle qu'elle fonctionne réellement, pas telle qu'elle est modélisée.</p>
+        <p>Parallèlement, comme conseiller municipal à Roberval depuis 2021, j'observe comment les décisions politiques locales s'articulent — ou non — avec les réalités économiques régionales. L'écart entre les deux est souvent révélateur.</p>
+        <p>J'écris pour fixer ces observations. Pas pour informer au sens journalistique — pour analyser, prendre position, forcer la réflexion. La règle d'or de chaque texte : qu'est-ce que le lecteur fera différemment après l'avoir lu?</p>
+      </section>
+
+      <div class="chiffres reveal">
+        <div class="chiffre-item">
+          <span class="chiffre-valeur">20+</span>
+          <span class="chiffre-label">ans dans le financement d'entreprises</span>
+        </div>
+        <div class="chiffre-item">
+          <span class="chiffre-valeur">3</span>
+          <span class="chiffre-label">mandats d'implication municipale</span>
+        </div>
+        <div class="chiffre-item">
+          <span class="chiffre-valeur">LSJ</span>
+          <span class="chiffre-label">ancrage Lac-Saint-Jean, portée provinciale</span>
+        </div>
+        <div class="chiffre-item">
+          <span class="chiffre-valeur">QC</span>
+          <span class="chiffre-label">économie, énergie, PME du Québec</span>
+        </div>
+      </div>
+
+      <section class="bio-section reveal">
+        <span class="section-label">Ce que j'écris ——</span>
+        <h2>Trois verticalités,<em> une cohérence.</em></h2>
+        <div class="themes">
+          <div class="theme-item">
+            <span class="theme-num">01</span>
+            <div>
+              <p class="theme-titre">Économie &amp; Énergie</p>
+              <p class="theme-desc">La transition énergétique vue comme une réalité économique, pas comme un débat idéologique. Hydro-Québec, décarbonation industrielle, biophysique économique appliquée au Québec.</p>
+            </div>
+          </div>
+          <div class="theme-item">
+            <span class="theme-num">02</span>
+            <div>
+              <p class="theme-titre">Terrain PME</p>
+              <p class="theme-desc">Les enjeux réels des PME régionales — financement, relève, main-d'œuvre, accès aux marchés. Ce que les entrepreneurs du Lac-Saint-Jean vivent, chiffres à l'appui.</p>
+            </div>
+          </div>
+          <div class="theme-item">
+            <span class="theme-num">03</span>
+            <div>
+              <p class="theme-titre">Marketing numérique</p>
+              <p class="theme-desc">Comment les entreprises régionales peuvent utiliser les outils numériques sans perdre leur identité locale. Stratégies concrètes, sans jargon d'agence.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bio-section reveal">
+        <div class="cta-bloc">
+          <a href="/blog/" class="btn-primary">Lire les articles</a>
+          <a href="mailto:pascal@pascalgagnon.ca" class="btn-secondary">Me contacter →</a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<div class="section-divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
+    <li><a href="/blog/">Articles</a></li>
+    <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+    <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
+  </ul>
+  <span class="footer-ref">Ibn Khaldoun · Biophysique économique · Terrain québécois</span>
+  <p class="footer-copy">© 2026 Pascal Gagnon</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
