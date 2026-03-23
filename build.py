@@ -68,10 +68,14 @@ def build():
     site = load_data("site")
     articles = load_data("articles")
 
-    # Build index.html from src/index.md
-    index_path = SRC / "index.md"
-    if index_path.exists():
-        meta, body = load_yaml_frontmatter(index_path)
+    # Build index.html — static HTML priority over template
+    index_html_path = SRC / "index.html"
+    index_md_path = SRC / "index.md"
+    if index_html_path.exists():
+        shutil.copy(index_html_path, DIST / "index.html")
+        print("✓ index.html (static)")
+    elif index_md_path.exists():
+        meta, body = load_yaml_frontmatter(index_md_path)
         layout_name = meta.get("layout", "base.html.j2")
         template = env.get_template(layout_name)
         content_html = md.convert(body) if body else ""
