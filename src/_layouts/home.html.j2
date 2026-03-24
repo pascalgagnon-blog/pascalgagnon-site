@@ -1,158 +1,219 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ site.name }} — Économie régionale, énergie et PME du Québec</title>
-  <meta name="description" content="{{ site.description }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pascal Gagnon — Économie, Énergie &amp; PME du Québec</title>
+<meta name="description" content="Pascal Gagnon observe l'économie, l'énergie et les PME du Québec depuis le terrain. Directeur de compte Desjardins Entreprise, conseiller municipal Roberval.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --noir: #0a0a0a;
+  --creme: #f5f0e8;
+  --bleu: #0063b2;
+  --bleu-clair: #4d92c9;
+  --bleu-pale: #e6eff7;
+  --gris: #6b6b6b;
+  --gris-clair: #d4cfc6;
+  --max: 1200px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--creme); color: var(--noir); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; font-size: 18px; line-height: 1.7; }
+
+/* ── NAV ── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 4rem; background: rgba(245,240,232,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,99,178,0.15); }
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--noir); text-decoration: none; }
+.nav-logo span { color: var(--bleu); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover { color: var(--bleu); }
+.nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
+.nav-cta:hover { background: var(--bleu); color: #fff; }
+@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+
+/* ── HERO ── */
+.hero { min-height: 80vh; display: flex; align-items: center; padding-top: 80px; background: var(--creme); }
+.hero-left { display: flex; flex-direction: column; justify-content: center; padding: 6rem 4rem; max-width: 820px; }
+@media (max-width: 768px) { .hero-left { padding: 3rem 1.5rem; } }
+.hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--bleu-clair); }
+.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 4.5vw, 5rem); font-weight: 900; line-height: 1.0; margin-bottom: 0.3rem; color: var(--noir); letter-spacing: -0.02em; }
+.hero-title em { font-style: italic; color: var(--bleu); }
+.hero-subtitle { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 1.6vw, 1.4rem); font-weight: 400; font-style: italic; color: var(--gris); margin-bottom: 1.8rem; margin-top: 0.5rem; }
+.hero-verticaux { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 2.8rem; line-height: 1.5; }
+.hero-actions { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
+.btn-primary { background: var(--bleu); color: #fff; padding: 1rem 2.2rem; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; font-family: 'DM Sans', sans-serif; border: 1px solid var(--bleu); }
+.btn-primary:hover { background: var(--noir); border-color: var(--noir); color: #fff; }
+.btn-secondary { font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; }
+.btn-secondary:hover { color: var(--bleu); }
+
+/* ── DIVIDER ── */
+.section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--bleu-clair), transparent); margin: 0 4rem; opacity: 0.4; }
+
+/* ── ARTICLE VEDETTE ── */
+.article-central { padding: 7rem 4rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .article-central { padding: 4rem 1.5rem; } }
+.section-label { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu-clair); display: block; margin-bottom: 2rem; }
+.central-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+@media (max-width: 768px) { .central-inner { grid-template-columns: 1fr; gap: 2rem; } }
+.central-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bleu); display: block; margin-bottom: 0.8rem; }
+.central-temps { font-size: 0.82rem; color: var(--gris); }
+.central-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+.central-content h2 em { font-style: italic; color: var(--bleu); }
+.central-chapeau { font-size: 1.15rem; line-height: 1.85; color: #3a3a3a; margin-bottom: 2rem; }
+.central-lien { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s; }
+.central-lien:hover { color: var(--noir); }
+
+/* ── ARTICLES RÉCENTS ── */
+.articles-recents { padding: 0 4rem 7rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .articles-recents { padding: 0 1.5rem 4rem; } }
+.articles-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; border-top: 1px solid var(--gris-clair); padding-top: 2.5rem; }
+.articles-header h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
+.voir-tout { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); text-decoration: none; transition: letter-spacing 0.3s; }
+.voir-tout:hover { letter-spacing: 0.22em; }
+.articles-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+@media (max-width: 768px) { .articles-grille { grid-template-columns: 1fr; gap: 2rem; } }
+.article-card { display: flex; flex-direction: column; border-top: 2px solid var(--gris-clair); padding-top: 1.8rem; transition: border-color 0.25s; }
+.article-card:hover { border-color: var(--bleu); }
+.card-vertical { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bleu); margin-bottom: 0.8rem; }
+.card-titre { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; line-height: 1.25; color: var(--noir); text-decoration: none; display: block; margin-bottom: 0.9rem; transition: color 0.2s; }
+.article-card:hover .card-titre { color: var(--bleu); }
+.card-extrait { font-size: 1rem; line-height: 1.75; color: #4a4a4a; margin-bottom: 1.2rem; flex: 1; }
+.card-meta { font-size: 0.75rem; color: var(--gris); letter-spacing: 0.04em; }
+
+/* ── INFOLETTRE ── */
+.newsletter { padding: 7rem 4rem; border-top: 1px solid var(--gris-clair); }
+@media (max-width: 768px) { .newsletter { padding: 4rem 1.5rem; } }
+.newsletter-inner { max-width: 520px; margin: 0 auto; text-align: center; }
+.nl-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 2.6vw, 2.3rem); font-weight: 700; line-height: 1.2; color: var(--noir); margin-bottom: 1rem; letter-spacing: -0.01em; }
+.nl-h2 em { font-style: italic; color: var(--bleu); }
+.nl-desc { font-size: 1rem; line-height: 1.85; color: var(--gris); margin-bottom: 2.4rem; }
+.nl-form { display: flex; flex-direction: column; gap: 0.8rem; }
+.nl-form input { background: transparent; border: 1px solid var(--gris-clair); padding: 0.95rem 1.2rem; font-size: 1rem; color: var(--noir); font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; text-align: center; }
+.nl-form input::placeholder { color: var(--gris-clair); }
+.nl-form input:focus { border-color: var(--bleu); }
+.nl-form button { background: var(--bleu); color: #fff; border: none; padding: 1rem 1.2rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.25s; }
+.nl-form button:hover { background: var(--noir); }
+.nl-note { font-size: 0.72rem; color: var(--gris-clair); margin-top: 0.6rem; }
+
+/* ── FOOTER ── */
+footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+@media (max-width: 768px) { footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; } }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: rgba(245,240,232,0.5); text-decoration: none; }
+.footer-logo span { color: var(--bleu-clair); }
+.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--bleu-clair); }
+.footer-ref { font-size: 0.65rem; color: rgba(245,240,232,0.18); font-style: italic; }
+.footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); }
+
+/* ── ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
 </head>
-<body class="home">
+<body>
 
-  {% include "header.html.j2" %}
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="nav-links">
+    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/terrain-pme/">Terrain PME</a></li>
+    <li><a href="/marketing-numerique/">Marketing numérique</a></li>
+  </ul>
+  <a href="#newsletter" class="nav-cta">Infolettre</a>
+</nav>
 
-  <main>
-
-    <!-- ═══════════════════════════════════════════════════
-         ZONE 1 — HERO : Qui est Pascal, pourquoi ça compte
-    ════════════════════════════════════════════════════ -->
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-label">Analyste · Conseiller municipal · Roberval</div>
-        <h1 class="hero-title">
-          Le Québec profond produit la richesse.<br>
-          Il est temps qu'il décide comment la dépenser.
-        </h1>
-        <p class="hero-sub">
-          Directeur de compte corporatif chez Desjardins, conseiller municipal à Roberval,
-          ancré au Lac-Saint-Jean. J'écris sur l'économie régionale, l'énergie et les PME
-          avec des données — pas des opinions molles.
-        </p>
-        <a href="/articles/" class="btn-primary">Lire les articles</a>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════
-         ZONE 2 — ARTICLE EN VEDETTE
-    ════════════════════════════════════════════════════ -->
-    <section class="featured-section">
-      <div class="container">
-        <div class="section-label">À LIRE EN PREMIER</div>
-        <article class="featured-card">
-          <div class="featured-meta">
-            <span class="article-tag">{{ articles.featured.tag }}</span>
-          </div>
-          <h2 class="featured-title">
-            <a href="/articles/{{ articles.featured.slug }}/">{{ articles.featured.title }}</a>
-          </h2>
-          <p class="featured-chapeau">{{ articles.featured.chapeau }}</p>
-          <div class="featured-byline">
-            <span>Pascal Gagnon</span>
-            <span class="byline-sep">·</span>
-            <span>{{ articles.featured.date }}</span>
-            <span class="byline-sep">·</span>
-            <span>{{ articles.featured.reading_time }} de lecture</span>
-          </div>
-          <a href="/articles/{{ articles.featured.slug }}/" class="read-more">Lire l'article →</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════
-         ZONE 3 — ARTICLES RÉCENTS
-    ════════════════════════════════════════════════════ -->
-    <section class="recent-section">
-      <div class="container">
-        <div class="section-label">ARTICLES RÉCENTS</div>
-        <div class="articles-grid">
-          {% for article in articles.recent %}
-          <article class="article-card">
-            <div class="card-thumb" aria-hidden="true"></div>
-            <div class="card-body">
-              <span class="article-tag">{{ article.tag }}</span>
-              <h3 class="card-title">
-                <a href="/articles/{{ article.slug }}/">{{ article.title }}</a>
-              </h3>
-              <p class="card-chapeau">{{ article.chapeau }}</p>
-              <div class="card-byline">
-                <span>{{ article.date }}</span>
-                <span class="byline-sep">·</span>
-                <span>{{ article.reading_time }}</span>
-              </div>
-            </div>
-          </article>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════
-         ZONE 4 — LES 3 VERTICAUX ÉDITORIAUX
-    ════════════════════════════════════════════════════ -->
-    <section class="verticals-section">
-      <div class="container">
-        <div class="section-label">LES TROIS ANGLES</div>
-        <div class="verticals-grid">
-          {% for v in site.verticaux %}
-          <div class="vertical-card">
-            <h3 class="vertical-title">{{ v.label }}</h3>
-            <p class="vertical-desc">{{ v.description }}</p>
-            <a href="/{{ v.slug }}/" class="vertical-link">Tous les articles →</a>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════
-         ZONE 5 — INFOLETTRE
-    ════════════════════════════════════════════════════ -->
-    <section class="newsletter-section">
-      <div class="container">
-        <div class="newsletter-inner">
-          <div class="newsletter-text">
-            <h2 class="newsletter-title">Si ce que tu viens de lire t'a servi</h2>
-            <p class="newsletter-sub">
-              Les prochains articles directement dans ta boîte. Pas de fréquence imposée —
-              un article quand il est prêt, pas avant.
-            </p>
-          </div>
-          <form class="newsletter-form" action="#" method="post">
-            <input
-              type="email"
-              name="email"
-              placeholder="ton@courriel.ca"
-              required
-              class="newsletter-input"
-              aria-label="Adresse courriel"
-            >
-            <button type="submit" class="btn-primary">M'abonner</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ═══════════════════════════════════════════════════
-       AUTEUR BIO (avant footer)
-  ════════════════════════════════════════════════════ -->
-  <section class="author-section">
-    <div class="container">
-      <div class="author-card">
-        <div class="author-avatar-lg">{{ site.author.initials }}</div>
-        <div class="author-bio">
-          <strong class="author-name">{{ site.author.name }}</strong>
-          <p>{{ site.author.bio }}</p>
-        </div>
-      </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Directeur de compte Desjardins Entreprise · Conseiller municipal, Roberval</p>
+    <h1 class="hero-title">Le Lac-Saint-Jean<br><em>se transforme.</em></h1>
+    <p class="hero-subtitle">J'observe depuis l'intérieur, j'écris ce que je vois.</p>
+    <p class="hero-verticaux">Économie &amp; Énergie &nbsp;·&nbsp; Terrain PME &nbsp;·&nbsp; Marketing numérique</p>
+    <div class="hero-actions">
+      <a href="/blog/" class="btn-primary">Lire les articles</a>
+      <a href="/a-propos/" class="btn-secondary">À propos →</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  {% include "footer.html.j2" %}
+<div class="section-divider"></div>
 
+<!-- ARTICLE VEDETTE -->
+<section class="article-central reveal">
+  <span class="section-label">À lire en premier ——</span>
+  <div class="central-inner">
+    <div>
+      <span class="central-tag">◆ {{ articles.featured.vertical }}</span>
+      <span class="central-temps">Lecture : ~{{ articles.featured.reading_time }}</span>
+    </div>
+    <div class="central-content">
+      <h2>{{ articles.featured.title }}</h2>
+      <p class="central-chapeau">{{ articles.featured.chapeau }}</p>
+      <a href="/articles/{{ articles.featured.slug }}/" class="central-lien">Lire l'article →</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ARTICLES RÉCENTS -->
+<section class="articles-recents reveal">
+  <div class="articles-header">
+    <h2>Articles récents</h2>
+    <a href="/blog/" class="voir-tout">Tous les articles →</a>
+  </div>
+  <div class="articles-grille">
+    {% for article in articles.recent %}
+    <article class="article-card">
+      <span class="card-vertical">{{ article.vertical }}</span>
+      <a href="/articles/{{ article.slug }}/" class="card-titre">{{ article.title }}</a>
+      <p class="card-extrait">{{ article.chapeau }}</p>
+      <span class="card-meta">{{ article.date }} &nbsp;·&nbsp; {{ article.reading_time }}</span>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- INFOLETTRE -->
+<section class="newsletter reveal" id="newsletter">
+  <div class="newsletter-inner">
+    <span class="section-label">Infolettre ——</span>
+    <h2 class="nl-h2">Ce que j'observe sur le terrain,<em> une fois par mois.</em></h2>
+    <p class="nl-desc">Pas de contenu recyclé. Pas de promotion. Des analyses qui prennent position sur l'économie, l'énergie et les PME du Québec.</p>
+    <div class="nl-form">
+      <input type="text" placeholder="Votre prénom">
+      <input type="email" placeholder="Votre courriel">
+      <button type="button">Je m'abonne</button>
+      <p class="nl-note">Désabonnement en un clic. Conforme à la Loi 25.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
+    <li><a href="/blog/">Articles</a></li>
+    <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+    <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
+  </ul>
+  <span class="footer-ref">Ibn Khaldoun · Biophysique économique · Terrain québécois</span>
+  <p class="footer-copy">© 2026 Pascal Gagnon</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>

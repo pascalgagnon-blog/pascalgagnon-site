@@ -1,4 +1,4 @@
 ---
 layout: home.html.j2
-title: Accueil
+title: Pascal Gagnon — Économie, Énergie & PME du Québec
 ---
