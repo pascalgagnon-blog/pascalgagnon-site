@@ -18,11 +18,11 @@ verticaux:
     label: Économie & Énergie
     slug: economie-energie
     description: "La contrainte biophysique que personne ne veut nommer au Québec."
-  - id: terrain-pme
-    label: Terrain PME
-    slug: terrain-pme
-    description: "Ce que les PME régionales font que les consultants ne voient pas."
-  - id: gouvernance-regionale
-    label: Gouvernance régionale
-    slug: gouvernance-regionale
-    description: "Les décisions prises à Québec qui façonnent les territoires."
+  - id: pme-ia
+    label: PME régionales et IA
+    slug: pme-ia
+    description: "Vous voulez savoir à quoi peut servir les derniers outils IA pour votre PME? Suivez en direct ma progression dans l'apprentissage des outils et des projets reliés."
+  - id: sante-metabolique
+    label: Santé métabolique
+    slug: sante-metabolique
+    description: "Perdre du poids a toujours été un défi pour moi. Je vulgarise les dernières recherches au niveau de la résistance à l'insuline, le diabète et l'ensemble des moyens que vous pouvez appliquer afin d'améliorer ma santé."
