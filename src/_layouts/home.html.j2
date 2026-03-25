@@ -153,7 +153,7 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
     <div class="central-content">
       <h2>{{ articles.featured.title }}</h2>
       <p class="central-chapeau">{{ articles.featured.chapeau }}</p>
-      <a href="/articles/{{ articles.featured.slug }}/" class="central-lien">Lire l'article →</a>
+      <a href="{{ articles.featured.url if articles.featured.url else '/articles/' + articles.featured.slug + '/' }}" class="central-lien">Lire l'article →</a>
     </div>
   </div>
 </section>
@@ -170,7 +170,7 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
     {% for article in articles.recent %}
     <article class="article-card">
       <span class="card-vertical">{{ article.vertical }}</span>
-      <a href="/articles/{{ article.slug }}/" class="card-titre">{{ article.title }}</a>
+      <a href="{{ article.url if article.url else '/articles/' + article.slug + '/' }}" class="card-titre">{{ article.title }}</a>
       <p class="card-extrait">{{ article.chapeau }}</p>
       <span class="card-meta">{{ article.date }} &nbsp;·&nbsp; {{ article.reading_time }}</span>
     </article>
