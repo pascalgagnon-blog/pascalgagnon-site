@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Articles — Pascal Gagnon</title>
-<meta name="description" content="Analyses sur l'économie, l'énergie et les PME du Québec. Écrits depuis le terrain du Lac-Saint-Jean.">
+<title>Économie &amp; Énergie — Pascal Gagnon</title>
+<meta name="description" content="Analyses sur l'économie biophysique, l'énergie et la transition énergétique au Québec. Écrits depuis le terrain du Lac-Saint-Jean.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +27,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .nav-logo span { color: var(--bleu); }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 .nav-links a { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; }
-.nav-links a:hover { color: var(--bleu); }
+.nav-links a:hover, .nav-links a.actif { color: var(--bleu); }
 .nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
 .nav-cta:hover { background: var(--bleu); color: #fff; }
 @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
@@ -41,26 +41,22 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .page-title em { font-style: italic; color: var(--bleu); }
 .article-count { font-size: 0.75rem; color: var(--gris); letter-spacing: 0.08em; white-space: nowrap; padding-bottom: 0.5rem; }
 
+/* ── INTRO ── */
+.page-intro { padding: 0 4rem 3rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .page-intro { padding: 0 1.5rem 2.5rem; } }
+.page-intro p { font-size: 1.1rem; line-height: 1.85; color: #3a3a3a; max-width: 680px; }
+
 /* ── DIVIDER ── */
 .section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--bleu-clair), transparent); margin: 0 4rem; opacity: 0.4; }
-
-/* ── FILTRES ── */
-.filtres { padding: 2.5rem 4rem; max-width: var(--max); margin: 0 auto; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
-@media (max-width: 768px) { .filtres { padding: 2rem 1.5rem; } }
-.filtre-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); margin-right: 0.6rem; }
-.filtre-btn { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 1.1rem; border: 1px solid var(--gris-clair); color: var(--gris); background: transparent; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
-.filtre-btn:hover, .filtre-btn.actif { border-color: var(--bleu); color: var(--bleu); background: var(--bleu-pale); }
 
 /* ── ARTICLE VEDETTE ── */
 .article-vedette { padding: 4rem 4rem 5rem; max-width: var(--max); margin: 0 auto; }
 @media (max-width: 768px) { .article-vedette { padding: 3rem 1.5rem 4rem; } }
 .vedette-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; padding-bottom: 4rem; border-bottom: 1px solid var(--gris-clair); }
 @media (max-width: 768px) { .vedette-inner { grid-template-columns: 1fr; gap: 2rem; } }
-.vedette-meta {}
 .vedette-tag { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bleu); display: block; margin-bottom: 0.8rem; }
 .vedette-badge { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.3rem 0.8rem; border: 1px solid var(--bleu); color: var(--bleu); display: inline-block; margin-bottom: 1.5rem; }
 .vedette-temps { font-size: 0.82rem; color: var(--gris); display: block; }
-.vedette-content {}
 .section-label { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu-clair); display: block; margin-bottom: 1.8rem; }
 .vedette-titre { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
 .vedette-titre em { font-style: italic; color: var(--bleu); }
@@ -88,8 +84,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .card-meta { font-size: 0.75rem; color: var(--gris); letter-spacing: 0.04em; }
 .card-lire { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bleu); text-decoration: none; transition: letter-spacing 0.2s; white-space: nowrap; }
 .card-lire:hover { letter-spacing: 0.2em; }
-
-/* Carte "À venir" */
 .card-titre-venir { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--gris-clair); display: block; margin-bottom: 0.8rem; }
 
 /* ── INFOLETTRE ── */
@@ -115,7 +109,6 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
 .footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--bleu-clair); }
-.footer-ref { font-size: 0.65rem; color: rgba(245,240,232,0.18); font-style: italic; }
 .footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); }
 
 /* ── ANIMATIONS ── */
@@ -129,7 +122,7 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 <nav>
   <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
   <ul class="nav-links">
-    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/economie-energie/" class="actif">Économie &amp; Énergie</a></li>
     <li><a href="/pme-ia/">PME &amp; IA</a></li>
     <li><a href="/sante-metabolique/">Santé métabolique</a></li>
   </ul>
@@ -139,36 +132,31 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 <!-- EN-TÊTE -->
 <header class="page-header">
   <div>
-    <p class="page-eyebrow">Articles</p>
-    <h1 class="page-title">Ce que j'observe<br><em>depuis le terrain.</em></h1>
+    <p class="page-eyebrow">Vertical</p>
+    <h1 class="page-title">Économie<br><em>&amp; Énergie</em></h1>
   </div>
   <p class="article-count">2 articles publiés</p>
 </header>
 
-<div class="section-divider"></div>
-
-<!-- FILTRES -->
-<div class="filtres reveal">
-  <span class="filtre-label">Thèmes —</span>
-  <button class="filtre-btn actif" onclick="filtrer(this, 'tous')">Tous</button>
-  <button class="filtre-btn" onclick="filtrer(this, 'economie-energie')">Économie &amp; Énergie</button>
-  <button class="filtre-btn" onclick="filtrer(this, 'pme-ia')">PME &amp; IA</button>
-  <button class="filtre-btn" onclick="filtrer(this, 'sante-metabolique')">Santé métabolique</button>
+<div class="page-intro reveal">
+  <p>L'énergie n'est pas un secteur parmi d'autres — c'est le fondement physique de toute activité économique. Ces analyses examinent la transition énergétique, l'économie biophysique et les enjeux concrets pour le Québec, depuis le Lac-Saint-Jean.</p>
 </div>
+
+<div class="section-divider"></div>
 
 <!-- ARTICLE VEDETTE -->
 <section class="article-vedette reveal">
   <span class="section-label">À lire en premier ——</span>
-  <div class="vedette-inner" data-vertical="economie-energie">
+  <div class="vedette-inner">
     <div class="vedette-meta">
-      <span class="vedette-tag">◆ Économie &amp; Énergie</span>
-      <span class="vedette-badge">Article de fond</span>
-      <span class="vedette-temps">Lecture : ~8 min</span>
+      <span class="vedette-tag">◆ Économie forestière</span>
+      <span class="vedette-badge">Analyse de dossier</span>
+      <span class="vedette-temps">Lecture : ~9 min</span>
     </div>
     <div class="vedette-content">
-      <h2 class="vedette-titre">L'énergie est le fondement de l'économie —<em> et personne n'en parle.</em></h2>
-      <p class="vedette-chapeau">Ce que la théorie économique dominante omet depuis 150 ans — et pourquoi cette omission explique la stagnation, les crises financières, et les limites réelles de la croissance. Un cadre de lecture indispensable pour quiconque prend des décisions économiques aujourd'hui.</p>
-      <a href="/lenergie-est-le-fondement-de-leconomie-pascal-gagnon/" class="lire-lien">Lire l'article →</a>
+      <h2 class="vedette-titre">L'électrification de la machinerie forestière —<em> le chaînon manquant de la décarbonation.</em></h2>
+      <p class="vedette-chapeau">À 100 $/baril, une flotte de quatre machines électrifiées génère plus d'un million de dollars d'économies annuelles. Le Lac-Saint-Jean a tous les éléments pour être le premier à faire ce calcul pour de vrai.</p>
+      <a href="/articles/electrification_machinerie_forestiere/" class="lire-lien">Lire l'article →</a>
     </div>
   </div>
 </section>
@@ -180,41 +168,38 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
   </div>
   <div class="articles-grille">
 
-    <article class="article-card" data-vertical="economie-energie">
-      <span class="card-vertical">Économie &amp; Énergie</span>
-      <a href="/leolien-forestier-le-chainon-manquant-de-la-decarbonation/" class="card-titre">L'électrification de la machinerie forestière : le chaînon manquant de la décarbonation</a>
+    <article class="article-card">
+      <span class="card-vertical">Économie biophysique</span>
+      <a href="/lenergie-est-le-fondement-de-leconomie-pascal-gagnon/" class="card-titre">L'énergie est le fondement de l'économie — et personne n'en parle.</a>
+      <p class="card-chapeau">Ce que la théorie économique dominante omet depuis 150 ans — et pourquoi cette omission explique la stagnation, les crises financières, et les limites réelles de la croissance.</p>
+      <div class="card-bas">
+        <span class="card-meta">2025 &nbsp;·&nbsp; 20–30 min</span>
+        <a href="/lenergie-est-le-fondement-de-leconomie-pascal-gagnon/" class="card-lire">Lire →</a>
+      </div>
+    </article>
+
+    <article class="article-card">
+      <span class="card-vertical">Économie forestière</span>
+      <a href="/articles/electrification_machinerie_forestiere/" class="card-titre">L'électrification de la machinerie forestière : le chaînon manquant de la décarbonation</a>
       <p class="card-chapeau">Une éolienne tourne en forêt pendant qu'une abatteuse brûle vingt-cinq litres de diesel à l'heure. L'une est le symbole de la transition. L'autre en est l'angle mort.</p>
       <div class="card-bas">
-        <span class="card-meta">Mars 2026 &nbsp;·&nbsp; 6 min</span>
-        <a href="/leolien-forestier-le-chainon-manquant-de-la-decarbonation/" class="card-lire">Lire →</a>
+        <span class="card-meta">Mars 2026 &nbsp;·&nbsp; ~9 min</span>
+        <a href="/articles/electrification_machinerie_forestiere/" class="card-lire">Lire →</a>
       </div>
     </article>
 
-    <article class="article-card a-venir" data-vertical="terrain-pme">
-      <span class="card-vertical">Terrain PME</span>
-      <span class="card-titre-venir">Prochain article</span>
-      <p class="card-chapeau" style="color:var(--gris-clair);font-style:italic;">À paraître prochainement.</p>
-      <div class="card-bas">
-        <span class="card-meta">&nbsp;</span>
-      </div>
-    </article>
-
-    <article class="article-card a-venir" data-vertical="marketing-numerique">
-      <span class="card-vertical">Marketing numérique</span>
-      <span class="card-titre-venir">Prochain article</span>
-      <p class="card-chapeau" style="color:var(--gris-clair);font-style:italic;">À paraître prochainement.</p>
-      <div class="card-bas">
-        <span class="card-meta">&nbsp;</span>
-      </div>
-    </article>
-
-    <article class="article-card a-venir" data-vertical="economie-energie">
+    <article class="article-card a-venir">
       <span class="card-vertical">Économie &amp; Énergie</span>
       <span class="card-titre-venir">Prochain article</span>
       <p class="card-chapeau" style="color:var(--gris-clair);font-style:italic;">À paraître prochainement.</p>
-      <div class="card-bas">
-        <span class="card-meta">&nbsp;</span>
-      </div>
+      <div class="card-bas"><span class="card-meta">&nbsp;</span></div>
+    </article>
+
+    <article class="article-card a-venir">
+      <span class="card-vertical">Économie &amp; Énergie</span>
+      <span class="card-titre-venir">Prochain article</span>
+      <p class="card-chapeau" style="color:var(--gris-clair);font-style:italic;">À paraître prochainement.</p>
+      <div class="card-bas"><span class="card-meta">&nbsp;</span></div>
     </article>
 
   </div>
@@ -242,39 +227,19 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
   <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
   <ul class="footer-links">
     <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
-    <li><a href="/blog/">Articles</a></li>
-    <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
+    <li><a href="/blog/">Tous les articles</a></li>
+    <li><a href="/pme-ia/">PME &amp; IA</a></li>
+    <li><a href="/sante-metabolique/">Santé métabolique</a></li>
     <li><a href="/a-propos/">À propos</a></li>
-    <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
   </ul>
-  <span class="footer-ref">Ibn Khaldoun · Biophysique économique · Terrain québécois</span>
   <p class="footer-copy">© 2026 Pascal Gagnon</p>
 </footer>
 
 <script>
-// Animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Filtres
-function filtrer(btn, vertical) {
-  document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('actif'));
-  btn.classList.add('actif');
-  const vedette = document.querySelector('.article-vedette');
-  const cards = document.querySelectorAll('.article-card');
-  if (vertical === 'tous') {
-    vedette.style.display = '';
-    cards.forEach(c => c.closest('.article-card') && (c.style.display = ''));
-  } else {
-    const vVertical = vedette.querySelector('[data-vertical]') || vedette;
-    vedette.style.display = vVertical.dataset.vertical === vertical ? '' : 'none';
-    cards.forEach(c => {
-      c.style.display = c.dataset.vertical === vertical ? '' : 'none';
-    });
-  }
-}
 </script>
 </body>
 </html>
