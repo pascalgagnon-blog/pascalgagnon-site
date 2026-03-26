@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de progression — IA &amp; Création de contenu · Pascal Gagnon</title>
+    <meta name="description" content="Suivi de progression en temps réel : missions IA, arbre de maîtrise Claude, Zettelkasten. Apprentissage en public par Pascal Gagnon, Lac-Saint-Jean.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+    /* ── SITE NAV ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --bleu: #0063b2;
+      --bleu-clair: #4d92c9;
+      --creme: #f5f0e8;
+      --noir: #0a0a0a;
+      --gris: #6b6b6b;
+    }
+    body { margin: 0; padding: 0; }
+    nav.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 4rem; background: rgba(245,240,232,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,99,178,0.15); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--noir); text-decoration: none; }
+    .nav-logo span { color: var(--bleu); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; font-family: 'DM Sans', sans-serif; }
+    .nav-links a:hover, .nav-links a.actif { color: var(--bleu); }
+    .nav-retour { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; font-family: 'DM Sans', sans-serif; }
+    .nav-retour:hover { background: var(--bleu); color: #fff; }
+    @media (max-width: 768px) { nav.site-nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+
+    /* ── FOOTER SITE ── */
+    footer.site-footer { background: #0a0a0a; padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    @media (max-width: 768px) { footer.site-footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; } }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: rgba(245,240,232,0.5); text-decoration: none; }
+    .footer-logo span { color: var(--bleu-clair); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; margin: 0; padding: 0; }
+    .footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; font-family: 'DM Sans', sans-serif; }
+    .footer-links a:hover { color: var(--bleu-clair); }
+    .footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); font-family: 'DM Sans', sans-serif; }
+
+    /* ── CONTENU PRINCIPAL — espace pour la nav fixe ── */
+    .main-content { padding-top: 80px; }
+
+    /* ══════════════════════════════════════════════════════════
+       STYLES ORIGINAUX DU TABLEAU DE PROGRESSION
+    ══════════════════════════════════════════════════════════ */
+        :root {
+            --bg-dark:        #0d0902;
+            --bg-medium:      #1a1008;
+            --bg-card:        #1e1208;
+            --gold:           #c8a96e;
+            --gold-light:     #e8c98e;
+            --gold-dim:       #7a6040;
+            --text:           #f5f0e8;
+            --text-dim:       #9a8868;
+            --done:           #3d7830;
+            --done-glow:      rgba(74,140,58,0.35);
+            --active:         #b87820;
+            --active-glow:    rgba(200,140,40,0.45);
+            --locked-border:  #302418;
+            --locked-text:    #5a4a38;
+        }
+
+        .main-content {
+            background: var(--bg-dark);
+            background-image:
+                radial-gradient(ellipse 70% 60% at 15% 40%, rgba(30,16,4,0.9) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 50% at 85% 15%, rgba(20,10,2,0.7) 0%, transparent 45%);
+            color: var(--text);
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+            min-height: 100vh;
+            padding: 32px 24px 48px;
+            user-select: none;
+        }
+
+        /* ─── DIVIDER ─── */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 6px 0 14px;
+        }
+
+        /* ─── PAGE HEADER ─── */
+        .page-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .page-title {
+            font-size: 2em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            text-shadow: 0 0 24px rgba(200,169,110,0.35);
+        }
+        .page-sub {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            margin-top: 6px;
+        }
+
+        /* ─── METRICS ─── */
+        .metrics-row {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 38px;
+            flex-wrap: wrap;
+        }
+        .metric {
+            background: var(--bg-card);
+            border: 1px solid var(--gold-dim);
+            padding: 14px 28px;
+            text-align: center;
+            min-width: 155px;
+            position: relative;
+        }
+        .metric::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 10%; right: 10%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        .metric-lbl { font-size: 0.72em; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+        .metric-val { font-size: 1.9em; color: var(--gold); font-weight: bold; }
+        .metric-bar { height: 3px; background: var(--locked-border); margin-top: 8px; border-radius: 2px; overflow: hidden; }
+        .metric-fill { height: 100%; background: linear-gradient(to right, var(--gold-dim), var(--gold)); border-radius: 2px; }
+
+        /* ─── BRANCHES ─── */
+        .section-label {
+            text-align: center;
+            font-size: 0.78em;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+        .section-label::before,
+        .section-label::after { content: ' ◆ '; color: var(--gold-dim); font-size: 0.75em; }
+
+        .branches {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 44px;
+        }
+
+        /* ─── BRANCH COLUMN ─── */
+        .branch { flex: 0 0 175px; display: flex; flex-direction: column; align-items: center; }
+
+        .branch-hdr {
+            width: 100%;
+            background: linear-gradient(to bottom, #2e200c, #1a1008);
+            border: 1px solid var(--gold);
+            border-bottom: 3px solid var(--gold-dim);
+            padding: 13px 8px 11px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+            padding-bottom: 22px;
+        }
+        .branch-icon { font-size: 1.9em; display: block; margin-bottom: 4px; line-height: 1; }
+        .branch-name { font-size: 0.75em; color: var(--gold-light); text-transform: uppercase; letter-spacing: 1.5px; line-height: 1.4; }
+
+        .vline { width: 2px; height: 14px; background: var(--gold-dim); }
+
+        /* ─── MISSION CARD ─── */
+        .mission {
+            width: 100%;
+            padding: 10px 11px 9px;
+            border: 1px solid;
+            background: var(--bg-card);
+            transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
+        }
+        .mission:hover { transform: scale(1.03); z-index: 20; }
+
+        .mission.done {
+            border-color: var(--done);
+            background: linear-gradient(135deg, #1a2c12 0%, var(--bg-card) 55%);
+        }
+        .mission.done:hover { box-shadow: 0 0 14px var(--done-glow); }
+
+        .mission.active {
+            border-color: var(--active);
+            background: linear-gradient(135deg, #2a1c06 0%, var(--bg-card) 55%);
+            animation: glow-active 2.2s ease-in-out infinite;
+        }
+        @keyframes glow-active {
+            0%,100% { box-shadow: 0 0 4px rgba(184,120,32,0.25); }
+            50%      { box-shadow: 0 0 14px var(--active-glow); }
+        }
+
+        .mission.locked {
+            border-color: var(--locked-border);
+            opacity: 0.65;
+        }
+
+        .m-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3px; }
+        .m-id { font-size: 0.62em; color: var(--gold-dim); text-transform: uppercase; letter-spacing: 1px; }
+        .m-ico { font-size: 0.85em; line-height: 1; }
+        .m-title { font-size: 0.76em; line-height: 1.38; color: var(--text); }
+        .mission.locked .m-title { color: var(--locked-text); }
+        .m-note { font-size: 0.63em; color: var(--text-dim); margin-top: 4px; font-style: italic; }
+
+        /* ─── NIVEAUX — horizontal tech tree ─── */
+        .niveaux-track {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            gap: 0;
+            margin-bottom: 44px;
+        }
+
+        .niv-node { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+
+        .niv-card {
+            width: 100px;
+            height: 82px;
+            border: 1px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 7px;
+            background: var(--bg-card);
+            transition: transform 0.15s, box-shadow 0.15s;
+            cursor: default;
+            flex-shrink: 0;
+        }
+        .niv-card:hover { transform: translateY(-4px); z-index: 20; }
+
+        .niv-card.done {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, #2a1c08, var(--bg-card));
+            box-shadow: 0 0 8px rgba(200,169,110,0.18);
+        }
+        .niv-card.active {
+            border-color: var(--active);
+            animation: glow-active 2.2s ease-in-out infinite;
+        }
+        .niv-card.locked { border-color: var(--locked-border); opacity: 0.55; }
+
+        .niv-num { font-size: 1.5em; font-weight: bold; color: var(--gold); line-height: 1; }
+        .niv-card.locked .niv-num { color: var(--locked-text); }
+        .niv-lbl { font-size: 0.6em; color: var(--text-dim); margin-top: 5px; line-height: 1.3; }
+        .niv-card.done .niv-lbl,
+        .niv-card.active .niv-lbl { color: var(--text); }
+        .niv-ico { font-size: 0.82em; margin-top: 4px; }
+
+        .niv-connector {
+            width: 18px; height: 2px; flex-shrink: 0;
+            background: var(--gold-dim);
+        }
+        .niv-connector.locked { background: var(--locked-border); }
+
+        /* ─── RESSOURCES ─── */
+        .ressources {
+            max-width: 720px;
+            margin: 0 auto 44px;
+        }
+        .res-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 7px;
+        }
+        .res-item {
+            background: var(--bg-card);
+            border: 1px solid var(--locked-border);
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.72em;
+        }
+        .res-num { color: var(--gold-dim); min-width: 26px; }
+        .res-title { flex: 1; color: var(--locked-text); line-height: 1.35; }
+        .res-ico { font-size: 1em; }
+        .res-item.done { border-color: var(--done); background: linear-gradient(135deg, #1a2c12 0%, var(--bg-card) 55%); }
+        .res-item.done .res-title { color: var(--text-dim); }
+
+        /* ─── PRIORITÉS ─── */
+        .priorites {
+            max-width: 500px;
+            margin: 0 auto 44px;
+        }
+        .prio-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .prio-item {
+            background: var(--bg-card);
+            border: 1px solid var(--gold-dim);
+            border-left: 3px solid var(--gold);
+            padding: 10px 14px;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .prio-num { font-size: 1.1em; color: var(--gold); font-weight: bold; min-width: 20px; }
+        .prio-code { font-size: 0.8em; color: var(--gold-dim); min-width: 28px; }
+
+        /* ─── ZETTELKASTEN — ajouts ─── */
+        .zk-score-mini {
+            text-align: center;
+            font-size: 0.72em;
+            color: var(--text-dim);
+            letter-spacing: 1.5px;
+            margin: -12px auto 20px;
+        }
+        .zk-score-mini strong { color: var(--gold); }
+        .zk-score-mini em { color: var(--active); font-style: normal; }
+
+        .zk-graph-wrap {
+            max-width: 940px;
+            margin: 0 auto 44px;
+            overflow-x: auto;
+            border: 1px solid var(--gold-dim);
+            background: linear-gradient(160deg, #110b04 0%, #0d0902 60%);
+            position: relative;
+        }
+        .zk-graph-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 10%; right: 10%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+        }
+        @keyframes zk-pulse {
+            0%,100% { opacity: 0.7; }
+            50%      { opacity: 1; }
+        }
+        .zk-active-ring { animation: zk-pulse 2.2s ease-in-out infinite; }
+
+        /* ─── FOOTER ─── */
+        .page-footer {
+            text-align: center;
+            font-size: 0.68em;
+            color: var(--locked-text);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding-top: 18px;
+            border-top: 1px solid rgba(200,169,110,0.15);
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV SITE -->
+<nav class="site-nav">
+  <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="nav-links">
+    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/pme-ia/" class="actif">PME &amp; IA</a></li>
+    <li><a href="/sante-metabolique/">Santé métabolique</a></li>
+  </ul>
+  <a href="/pme-ia/progression/" class="nav-retour">← Progression</a>
+</nav>
+
+<!-- CONTENU PRINCIPAL -->
+<div class="main-content">
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <div class="page-title">Progression IA &amp; Création de contenu</div>
+        <div class="divider"></div>
+        <div class="page-sub">Pascal Gagnon · Lac-Saint-Jean · Mars 2026</div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="metrics-row">
+        <div class="metric">
+            <div class="metric-lbl">🎙️ Histoire</div>
+            <div class="metric-val">3 / 8</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:37.5%"></div></div>
+        </div>
+        <div class="metric">
+            <div class="metric-lbl">✍️ PascalGagnon</div>
+            <div class="metric-val">6 / 10</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:60%"></div></div>
+        </div>
+        <div class="metric">
+            <div class="metric-lbl">🧠 Maîtrise Claude</div>
+            <div class="metric-val">7 / 9</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:78%"></div></div>
+        </div>
+        <div class="metric">
+            <div class="metric-lbl">🗂️ Zettelkasten</div>
+            <div class="metric-val">2 / 8</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:25%"></div></div>
+        </div>
+        <div class="metric">
+            <div class="metric-lbl">💰 Monétisation</div>
+            <div class="metric-val">2 / 4</div>
+            <div class="metric-bar"><div class="metric-fill" style="width:50%"></div></div>
+        </div>
+    </div>
+
+    <!-- BRANCHES -->
+    <div class="section-label">Branches de missions</div>
+    <div class="branches">
+
+        <!-- HISTOIRE -->
+        <div class="branch">
+            <div class="branch-hdr">
+                <span class="branch-icon">🎙️</span>
+                <div class="branch-name">Histoire<br>Podcast</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission locked" title="Enregistrer le premier épisode et faire le montage audio">
+                <div class="m-top"><span class="m-id">H1</span><span class="m-ico">🔒</span></div>
+                <div class="m-title">Enregistrer le premier podcast et faire le montage</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission locked" title="Anchor, Spotify, Apple Podcasts?">
+                <div class="m-top"><span class="m-id">H2</span><span class="m-ico">🔒</span></div>
+                <div class="m-title">Setup du compte de publication podcast</div>
+                <div class="m-note">Anchor, Spotify, Apple?</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission locked">
+                <div class="m-top"><span class="m-id">H3</span><span class="m-ico">🔒</span></div>
+                <div class="m-title">Processus enregistrer → publier</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission locked">
+                <div class="m-top"><span class="m-id">H4</span><span class="m-ico">🔒</span></div>
+                <div class="m-title">Processus refaçonnage réseaux sociaux</div>
+            </div>
+        </div>
+
+        <!-- PASCALGAGNON -->
+        <div class="branch">
+            <div class="branch-hdr">
+                <span class="branch-icon">✍️</span>
+                <div class="branch-name">Pascal<br>Gagnon.ca</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission done" title="Site statique Python/Jinja2 sur Hostinger — 2026-03-24">
+                <div class="m-top"><span class="m-id">P1</span><span class="m-ico">✅</span></div>
+                <div class="m-title">Articles en ligne — site statique</div>
+                <div class="m-note">Migration WordPress → Jinja2/VPS · 2026-03-24</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission active" title="Contenu prêt — goulot principal : personne ne le voit encore">
+                <div class="m-top"><span class="m-id">P2</span><span class="m-ico">⏳</span></div>
+                <div class="m-title">Diffusion réseaux sociaux</div>
+                <div class="m-note">Goulot principal — audience = 0</div>
+            </div>
+        </div>
+
+        <!-- MONÉTISATION -->
+        <div class="branch">
+            <div class="branch-hdr">
+                <span class="branch-icon">💰</span>
+                <div class="branch-name">Monéti-<br>sation</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission active" title="PDF Méthode Reset — en cours">
+                <div class="m-top"><span class="m-id">M1</span><span class="m-ico">⏳</span></div>
+                <div class="m-title">Produit PDF — Méthode Reset</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission done" title="pascalgagnon.ca/reset-method/a/ et /b/ — 2026-03-22">
+                <div class="m-top"><span class="m-id">M2</span><span class="m-ico">✅</span></div>
+                <div class="m-title">Pages de vente A/B</div>
+                <div class="m-note">/reset-method/a/ et /b/ · 2026-03-22</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission active" title="Processus de capture courriel en démarrage">
+                <div class="m-top"><span class="m-id">M3</span><span class="m-ico">⏳</span></div>
+                <div class="m-title">Capture courriel automatisée</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission locked">
+                <div class="m-top"><span class="m-id">M4</span><span class="m-ico">🔒</span></div>
+                <div class="m-title">Lancement et premières ventes</div>
+                <div class="m-note">Dépend M1 + M3</div>
+            </div>
+        </div>
+
+        <!-- AGENT IA -->
+        <div class="branch">
+            <div class="branch-hdr">
+                <span class="branch-icon">🤖</span>
+                <div class="branch-name">Agent<br>IA</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission done" title="Série Meunier complète visionnée">
+                <div class="m-top"><span class="m-id">A1</span><span class="m-ico">✅</span></div>
+                <div class="m-title">Comprendre les agents IA</div>
+                <div class="m-note">Série Meunier — complète</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission done" title="Agents IA créés">
+                <div class="m-top"><span class="m-id">A2</span><span class="m-ico">✅</span></div>
+                <div class="m-title">Créer un premier agent IA</div>
+            </div>
+        </div>
+
+        <!-- SERVEUR DÉDIÉ -->
+        <div class="branch">
+            <div class="branch-hdr">
+                <span class="branch-icon">🖥️</span>
+                <div class="branch-name">Serveur<br>Dédié</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission done" title="Hostinger — Dokploy installé">
+                <div class="m-top"><span class="m-id">S1</span><span class="m-ico">✅</span></div>
+                <div class="m-title">Abonnement à un serveur dédié</div>
+                <div class="m-note">Hostinger · Dokploy installé</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission active" title="Définir le premier flux d'automatisation via Dokploy">
+                <div class="m-top"><span class="m-id">S2</span><span class="m-ico">⏳</span></div>
+                <div class="m-title">Flux d'automatisation IA / SaaS</div>
+            </div>
+        </div>
+
+        <!-- MAÎTRISE CLAUDE -->
+        <div class="branch">
+            <div class="branch-hdr">
+                <span class="branch-icon">🧠</span>
+                <div class="branch-name">Maîtrise<br>Claude</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission active" title="Mapping de la progression en cours">
+                <div class="m-top"><span class="m-id">C2</span><span class="m-ico">⏳</span></div>
+                <div class="m-title">Mapping de la progression actuelle</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission done" title="Capacités Claude publiées sur pascalgagnon.ca">
+                <div class="m-top"><span class="m-id">C1</span><span class="m-ico">✅</span></div>
+                <div class="m-title">Diagramme des capacités de Claude</div>
+            </div>
+            <div class="vline"></div>
+            <div class="mission locked">
+                <div class="m-top"><span class="m-id">C3</span><span class="m-ico">🔒</span></div>
+                <div class="m-title">Visuel de progression cognitif (style EU4)</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- NIVEAUX TECH TREE -->
+    <div class="section-label">Arbre de maîtrise — Claude</div>
+    <div class="niveaux-track">
+        <div class="niv-node"><div class="niv-card done" title="Prompts conversationnels de base"><div class="niv-num">N1</div><div class="niv-lbl">Prompts conversationnels</div><div class="niv-ico">✅</div></div></div>
+        <div class="niv-connector"></div>
+        <div class="niv-node"><div class="niv-card done" title="Fichiers contexte et système de chapeaux"><div class="niv-num">N2</div><div class="niv-lbl">Fichiers contexte &amp; chapeaux</div><div class="niv-ico">✅</div></div></div>
+        <div class="niv-connector"></div>
+        <div class="niv-node"><div class="niv-card done" title="Workflow Cowork + fichiers système"><div class="niv-num">N3</div><div class="niv-lbl">Workflow Cowork + fichiers système</div><div class="niv-ico">✅</div></div></div>
+        <div class="niv-connector"></div>
+        <div class="niv-node"><div class="niv-card done" title="Skills personnalisés : article-pg, html-pg"><div class="niv-num">N4</div><div class="niv-lbl">Skills personnalisés</div><div class="niv-ico">✅</div></div></div>
+        <div class="niv-connector"></div>
+        <div class="niv-node"><div class="niv-card done" title="Série Meunier complète — agents IA compris"><div class="niv-num">N5</div><div class="niv-lbl">Agents IA (compréhension)</div><div class="niv-ico">✅</div></div></div>
+        <div class="niv-connector"></div>
+        <div class="niv-node"><div class="niv-card done" title="Agents IA créés et déployés"><div class="niv-num">N6</div><div class="niv-lbl">Agents IA (création)</div><div class="niv-ico">✅</div></div></div>
+        <div class="niv-connector"></div>
+        <div class="niv-node"><div class="niv-card done" title="Git + CI/CD + VPS Hostinger — pipeline actif depuis 2026-03-24"><div class="niv-num">N7</div><div class="niv-lbl">Déploiement web autonome</div><div class="niv-ico">✅</div></div></div>
+        <div class="niv-connector"></div>
+        <div class="niv-node"><div class="niv-card active" title="Hostinger actif · Dokploy installé · flux à construire"><div class="niv-num">N8</div><div class="niv-lbl">Serveur dédié + flux auto</div><div class="niv-ico">⏳</div></div></div>
+        <div class="niv-connector locked"></div>
+        <div class="niv-node"><div class="niv-card locked" title="Automatisation multi-services IA/SaaS — prochaine frontière"><div class="niv-num">N9</div><div class="niv-lbl">Automatisation multi-services</div><div class="niv-ico">🔒</div></div></div>
+    </div>
+
+    <!-- SECTION ZETTELKASTEN -->
+    <div class="section-label">Arbre Zettelkasten — Second Cerveau</div>
+    <div class="zk-score-mini">Niveaux débloqués : <strong>2 / 8</strong> &nbsp;·&nbsp; En progression : <em>Z3 — 98 concepts capturés</em> &nbsp;·&nbsp; Raccourci actif : <em>Pipeline articles (skill-pg)</em> &nbsp;·&nbsp; Prochain verrou : <em>wikilinks</em></div>
+    <div class="niveaux-track">
+        <div class="niv-node"><div class="niv-card done" title="Vault Obsidian installé. Dossiers structurés. Infrastructure solide."><div class="niv-num">Z1</div><div class="niv-lbl">Vault &amp; Infrastructure</div><div class="niv-ico">✅</div></div></div>
+        <div class="niv-connector"></div>
+        <div class="niv-node"><div class="niv-card done" title="INBOX actif. Templates dans MODELES. Habitude de capture en place."><div class="niv-num">Z2</div><div class="niv-lbl">Capture &amp; Templates</div><div class="niv-ico">✅</div></div></div>
+        <div class="niv-connector"></div>
+        <div class="niv-node"><div class="niv-card active" title="En cours. 98 concepts capturés. Objectif : atomicité et titres-assertions."><div class="niv-num">Z3</div><div class="niv-lbl">Atomicité des notes</div><div class="niv-ico">⏳</div></div></div>
+        <div class="niv-connector locked"></div>
+        <div class="niv-node"><div class="niv-card locked" title="À débloquer après Z3. Reformuler dans ses propres mots, lier à ≥2 notes."><div class="niv-num">Z4</div><div class="niv-lbl">Notes permanentes</div><div class="niv-ico">🔒</div></div></div>
+        <div class="niv-connector locked"></div>
+        <div class="niv-node"><div class="niv-card locked" title="À débloquer après Z4. Objectif : 5+ liens par note permanente."><div class="niv-num">Z5</div><div class="niv-lbl">Réseau de liens</div><div class="niv-ico">🔒</div></div></div>
+        <div class="niv-connector locked"></div>
+        <div class="niv-node"><div class="niv-card locked" title="À débloquer après Z5. MOC par thème, graphe view."><div class="niv-num">Z6</div><div class="niv-lbl">MOC &amp; Cartographie</div><div class="niv-ico">🔒</div></div></div>
+        <div class="niv-connector locked"></div>
+        <div class="niv-node"><div class="niv-card locked" title="À débloquer après Z6. Idées émergentes par densité du réseau."><div class="niv-num">Z7</div><div class="niv-lbl">Émergence</div><div class="niv-ico">🔒</div></div></div>
+        <div class="niv-connector locked"></div>
+        <div class="niv-node"><div class="niv-card locked" title="À débloquer après Z7. Second cerveau public."><div class="niv-num">Z8</div><div class="niv-lbl">Jardin numérique</div><div class="niv-ico">🔒</div></div></div>
+    </div>
+
+    <!-- GRAPHE DE CAPACITÉS ZETTELKASTEN -->
+    <div class="section-label">Constellation de capacités — Zettelkasten</div>
+    <div class="zk-graph-wrap">
+        <svg viewBox="0 0 920 498" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:640px;display:block;">
+            <defs>
+                <filter id="fg" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="5" result="b"/><feFlood flood-color="#c8a96e" flood-opacity="0.45" result="c"/><feComposite in="c" in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <filter id="fa" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="6" result="b"/><feFlood flood-color="#b87820" flood-opacity="0.55" result="c"/><feComposite in="c" in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <text x="80"  y="474" text-anchor="middle" font-size="8.5" fill="rgba(200,169,110,0.18)" font-family="serif" letter-spacing="1.5">FONDATION</text>
+            <text x="235" y="474" text-anchor="middle" font-size="8.5" fill="rgba(200,169,110,0.18)" font-family="serif" letter-spacing="1.5">CAPTURE</text>
+            <text x="390" y="474" text-anchor="middle" font-size="8.5" fill="rgba(200,169,110,0.18)" font-family="serif" letter-spacing="1.5">TRAITEMENT</text>
+            <text x="545" y="474" text-anchor="middle" font-size="8.5" fill="rgba(200,169,110,0.18)" font-family="serif" letter-spacing="1.5">STRUCTURE</text>
+            <text x="695" y="474" text-anchor="middle" font-size="8.5" fill="rgba(200,169,110,0.18)" font-family="serif" letter-spacing="1.5">CARTOGRAPHIE</text>
+            <text x="845" y="474" text-anchor="middle" font-size="8.5" fill="rgba(200,169,110,0.18)" font-family="serif" letter-spacing="1.5">ÉMERGENCE</text>
+            <line x1="80"  y1="240" x2="235" y2="132" stroke="rgba(200,169,110,0.50)" stroke-width="1.5"/>
+            <line x1="80"  y1="240" x2="235" y2="358" stroke="rgba(200,169,110,0.50)" stroke-width="1.5"/>
+            <line x1="235" y1="358" x2="390" y2="368" stroke="rgba(200,169,110,0.50)" stroke-width="1.5"/>
+            <line x1="235" y1="132" x2="390" y2="212" stroke="rgba(184,120,32,0.55)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="235" y1="132" x2="390" y2="52"  stroke="rgba(184,120,32,0.55)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="235" y1="358" x2="390" y2="212" stroke="rgba(184,120,32,0.55)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="390" y1="212" x2="390" y2="52"  stroke="rgba(184,120,32,0.45)" stroke-width="1.2" stroke-dasharray="4,4"/>
+            <line x1="390" y1="212" x2="545" y2="118" stroke="rgba(100,80,50,0.40)" stroke-width="1" stroke-dasharray="3,5"/>
+            <line x1="390" y1="212" x2="545" y2="268" stroke="rgba(100,80,50,0.40)" stroke-width="1" stroke-dasharray="3,5"/>
+            <line x1="390" y1="368" x2="545" y2="268" stroke="rgba(100,80,50,0.40)" stroke-width="1" stroke-dasharray="3,5"/>
+            <line x1="390" y1="368" x2="545" y2="428" stroke="rgba(100,80,50,0.40)" stroke-width="1" stroke-dasharray="3,5"/>
+            <line x1="545" y1="118" x2="695" y2="174" stroke="rgba(60,48,30,0.35)" stroke-width="1" stroke-dasharray="3,6"/>
+            <line x1="545" y1="268" x2="695" y2="174" stroke="rgba(60,48,30,0.35)" stroke-width="1" stroke-dasharray="3,6"/>
+            <line x1="545" y1="268" x2="695" y2="354" stroke="rgba(60,48,30,0.35)" stroke-width="1" stroke-dasharray="3,6"/>
+            <line x1="545" y1="428" x2="695" y2="354" stroke="rgba(60,48,30,0.35)" stroke-width="1" stroke-dasharray="3,6"/>
+            <line x1="695" y1="174" x2="845" y2="264" stroke="rgba(60,48,30,0.35)" stroke-width="1" stroke-dasharray="3,6"/>
+            <line x1="695" y1="354" x2="845" y2="264" stroke="rgba(60,48,30,0.35)" stroke-width="1" stroke-dasharray="3,6"/>
+            <line x1="845" y1="264" x2="845" y2="72"  stroke="rgba(60,48,30,0.30)" stroke-width="1" stroke-dasharray="3,6"/>
+            <path d="M 390 52 C 560 4 730 8 845 72" fill="none" stroke="rgba(184,120,32,0.28)" stroke-width="1.2" stroke-dasharray="6,4"/>
+            <text x="615" y="14" text-anchor="middle" font-size="7.5" fill="rgba(184,120,32,0.45)" font-family="serif" font-style="italic" letter-spacing="0.5">raccourci · skill-pg</text>
+            <g filter="url(#fg)"><circle cx="80" cy="240" r="34" fill="#1a1008" stroke="#c8a96e" stroke-width="2"/></g>
+            <text x="80" y="232" text-anchor="middle" font-size="9" fill="#e8c98e" font-family="serif" font-weight="bold" letter-spacing="0.5">VAULT</text>
+            <text x="80" y="245" text-anchor="middle" font-size="7.5" fill="#9a8868" font-family="serif">Obsidian</text>
+            <text x="80" y="260" text-anchor="middle" font-size="12" font-family="serif">✅</text>
+            <g filter="url(#fg)"><circle cx="235" cy="132" r="32" fill="#1a1008" stroke="#c8a96e" stroke-width="2"/></g>
+            <text x="235" y="124" text-anchor="middle" font-size="9" fill="#e8c98e" font-family="serif" font-weight="bold" letter-spacing="0.5">CAPTURE</text>
+            <text x="235" y="137" text-anchor="middle" font-size="7.5" fill="#9a8868" font-family="serif">Inbox &amp; Fleeting</text>
+            <text x="235" y="151" text-anchor="middle" font-size="12" font-family="serif">✅</text>
+            <g filter="url(#fg)"><circle cx="235" cy="358" r="32" fill="#1a1008" stroke="#c8a96e" stroke-width="2"/></g>
+            <text x="235" y="350" text-anchor="middle" font-size="9" fill="#e8c98e" font-family="serif" font-weight="bold" letter-spacing="0.5">TEMPLATES</text>
+            <text x="235" y="363" text-anchor="middle" font-size="7.5" fill="#9a8868" font-family="serif">Modèles &amp; struct.</text>
+            <text x="235" y="377" text-anchor="middle" font-size="12" font-family="serif">✅</text>
+            <g filter="url(#fa)"><circle cx="390" cy="52" r="32" fill="#1e1006" stroke="#b87820" stroke-width="2" class="zk-active-ring"/></g>
+            <text x="390" y="44" text-anchor="middle" font-size="9" fill="#e8c98e" font-family="serif" font-weight="bold" letter-spacing="0.5">ARTICLES</text>
+            <text x="390" y="57" text-anchor="middle" font-size="7.5" fill="#9a8868" font-family="serif">Pipeline skill-pg</text>
+            <text x="390" y="71" text-anchor="middle" font-size="12" font-family="serif">⏳</text>
+            <g filter="url(#fa)"><circle cx="390" cy="212" r="32" fill="#1e1006" stroke="#b87820" stroke-width="2" class="zk-active-ring"/></g>
+            <text x="390" y="204" text-anchor="middle" font-size="9" fill="#e8c98e" font-family="serif" font-weight="bold" letter-spacing="0.5">ATOMICITÉ</text>
+            <text x="390" y="217" text-anchor="middle" font-size="7.5" fill="#9a8868" font-family="serif">1 idée = 1 note</text>
+            <text x="390" y="231" text-anchor="middle" font-size="12" font-family="serif">⏳</text>
+            <g filter="url(#fg)"><circle cx="390" cy="368" r="32" fill="#1a1008" stroke="#c8a96e" stroke-width="2"/></g>
+            <text x="390" y="360" text-anchor="middle" font-size="9" fill="#e8c98e" font-family="serif" font-weight="bold" letter-spacing="0.5">CONTEXTE</text>
+            <text x="390" y="373" text-anchor="middle" font-size="7.5" fill="#9a8868" font-family="serif">Chapeaux Claude</text>
+            <text x="390" y="387" text-anchor="middle" font-size="12" font-family="serif">✅</text>
+            <circle cx="545" cy="118" r="30" fill="#150e04" stroke="#3a2818" stroke-width="1.5"/>
+            <text x="545" y="110" text-anchor="middle" font-size="8" fill="#5a4a38" font-family="serif" font-weight="bold">PERMANENTES</text>
+            <text x="545" y="122" text-anchor="middle" font-size="7" fill="#3a2e22" font-family="serif">Reformuler &amp; lier</text>
+            <text x="545" y="135" text-anchor="middle" font-size="11" font-family="serif">🔒</text>
+            <circle cx="545" cy="268" r="30" fill="#150e04" stroke="#3a2818" stroke-width="1.5"/>
+            <text x="545" y="260" text-anchor="middle" font-size="8" fill="#5a4a38" font-family="serif" font-weight="bold">WIKILINKS</text>
+            <text x="545" y="272" text-anchor="middle" font-size="7" fill="#3a2e22" font-family="serif">[[Liens bidirect.]]</text>
+            <text x="545" y="285" text-anchor="middle" font-size="11" font-family="serif">🔒</text>
+            <circle cx="545" cy="428" r="30" fill="#150e04" stroke="#3a2818" stroke-width="1.5"/>
+            <text x="545" y="420" text-anchor="middle" font-size="8" fill="#5a4a38" font-family="serif" font-weight="bold">TAGS</text>
+            <text x="545" y="432" text-anchor="middle" font-size="7" fill="#3a2e22" font-family="serif">Taxonomie perso.</text>
+            <text x="545" y="445" text-anchor="middle" font-size="11" font-family="serif">🔒</text>
+            <circle cx="695" cy="174" r="30" fill="#150e04" stroke="#3a2818" stroke-width="1.5"/>
+            <text x="695" y="166" text-anchor="middle" font-size="8" fill="#5a4a38" font-family="serif" font-weight="bold">MOC</text>
+            <text x="695" y="178" text-anchor="middle" font-size="7" fill="#3a2e22" font-family="serif">Maps of Content</text>
+            <text x="695" y="191" text-anchor="middle" font-size="11" font-family="serif">🔒</text>
+            <circle cx="695" cy="354" r="30" fill="#150e04" stroke="#3a2818" stroke-width="1.5"/>
+            <text x="695" y="346" text-anchor="middle" font-size="8" fill="#5a4a38" font-family="serif" font-weight="bold">GRAPHE VIEW</text>
+            <text x="695" y="358" text-anchor="middle" font-size="7" fill="#3a2e22" font-family="serif">Réseau de notes</text>
+            <text x="695" y="371" text-anchor="middle" font-size="11" font-family="serif">🔒</text>
+            <circle cx="845" cy="72" r="30" fill="#150e04" stroke="#3a2818" stroke-width="1.5"/>
+            <text x="845" y="64" text-anchor="middle" font-size="8" fill="#5a4a38" font-family="serif" font-weight="bold">JARDIN NUM.</text>
+            <text x="845" y="76" text-anchor="middle" font-size="7" fill="#3a2e22" font-family="serif">Second cerveau pub.</text>
+            <text x="845" y="89" text-anchor="middle" font-size="11" font-family="serif">🔒</text>
+            <circle cx="845" cy="264" r="30" fill="#150e04" stroke="#3a2818" stroke-width="1.5"/>
+            <text x="845" y="256" text-anchor="middle" font-size="8" fill="#5a4a38" font-family="serif" font-weight="bold">CLUSTERS</text>
+            <text x="845" y="268" text-anchor="middle" font-size="7" fill="#3a2e22" font-family="serif">Thèmes émergents</text>
+            <text x="845" y="281" text-anchor="middle" font-size="11" font-family="serif">🔒</text>
+            <line x1="30" y1="462" x2="890" y2="462" stroke="rgba(200,169,110,0.10)" stroke-width="1"/>
+            <circle cx="268" cy="482" r="7" fill="#1a1008" stroke="#c8a96e" stroke-width="1.5"/>
+            <text x="280" y="486" font-size="9" fill="rgba(200,169,110,0.55)" font-family="serif">Maîtrisé (Z1–Z2)</text>
+            <circle cx="418" cy="482" r="7" fill="#1e1006" stroke="#b87820" stroke-width="1.5"/>
+            <text x="430" y="486" font-size="9" fill="rgba(200,169,110,0.55)" font-family="serif">En cours (Z3)</text>
+            <circle cx="555" cy="482" r="7" fill="#150e04" stroke="#3a2818" stroke-width="1.5"/>
+            <text x="567" y="486" font-size="9" fill="rgba(200,169,110,0.55)" font-family="serif">Verrouillé (Z4–Z8)</text>
+            <line x1="680" y1="482" x2="700" y2="482" stroke="rgba(184,120,32,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <text x="704" y="486" font-size="9" fill="rgba(200,169,110,0.55)" font-family="serif">Raccourci Claude actif</text>
+        </svg>
+    </div>
+
+    <!-- RESSOURCES D'APPRENTISSAGE -->
+    <div class="ressources">
+        <div class="section-label">Ressources — Série Eliott Meunier (IPCRA)</div>
+        <div class="res-grid">
+            <div class="res-item done"><span class="res-num">1/5</span><span class="res-title">L'IA devient simple quand on utilise ce système</span><span class="res-ico">✅</span></div>
+            <div class="res-item done"><span class="res-num">2/5</span><span class="res-title">Comment j'ai créé un assistant IA qui me connaît par cœur</span><span class="res-ico">✅</span></div>
+            <div class="res-item done"><span class="res-num">3/5</span><span class="res-title">Vous utilisez l'IA mais vous ne gagnez pas de temps ?</span><span class="res-ico">✅</span></div>
+            <div class="res-item done"><span class="res-num">4/5</span><span class="res-title">Comment créer votre PREMIER agent IA en 2026 (sans coder)</span><span class="res-ico">✅</span></div>
+            <div class="res-item done"><span class="res-num">5/5</span><span class="res-title">J'ai connecté l'IA à mes outils et elle automatise tout</span><span class="res-ico">✅</span></div>
+            <div class="res-item done"><span class="res-num">+</span><span class="res-title">J'ai branché l'IA sur mon second cerveau (avant/après)</span><span class="res-ico">✅</span></div>
+        </div>
+    </div>
+
+    <!-- PROCHAINES ACTIONS -->
+    <div class="priorites">
+        <div class="section-label">Prochaines actions prioritaires</div>
+        <ul class="prio-list">
+            <li class="prio-item"><span class="prio-num">1</span><span class="prio-code">M1</span><span>Finaliser le PDF Méthode Reset</span></li>
+            <li class="prio-item"><span class="prio-num">2</span><span class="prio-code">M3</span><span>Compléter le processus de capture courriel</span></li>
+            <li class="prio-item"><span class="prio-num">3</span><span class="prio-code">P2</span><span>Activer la diffusion réseaux — contenu prêt, audience = 0</span></li>
+            <li class="prio-item"><span class="prio-num">4</span><span class="prio-code">H1</span><span>Fixer une date pour le premier enregistrement podcast</span></li>
+            <li class="prio-item"><span class="prio-num">5</span><span class="prio-code">Z3</span><span>Ajouter les wikilinks sur les 10 notes les plus centrales du vault</span></li>
+        </ul>
+    </div>
+
+    <!-- PAGE FOOTER -->
+    <div class="page-footer">Mise à jour : 25 mars 2026 · <a href="/pme-ia/progression/" style="color:#7a6040;text-decoration:none;">← Retour à la progression</a></div>
+
+</div>
+
+<!-- FOOTER SITE -->
+<footer class="site-footer">
+  <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
+    <li><a href="/blog/">Tous les articles</a></li>
+    <li><a href="/pme-ia/">PME &amp; IA</a></li>
+    <li><a href="/pme-ia/progression/">Progression IA</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Pascal Gagnon</p>
+</footer>
+
+</body>
+</html>

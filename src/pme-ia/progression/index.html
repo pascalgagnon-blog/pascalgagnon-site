@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progression projets IA — Pascal Gagnon</title>
+<meta name="description" content="Apprentissage IA en public. Suivi de progression par projet avec indicateurs gamifiés — missions, niveaux débloqués, métriques actives.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --noir: #0a0a0a;
+  --creme: #f5f0e8;
+  --bleu: #0063b2;
+  --bleu-clair: #4d92c9;
+  --bleu-pale: #e6eff7;
+  --gris: #6b6b6b;
+  --gris-clair: #d4cfc6;
+  --max: 1200px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--creme); color: var(--noir); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; font-size: 18px; line-height: 1.7; }
+
+/* ── NAV ── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 4rem; background: rgba(245,240,232,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,99,178,0.15); }
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--noir); text-decoration: none; }
+.nav-logo span { color: var(--bleu); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover, .nav-links a.actif { color: var(--bleu); }
+.nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
+.nav-cta:hover { background: var(--bleu); color: #fff; }
+@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+
+/* ── EN-TÊTE ── */
+.page-header { padding-top: 140px; padding-bottom: 4rem; padding-left: 4rem; padding-right: 4rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .page-header { padding: 120px 1.5rem 3rem; } }
+.breadcrumb { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--gris); margin-bottom: 1.8rem; }
+.breadcrumb a { color: var(--bleu-clair); text-decoration: none; }
+.breadcrumb a:hover { color: var(--bleu); }
+.page-eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+.page-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--bleu-clair); }
+.page-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 3.8vw, 3.6rem); font-weight: 900; line-height: 1.05; color: var(--noir); letter-spacing: -0.02em; }
+.page-title em { font-style: italic; color: var(--bleu); }
+.page-sub { font-size: 0.75rem; color: var(--gris); letter-spacing: 0.08em; margin-top: 0.5rem; }
+
+/* ── INTRO ── */
+.page-intro { padding: 0 4rem 3rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .page-intro { padding: 0 1.5rem 2.5rem; } }
+.page-intro p { font-size: 1.05rem; line-height: 1.85; color: #3a3a3a; max-width: 700px; }
+
+/* ── DIVIDER ── */
+.section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--bleu-clair), transparent); margin: 0 4rem; opacity: 0.4; }
+
+/* ── CONCEPT GAMIFICATION ── */
+.concept { padding: 3.5rem 4rem 0; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .concept { padding: 2.5rem 1.5rem 0; } }
+.concept-inner { background: var(--bleu-pale); border-left: 3px solid var(--bleu); padding: 1.8rem 2.2rem; max-width: 740px; }
+.concept-label { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu); margin-bottom: 0.8rem; }
+.concept-inner p { font-size: 0.95rem; line-height: 1.75; color: #2a3a4a; }
+
+/* ── TABLEAUX DE BORD ── */
+.dashboards { padding: 4rem 4rem 6rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .dashboards { padding: 2.5rem 1.5rem 4rem; } }
+.section-eyebrow { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu-clair); display: block; margin-bottom: 2.5rem; }
+
+.dash-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+@media (max-width: 900px) { .dash-grille { grid-template-columns: 1fr; gap: 2rem; } }
+
+.dash-card { border-top: 2px solid var(--gris-clair); padding-top: 2rem; transition: border-color 0.25s; display: flex; flex-direction: column; }
+.dash-card:hover { border-color: var(--bleu); }
+
+.dash-tag { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bleu); margin-bottom: 0.8rem; }
+.dash-titre { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; line-height: 1.2; color: var(--noir); margin-bottom: 1rem; }
+.dash-desc { font-size: 0.95rem; line-height: 1.75; color: #4a4a4a; margin-bottom: 1.5rem; flex: 1; }
+
+/* Métriques mini */
+.dash-metrics { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.5rem; }
+.metric-row { display: flex; align-items: center; gap: 0.8rem; }
+.metric-label { font-size: 0.72rem; color: var(--gris); min-width: 160px; }
+.metric-track { flex: 1; height: 4px; background: var(--gris-clair); border-radius: 2px; overflow: hidden; }
+.metric-fill { height: 100%; background: var(--bleu); border-radius: 2px; transition: width 0.8s ease; }
+.metric-val { font-size: 0.72rem; font-weight: 500; color: var(--bleu); min-width: 40px; text-align: right; }
+
+.dash-bas { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.dash-date { font-size: 0.72rem; color: var(--gris); }
+.dash-lien { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bleu); text-decoration: none; transition: letter-spacing 0.2s; }
+.dash-lien:hover { letter-spacing: 0.22em; }
+
+/* ── NOUVEAU PROJET (placeholder) ── */
+.dash-card.placeholder { opacity: 0.45; border-top-style: dashed; }
+.dash-card.placeholder .dash-titre { color: var(--gris); font-style: italic; font-weight: 400; }
+
+/* ── COMMENT ÇA FONCTIONNE ── */
+.comment { padding: 0 4rem 6rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .comment { padding: 0 1.5rem 4rem; } }
+.comment h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--noir); margin-bottom: 1.5rem; }
+.etapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+@media (max-width: 768px) { .etapes { grid-template-columns: 1fr; gap: 1.5rem; } }
+.etape { padding: 1.5rem; border: 1px solid var(--gris-clair); }
+.etape-num { font-size: 2rem; font-weight: 700; color: var(--bleu-clair); opacity: 0.4; line-height: 1; margin-bottom: 0.6rem; font-family: 'Playfair Display', serif; }
+.etape h3 { font-size: 0.9rem; font-weight: 500; color: var(--noir); margin-bottom: 0.5rem; }
+.etape p { font-size: 0.85rem; line-height: 1.7; color: var(--gris); }
+
+/* ── FOOTER ── */
+footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+@media (max-width: 768px) { footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; } }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: rgba(245,240,232,0.5); text-decoration: none; }
+.footer-logo span { color: var(--bleu-clair); }
+.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--bleu-clair); }
+.footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); }
+
+/* ── ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="nav-links">
+    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/pme-ia/" class="actif">PME &amp; IA</a></li>
+    <li><a href="/sante-metabolique/">Santé métabolique</a></li>
+  </ul>
+  <a href="/pme-ia/" class="nav-cta">← PME &amp; IA</a>
+</nav>
+
+<!-- EN-TÊTE -->
+<header class="page-header">
+  <p class="breadcrumb"><a href="/">pascalgagnon.ca</a> / <a href="/pme-ia/">PME &amp; IA</a> / Progression</p>
+  <p class="page-eyebrow">Apprentissage en public</p>
+  <h1 class="page-title">Progression<br><em>projets IA</em></h1>
+  <p class="page-sub">Mis à jour chaque mardi ou à l'atteinte d'un palier</p>
+</header>
+
+<!-- INTRO -->
+<div class="page-intro reveal">
+  <p>Ce n'est pas un portfolio. C'est un carnet de bord en temps réel — missions actives, niveaux débloqués, goulots identifiés. L'apprentissage de l'IA se démontre par ce qu'on fait, pas par ce qu'on dit savoir faire.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- CONCEPT GAMIFICATION -->
+<div class="concept reveal">
+  <div class="concept-inner">
+    <div class="concept-label">Principe de gamification</div>
+    <p>Chaque projet est découpé en missions (✅ complété / ⏳ en cours / 🔒 verrouillé) et en niveaux progressifs. Les métriques sont mises à jour manuellement à chaque session de travail significative. L'objectif : rendre visible ce qui est normalement invisible — l'apprentissage lui-même.</p>
+  </div>
+</div>
+
+<div class="section-divider" style="margin-top:3.5rem;"></div>
+
+<!-- TABLEAUX DE BORD -->
+<section class="dashboards reveal">
+  <span class="section-eyebrow">Tableaux de bord actifs ——</span>
+  <div class="dash-grille">
+
+    <!-- PROGRESSION IA -->
+    <article class="dash-card">
+      <span class="dash-tag">PME &amp; IA — Projets</span>
+      <h2 class="dash-titre">Tableau de progression — IA &amp; Création de contenu</h2>
+      <p class="dash-desc">Branches de missions, arbre de maîtrise Claude, progression Zettelkasten et ressources d'apprentissage. Vue d'ensemble de tous les projets en cours.</p>
+      <div class="dash-metrics">
+        <div class="metric-row">
+          <span class="metric-label">🧠 Maîtrise Claude</span>
+          <div class="metric-track"><div class="metric-fill" style="width:78%"></div></div>
+          <span class="metric-val">7 / 9</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">✍️ PascalGagnon.ca</span>
+          <div class="metric-track"><div class="metric-fill" style="width:60%"></div></div>
+          <span class="metric-val">6 / 10</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">💰 Monétisation</span>
+          <div class="metric-track"><div class="metric-fill" style="width:50%"></div></div>
+          <span class="metric-val">2 / 4</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">🗂️ Zettelkasten</span>
+          <div class="metric-track"><div class="metric-fill" style="width:25%"></div></div>
+          <span class="metric-val">2 / 8</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">🎙️ Histoire Podcast</span>
+          <div class="metric-track"><div class="metric-fill" style="width:37%"></div></div>
+          <span class="metric-val">3 / 8</span>
+        </div>
+      </div>
+      <div class="dash-bas">
+        <span class="dash-date">Mars 2026</span>
+        <a href="/pme-ia/progression/progression-ia/" class="dash-lien">Voir le tableau complet →</a>
+      </div>
+    </article>
+
+    <!-- CAPACITÉS CLAUDE -->
+    <article class="dash-card">
+      <span class="dash-tag">PME &amp; IA — Outils</span>
+      <h2 class="dash-titre">Cartographie des capacités — Claude</h2>
+      <p class="dash-desc">Graphique radar comparant la couverture théorique de Claude avec l'utilisation réelle observée. Identifie les zones dormantes et les leviers à fort retour.</p>
+      <div class="dash-metrics">
+        <div class="metric-row">
+          <span class="metric-label">Création d'articles</span>
+          <div class="metric-track"><div class="metric-fill" style="width:82%"></div></div>
+          <span class="metric-val">82 %</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Apprentissage IA</span>
+          <div class="metric-track"><div class="metric-fill" style="width:75%"></div></div>
+          <span class="metric-val">75 %</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Analyse économique</span>
+          <div class="metric-track"><div class="metric-fill" style="width:12%; background: #e05050;"></div></div>
+          <span class="metric-val" style="color:#c04040;">12 %</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Diffusion réseaux</span>
+          <div class="metric-track"><div class="metric-fill" style="width:8%; background: #e05050;"></div></div>
+          <span class="metric-val" style="color:#c04040;">8 %</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Refaçonnage contenu</span>
+          <div class="metric-track"><div class="metric-fill" style="width:14%; background: #e05050;"></div></div>
+          <span class="metric-val" style="color:#c04040;">14 %</span>
+        </div>
+      </div>
+      <div class="dash-bas">
+        <span class="dash-date">Mars 2026</span>
+        <a href="/pme-ia/progression/capacites-claude/" class="dash-lien">Voir le radar complet →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COMMENT ÇA FONCTIONNE -->
+<section class="comment reveal">
+  <h2>Comment fonctionne ce suivi</h2>
+  <div class="etapes">
+    <div class="etape">
+      <div class="etape-num">01</div>
+      <h3>Missions et branches</h3>
+      <p>Chaque projet est découpé en missions concrètes, regroupées par branche thématique. Chaque mission a un statut : complétée, en cours, ou verrouillée en attente d'un prérequis.</p>
+    </div>
+    <div class="etape">
+      <div class="etape-num">02</div>
+      <h3>Niveaux de maîtrise</h3>
+      <p>L'arbre de maîtrise Claude Code suit la progression réelle, niveau par niveau. On ne déclare un niveau débloqué que quand il est appliqué dans un projet réel — pas juste compris en théorie.</p>
+    </div>
+    <div class="etape">
+      <div class="etape-num">03</div>
+      <h3>Mise à jour publique</h3>
+      <p>Ces pages sont mises à jour chaque mardi ou à l'atteinte d'un palier significatif. Les métriques sont honnêtes — les zones à 8 % d'utilisation sont affichées au même titre que celles à 82 %.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
+    <li><a href="/blog/">Tous les articles</a></li>
+    <li><a href="/pme-ia/">PME &amp; IA</a></li>
+    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/sante-metabolique/">Santé métabolique</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Pascal Gagnon</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

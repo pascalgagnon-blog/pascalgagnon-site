@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capacités Claude — Pascal Gagnon</title>
+    <meta name="description" content="Graphique radar comparant la couverture théorique de Claude avec l'utilisation observée. Zones dormantes et leviers à fort retour identifiés.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+    /* ── SITE NAV ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --bleu: #0063b2;
+      --bleu-clair: #4d92c9;
+      --creme: #f5f0e8;
+      --noir: #0a0a0a;
+      --gris: #6b6b6b;
+    }
+    body { margin: 0; padding: 0; }
+    nav.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 4rem; background: rgba(245,240,232,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,99,178,0.15); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--noir); text-decoration: none; }
+    .nav-logo span { color: var(--bleu); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; font-family: 'DM Sans', sans-serif; }
+    .nav-links a:hover, .nav-links a.actif { color: var(--bleu); }
+    .nav-retour { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; font-family: 'DM Sans', sans-serif; }
+    .nav-retour:hover { background: var(--bleu); color: #fff; }
+    @media (max-width: 768px) { nav.site-nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+
+    /* ── FOOTER SITE ── */
+    footer.site-footer { background: #0a0a0a; padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    @media (max-width: 768px) { footer.site-footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; } }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: rgba(245,240,232,0.5); text-decoration: none; }
+    .footer-logo span { color: var(--bleu-clair); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; margin: 0; padding: 0; }
+    .footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; font-family: 'DM Sans', sans-serif; }
+    .footer-links a:hover { color: var(--bleu-clair); }
+    .footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); font-family: 'DM Sans', sans-serif; }
+
+    /* ══════════════════════════════════════════════════════════
+       STYLES ORIGINAUX DU DIAGRAMME RADAR
+    ══════════════════════════════════════════════════════════ */
+        :root {
+            --bg:         #0d0902;
+            --bg-card:    #1e1208;
+            --gold:       #c8a96e;
+            --gold-light: #e8c98e;
+            --gold-dim:   #7a6040;
+            --text:       #f5f0e8;
+            --text-dim:   #9a8868;
+            --blue:       #4e8fdb;
+            --locked:     #302418;
+        }
+        .main-content {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+            min-height: 100vh;
+            padding: 32px 20px 48px;
+            padding-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page-title {
+            font-size: 1.55em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            text-shadow: 0 0 22px rgba(200,169,110,0.3);
+            text-align: center;
+        }
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 10px 0 6px;
+            width: 100%;
+            max-width: 640px;
+        }
+        .subtitle {
+            font-size: 0.77em;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+        }
+        canvas { display: block; width: 100%; height: auto; }
+        .legend {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.78em;
+            color: var(--text-dim);
+            letter-spacing: 0.5px;
+        }
+        .legend-swatch {
+            width: 28px;
+            height: 3px;
+            border-radius: 2px;
+        }
+        /* ── ZONES D'ANALYSE ── */
+        .section-lbl {
+            font-size: 0.74em;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            margin: 32px 0 18px;
+        }
+        .section-lbl::before,
+        .section-lbl::after { content: ' ◆ '; color: var(--gold-dim); font-size: 0.75em; }
+        .zones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            max-width: 880px;
+            width: 100%;
+        }
+        .zone {
+            background: var(--bg-card);
+            border: 1px solid var(--locked);
+            padding: 14px 17px;
+            font-size: 0.78em;
+            line-height: 1.65;
+            color: var(--text-dim);
+        }
+        .zone-title {
+            display: block;
+            font-weight: bold;
+            font-size: 1em;
+            letter-spacing: 0.5px;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+        }
+        .zone.actif    { border-left: 3px solid var(--gold); }
+        .zone.actif    .zone-title { color: var(--gold-light); }
+        .zone.potentiel{ border-left: 3px solid var(--blue); }
+        .zone.potentiel .zone-title { color: #8abce8; }
+        .zone.levier   { border-left: 3px solid #c86060; }
+        .zone.levier   .zone-title { color: #e8a0a0; }
+        /* ── TABLE D'ÉCARTS ── */
+        .gap-table {
+            max-width: 660px;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 0.76em;
+        }
+        .gap-table th {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            padding: 6px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--gold-dim);
+        }
+        .gap-table td {
+            padding: 7px 12px;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(48,36,24,0.5);
+            vertical-align: top;
+        }
+        .gap-table tr:hover td { background: rgba(200,169,110,0.04); }
+        .gap-table .pct { font-weight: bold; }
+        .gap-table .pct.high { color: #c86060; }
+        .gap-table .pct.med  { color: var(--gold); }
+        .gap-table .pct.low  { color: #6da86d; }
+        .bar-wrap { width: 120px; height: 6px; background: rgba(48,36,24,0.6); border-radius: 3px; display: inline-block; vertical-align: middle; }
+        .bar-fill  { height: 100%; border-radius: 3px; }
+        .page-footer-dark {
+            margin-top: 40px;
+            font-size: 0.65em;
+            color: var(--locked);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV SITE -->
+<nav class="site-nav">
+  <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="nav-links">
+    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/pme-ia/" class="actif">PME &amp; IA</a></li>
+    <li><a href="/sante-metabolique/">Santé métabolique</a></li>
+  </ul>
+  <a href="/pme-ia/progression/" class="nav-retour">← Progression</a>
+</nav>
+
+<!-- CONTENU PRINCIPAL -->
+<div class="main-content">
+
+<div class="page-title">Capacités Claude — Pascal Gagnon</div>
+<div class="divider"></div>
+<div class="subtitle">Couverture théorique vs utilisation observée · Mars 2026</div>
+
+<div class="chart-container">
+    <canvas id="radar" width="700" height="620"></canvas>
+</div>
+
+<div class="legend">
+    <div class="legend-item">
+        <div class="legend-swatch" style="background:#4e8fdb;opacity:0.9"></div>
+        Couverture théorique de Claude
+    </div>
+    <div class="legend-item">
+        <div class="legend-swatch" style="background:var(--gold)"></div>
+        Utilisation observée — Pascal Gagnon
+    </div>
+</div>
+
+<div class="section-lbl">Lecture des zones</div>
+
+<div class="zones">
+    <div class="zone actif">
+        <span class="zone-title">✅ Zones activées — usage fort</span>
+        <strong style="color:var(--gold-light)">Création d'articles &amp; Apprentissage IA</strong> : usage proche du plafond théorique. Le système skill-pg + fichiers contexte + chapeaux a transformé Claude en co-auteur réel. L'apprentissage structuré (série Meunier, agents, vault) est la deuxième zone forte.
+    </div>
+    <div class="zone potentiel">
+        <span class="zone-title">🔵 Zone dormante — potentiel intact</span>
+        <strong style="color:#8abce8">Production podcast</strong> : Claude peut écrire les scripts, show notes, transcriptions et épisodes complets. La branche Histoire est rédigée (.docx) — H1 (premier enregistrement) est le seul déclencheur manquant.
+    </div>
+    <div class="zone levier">
+        <span class="zone-title">⚡ Zones à fort levier — gains immédiats</span>
+        <strong style="color:#e8a0a0">Analyse économique, Refaçonnage contenu, Pipeline publication, Diffusion réseaux</strong> : écart élevé entre ce que Claude peut faire et ce qui est utilisé. Ce sont les prochains déblocages les plus rentables.
+    </div>
+</div>
+
+<div class="section-lbl">Écarts détaillés par domaine</div>
+
+<table class="gap-table">
+    <thead>
+        <tr>
+            <th>Domaine</th>
+            <th>Théorique</th>
+            <th>Observé</th>
+            <th>Écart</th>
+            <th>Priorité</th>
+        </tr>
+    </thead>
+    <tbody id="gap-rows"></tbody>
+</table>
+
+<div class="page-footer-dark">Mars 2026 · <a href="/pme-ia/progression/" style="color:#7a6040;text-decoration:none;">← Retour à la progression</a></div>
+
+</div>
+
+<!-- FOOTER SITE -->
+<footer class="site-footer">
+  <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
+    <li><a href="/blog/">Tous les articles</a></li>
+    <li><a href="/pme-ia/">PME &amp; IA</a></li>
+    <li><a href="/pme-ia/progression/">Progression IA</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Pascal Gagnon</p>
+</footer>
+
+<script>
+const dims = [
+    { label: ["Création", "d'articles"],       theo: 0.95, obs: 0.82, note: "Système skill-pg + charte éditoriale. Usage quasi optimal.",                                                    prio: "Maintenir"     },
+    { label: ["Apprentissage", "IA"],           theo: 0.80, obs: 0.75, note: "Série Meunier, agents créés, vault structuré. Très actif.",                                                    prio: "Maintenir"     },
+    { label: ["Gestion vault", "& Zettelkasten"],theo:0.85, obs: 0.50, note: "Infrastructure solide (Z1–Z2). Atomicité (Z3) en cours.",                                                      prio: "Z3 → actif"    },
+    { label: ["Développement", "web"],          theo: 0.80, obs: 0.28, note: "Pipeline Jinja2/VPS actif. Pas de flux régulier côté frontend.",                                              prio: "Secondaire"    },
+    { label: ["Agents IA", "& auto."],          theo: 0.90, obs: 0.32, note: "Agents créés (N6). Flux Dokploy (S2) à déployer.",                                                           prio: "S2 → actif"    },
+    { label: ["Analyse", "économique"],         theo: 0.88, obs: 0.12, note: "ISQ, Stats Canada, données MERN — Claude peut préparer des synthèses chiffrées. Quasi inexploité.",           prio: "⚡ Fort levier" },
+    { label: ["Refaçonnage", "contenu"],        theo: 0.88, obs: 0.14, note: "1 article → 5 formats (LinkedIn, X, infolettre, résumé, citation). Pipeline inexistant.",                    prio: "⚡ Fort levier" },
+    { label: ["Pipeline", "publication"],       theo: 0.85, obs: 0.18, note: "De l'article au post planifié. Claude peut générer le calendrier et les textes. P2 non démarré.",            prio: "⚡ Fort levier" },
+    { label: ["Production", "podcast"],         theo: 0.82, obs: 0.05, note: "Épisodes rédigés (.docx), mais H1 non lancé. Claude peut faire scripts, show notes, transcriptions.",        prio: "H1 → démarrer" },
+    { label: ["Diffusion", "réseaux sociaux"],  theo: 0.78, obs: 0.08, note: "LinkedIn, Facebook — posts adaptés au ton Pascal. Processus P2 et H4 non construits.",                      prio: "⚡ Fort levier" }
+];
+
+const canvas = document.getElementById('radar');
+const ctx    = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const cx = W / 2, cy = H / 2 + 14;
+const R = 192;
+const N = dims.length;
+
+function angle(i) { return (2 * Math.PI * i / N) - Math.PI / 2; }
+function pt(val, i) {
+    const a = angle(i);
+    return { x: cx + val * R * Math.cos(a), y: cy + val * R * Math.sin(a) };
+}
+
+const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.3);
+grd.addColorStop(0, 'rgba(200,169,110,0.04)');
+grd.addColorStop(1, 'rgba(13,9,2,0)');
+ctx.fillStyle = grd;
+ctx.fillRect(0, 0, W, H);
+
+[0.2, 0.4, 0.6, 0.8, 1.0].forEach(r => {
+    ctx.beginPath();
+    for (let i = 0; i < N; i++) {
+        const p = pt(r, i);
+        i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = r === 1.0 ? 'rgba(200,169,110,0.28)' : 'rgba(200,169,110,0.10)';
+    ctx.lineWidth   = r === 1.0 ? 1.5 : 1;
+    ctx.stroke();
+    const lp = pt(r, 0);
+    ctx.fillStyle = 'rgba(154,136,104,0.45)';
+    ctx.font      = '10px serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(r.toFixed(1), lp.x - 6, lp.y + 3);
+});
+
+for (let i = 0; i < N; i++) {
+    const p = pt(1, i);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(p.x, p.y);
+    ctx.strokeStyle = 'rgba(200,169,110,0.15)';
+    ctx.lineWidth   = 1;
+    ctx.stroke();
+}
+
+ctx.beginPath();
+dims.forEach((d, i) => {
+    const p = pt(d.theo, i);
+    i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+});
+ctx.closePath();
+ctx.fillStyle   = 'rgba(78,143,219,0.15)';
+ctx.fill();
+ctx.strokeStyle = 'rgba(78,143,219,0.80)';
+ctx.lineWidth   = 1.8;
+ctx.stroke();
+
+ctx.beginPath();
+dims.forEach((d, i) => {
+    const p = pt(d.obs, i);
+    i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+});
+ctx.closePath();
+ctx.fillStyle   = 'rgba(200,169,110,0.22)';
+ctx.fill();
+ctx.strokeStyle = 'rgba(200,169,110,0.90)';
+ctx.lineWidth   = 2;
+ctx.stroke();
+
+dims.forEach((d, i) => {
+    const tp = pt(d.theo, i);
+    ctx.beginPath();
+    ctx.arc(tp.x, tp.y, 3.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#4e8fdb';
+    ctx.fill();
+    const op = pt(d.obs, i);
+    ctx.beginPath();
+    ctx.arc(op.x, op.y, 4.5, 0, Math.PI * 2);
+    ctx.fillStyle   = '#c8a96e';
+    ctx.strokeStyle = '#0d0902';
+    ctx.lineWidth   = 1;
+    ctx.fill();
+    ctx.stroke();
+});
+
+ctx.textAlign = 'center';
+dims.forEach((d, i) => {
+    const a     = angle(i);
+    const lDist = R + 36;
+    const lx    = cx + lDist * Math.cos(a);
+    const ly    = cy + lDist * Math.sin(a);
+    const nudge = (Math.cos(a) < -0.1) ? -8 : 0;
+    const isHighUsage = d.obs >= 0.65;
+    ctx.fillStyle = isHighUsage ? 'rgba(232,201,142,0.85)' : 'rgba(154,136,104,0.80)';
+    ctx.font      = '11.5px Palatino Linotype, Georgia, serif';
+    const lineH = 14;
+    const lines = d.label;
+    const totalH = (lines.length - 1) * lineH;
+    lines.forEach((line, li) => {
+        ctx.fillText(line, lx + nudge, ly - totalH / 2 + li * lineH + 4);
+    });
+});
+
+ctx.beginPath();
+ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+ctx.fillStyle = 'rgba(200,169,110,0.4)';
+ctx.fill();
+
+const prioColor = {
+    'Maintenir':    '#6da86d',
+    '⚡ Fort levier': '#c86060',
+    'S2 → actif':   '#b87820',
+    'Z3 → actif':   '#b87820',
+    'H1 → démarrer':'#b87820',
+    'Secondaire':   '#7a6040',
+};
+
+const tbody = document.getElementById('gap-rows');
+const sorted = [...dims].sort((a, b) => (b.theo - b.obs) - (a.theo - a.obs));
+
+sorted.forEach(d => {
+    const gap = d.theo - d.obs;
+    const pct = Math.round(gap * 100);
+    const gapClass = pct >= 60 ? 'high' : pct >= 30 ? 'med' : 'low';
+    const barColor = pct >= 60 ? '#c86060' : pct >= 30 ? '#b87820' : '#6da86d';
+    const label = d.label.join(' ');
+    const color = prioColor[d.prio] || '#9a8868';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td style="color:#e8c98e;font-weight:bold">${label}</td>
+        <td>${Math.round(d.theo * 100)} %</td>
+        <td>${Math.round(d.obs * 100)} %</td>
+        <td>
+            <span class="pct ${gapClass}">−${pct} %</span><br>
+            <div class="bar-wrap" style="margin-top:4px">
+                <div class="bar-fill" style="width:${pct}%;background:${barColor}"></div>
+            </div>
+        </td>
+        <td style="color:${color};font-weight:bold">${d.prio}</td>
+    `;
+    tbody.appendChild(tr);
+});
+</script>
+</body>
+</html>
