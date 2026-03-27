@@ -105,6 +105,10 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .article-wrap a { color: var(--bleu); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
 .article-wrap a:hover { color: var(--noir); }
 
+/* Images — responsives sur tous les appareils */
+.article-wrap img { max-width: 100%; height: auto; display: block; margin: 2rem auto; border-radius: 4px; }
+@media (max-width: 600px) { .article-wrap img { margin: 1.5rem auto; border-radius: 2px; } }
+
 /* Bloc téléchargement PDF */
 .article-wrap p strong a,
 .article-wrap p > a[href$=".pdf"] { display: inline-block; background: var(--bleu); color: #fff; padding: 0.7rem 1.5rem; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; transition: background 0.25s; }
