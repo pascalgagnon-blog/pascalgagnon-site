@@ -8,6 +8,14 @@ featured:
   tag: "ANALYSE DE DOSSIER"
 
 recent:
+  - title: "La gouvernance IA au Québec : le guide que personne n'a encore écrit"
+    chapeau: "Pendant que nos PME et nos municipalités attendent un cadre clair, le Québec accumule un retard numérique qui ne sera pas facile à effacer."
+    date: "27 mars 2026"
+    reading_time: "9 min"
+    vertical: "Gouvernance IA"
+    slug: "gouvernance-ia-quebec-guide-manquant"
+    url: "/articles/gouvernance-ia-quebec-guide-manquant/"
+    tag: "ARTICLE DE FOND"
   - title: "Vos formations d'entreprise ignorent la science du jeu vidéo — et ça vous coûte cher"
     chapeau: "La mécanique de récompense qui retient 40 millions de joueurs actifs peut transformer vos parcours d'apprentissage. Voici comment l'appliquer concrètement."
     date: "26 mars 2026"
