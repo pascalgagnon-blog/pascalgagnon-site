@@ -4,6 +4,11 @@
       <span class="logo-pascal">Pascal</span>
       <span class="logo-nom">Gagnon</span>
     </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
     <nav class="site-nav" aria-label="Navigation principale">
       {% for item in site.nav %}
       <a href="{{ item.url }}" class="nav-link">{{ item.label }}</a>

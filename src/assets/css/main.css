@@ -27,7 +27,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; }
 img  { max-width: 100%; display: block; }
-a    { color: var(--bleu); text-decoration: none; }
+a    { color: var(--bleu); text-decoration: none; font-weight: 600; }
 a:hover { color: var(--bleu-clair); }
 
 /* ─── Base ─────────────────────────────────────────────────── */
@@ -502,12 +502,66 @@ body {
   padding-top: 1rem;
 }
 
+/* ─── Hamburger (caché par défaut sur desktop) ─────────── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 200;
+}
+
+.hamburger-bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--noir);
+  border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
 /* ═══════════════════════════════════════════════════════════
    RESPONSIVE — Mobile
 ═══════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .nav-toggle { display: flex; }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--gris-bord);
+    border-bottom: 2px solid var(--bleu);
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .site-nav.is-open { display: flex; }
+
+  .site-header { position: sticky; }
+  .site-header .container { position: relative; }
+
+  .nav-link {
+    padding: 0.85rem 1.5rem;
+    border-bottom: 1px solid var(--gris-bord);
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+  }
+  .nav-link:last-child { border-bottom: none; }
+}
+
 @media (max-width: 480px) {
-  .hero     { padding: 4rem 0 3rem; }
-  .site-nav { gap: 1rem; }
+  .hero         { padding: 4rem 0 3rem; }
   .article-card { grid-template-columns: 1fr; }
   .card-thumb   { display: none; }
 }
