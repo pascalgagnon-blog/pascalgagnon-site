@@ -5,7 +5,7 @@ date: 1 avril 2026
 reading_time: 12 min
 vertical: Intelligence artificielle
 tag: ENTREVUE
-slug: Entrevue_avec_Claude_sur_economie_IA_et_1929
+slug: 1929-ia-effondrement-redistribution
 layout: article.html.j2
 ---
 
