@@ -1,2 +1,2 @@
 # pascalgagnon-site
-Site pascalgagnon.ca — Eleventy
+Site pascalgagnon.ca — Jinja2
