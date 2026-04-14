@@ -113,8 +113,36 @@ def build():
             (out_dir / "index.html").write_text(html, encoding="utf-8")
             print(f"✓ articles/{slug}/index.html")
 
+    # Build sante-metabolique article pages
+    sante_metabolique_src = SRC / "sante-metabolique"
+    sante_metabolique_mds = sorted(sante_metabolique_src.glob("*.md")) if sante_metabolique_src.exists() else []
+    if sante_metabolique_mds:
+        (DIST / "sante-metabolique").mkdir(exist_ok=True)
+        for md_file in sante_metabolique_mds:
+            meta, body = load_yaml_frontmatter(md_file)
+            layout_name = meta.get("layout", "sante-metabolique.html.j2")
+            try:
+                template = env.get_template(layout_name)
+            except Exception:
+                template = env.get_template("article.html.j2")
+            md.reset()
+            content_html = md.convert(body)
+            slug = meta.get("slug", md_file.stem)
+            out_dir = DIST / "sante-metabolique" / slug
+            out_dir.mkdir(exist_ok=True)
+            html = template.render(site=site, page=meta, content=content_html, articles=articles)
+            (out_dir / "index.html").write_text(html, encoding="utf-8")
+            print(f"✓ sante-metabolique/{slug}/index.html")
+
+    # Copy sante-metabolique/index.html (listing page) — static or already present
+    sm_index_src = sante_metabolique_src / "index.html"
+    if sm_index_src.exists():
+        (DIST / "sante-metabolique").mkdir(exist_ok=True)
+        shutil.copy(sm_index_src, DIST / "sante-metabolique" / "index.html")
+        print("✓ sante-metabolique/index.html (static)")
+
     # Copy static directories (any src/ subdir not prefixed with _ and not articles/assets)
-    skip = {"_layouts", "_includes", "_data", "assets", "articles"}
+    skip = {"_layouts", "_includes", "_data", "assets", "articles", "sante-metabolique"}
     for item in SRC.iterdir():
         if item.is_dir() and item.name not in skip and not item.name.startswith("_"):
             dest = DIST / item.name

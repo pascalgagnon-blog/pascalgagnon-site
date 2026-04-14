@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title }} — Pascal Gagnon</title>
+<meta name="description" content="{{ page.description }}">
+<link rel="canonical" href="https://pascalgagnon.ca/sante-metabolique/{{ page.slug }}/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{ page.title }}">
+<meta property="og:description" content="{{ page.description }}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://pascalgagnon.ca/sante-metabolique/{{ page.slug }}/">
+{% if page.image_hero %}<meta property="og:image" content="https://pascalgagnon.ca/assets/img/sante-metabolique/{{ page.image_hero }}">{% endif %}
+
+<!-- JSON-LD Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ page.title }}",
+  "description": "{{ page.description }}",
+  "author": { "@type": "Person", "name": "Pascal Gagnon", "url": "https://pascalgagnon.ca/a-propos/" },
+  "publisher": { "@type": "Person", "name": "Pascal Gagnon", "url": "https://pascalgagnon.ca" },
+  "datePublished": "{{ page.date }}",
+  "url": "https://pascalgagnon.ca/sante-metabolique/{{ page.slug }}/",
+  "mainEntityOfPage": "https://pascalgagnon.ca/sante-metabolique/{{ page.slug }}/",
+  "about": { "@type": "Thing", "name": "Santé métabolique" }{% if page.image_hero %},
+  "image": "https://pascalgagnon.ca/assets/img/sante-metabolique/{{ page.image_hero }}"{% endif %}
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --noir: #0a0a0a;
+  --creme: #f5f0e8;
+  --bleu: #0063b2;
+  --bleu-clair: #4d92c9;
+  --bleu-pale: #e6eff7;
+  --gris: #6b6b6b;
+  --gris-clair: #d4cfc6;
+  --max: 740px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--creme); color: var(--noir); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; font-size: 18px; line-height: 1.75; }
+
+/* ── NAV ── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 4rem; background: rgba(245,240,232,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,99,178,0.15); }
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--noir); text-decoration: none; }
+.nav-logo span { color: var(--bleu); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover, .nav-links a.actif { color: var(--bleu); }
+.nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
+.nav-cta:hover { background: var(--bleu); color: #fff; }
+@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+
+/* ── HERO ── */
+.hero { background: var(--noir); color: #fff; padding: 6rem 2rem 4.5rem; padding-top: calc(6rem + 80px); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px); }
+.hero-inner { position: relative; max-width: var(--max); margin: 0 auto; }
+.hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.8rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--bleu-clair); }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; font-weight: 900; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: var(--bleu-clair); }
+.hero-chapeau { font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 600px; margin-bottom: 2.5rem; }
+.hero-meta { font-size: 0.72rem; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; display: flex; gap: 2rem; flex-wrap: wrap; }
+.hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+/* ── IMAGE HERO ── */
+.article-hero-img { width: 100%; max-height: 480px; object-fit: cover; display: block; }
+@media (max-width: 600px) { .article-hero-img { max-height: 280px; } }
+
+/* ── RETOUR ── */
+.retour-bar { background: var(--creme); padding: 1rem 2rem; border-bottom: 1px solid var(--gris-clair); position: sticky; top: 80px; z-index: 90; }
+.retour-bar a { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.2s; }
+.retour-bar a:hover { color: var(--bleu); }
+@media (max-width: 600px) { .retour-bar { display: none; } }
+
+/* ── CORPS ARTICLE ── */
+.article-wrap { max-width: var(--max); margin: 0 auto; padding: 4rem 2rem 6rem; }
+@media (max-width: 600px) { .article-wrap { padding: 3rem 1.2rem 4rem; } }
+
+/* H1 dans le contenu = masqué (affiché dans le hero) */
+.article-wrap h1 { display: none; }
+
+/* H2 — intertitres de section */
+.article-wrap h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; line-height: 1.2; margin-top: 4rem; margin-bottom: 1.6rem; padding-top: 2.5rem; border-top: 1px solid var(--gris-clair); letter-spacing: -0.01em; }
+.article-wrap h2 em { font-style: italic; color: var(--bleu); }
+
+/* H3 — sous-intertitres */
+.article-wrap h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.8rem; }
+
+/* Paragraphes */
+.article-wrap p { margin-bottom: 1.3rem; }
+.article-wrap p + p { text-indent: 1.2em; }
+.article-wrap p:first-child, .article-wrap h2 + p, .article-wrap h3 + p,
+.article-wrap blockquote + p, .article-wrap table + p, .article-wrap hr + p { text-indent: 0; }
+
+/* Gras et italique */
+.article-wrap strong { font-weight: 500; }
+.article-wrap em { font-style: italic; }
+
+/* Séparateur */
+.article-wrap hr { border: none; border-top: 1px solid var(--gris-clair); margin: 3.5rem 0; }
+
+/* Blockquote — donnée clé */
+.article-wrap blockquote { background: var(--bleu-pale); border: 1px solid rgba(0,99,178,0.2); border-left: 3px solid var(--bleu); padding: 1.2rem 1.5rem; margin: 2rem 0; }
+.article-wrap blockquote p { font-size: 0.95rem; margin-bottom: 0.5rem; text-indent: 0 !important; line-height: 1.65; }
+.article-wrap blockquote p:last-child { margin-bottom: 0; }
+.article-wrap blockquote p strong { color: var(--bleu); font-size: 1rem; letter-spacing: 0.04em; }
+.article-wrap blockquote p em { font-size: 0.82rem; color: var(--gris); font-style: italic; }
+
+/* Tables */
+.article-wrap table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.88rem; }
+.article-wrap thead tr { background: var(--noir); color: #fff; }
+.article-wrap th { padding: 0.7rem 1rem; text-align: left; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+.article-wrap td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--gris-clair); vertical-align: top; }
+.article-wrap tr:nth-child(even) td { background: var(--bleu-pale); }
+@media (max-width: 600px) { .article-wrap table { font-size: 0.8rem; } .article-wrap th, .article-wrap td { padding: 0.5rem 0.6rem; } }
+
+/* Listes */
+.article-wrap ul, .article-wrap ol { padding-left: 1.5rem; margin-bottom: 1.3rem; }
+.article-wrap li { margin-bottom: 0.4rem; font-size: 0.97rem; }
+
+/* Liens */
+.article-wrap a { color: var(--bleu); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+.article-wrap a:hover { color: var(--noir); }
+
+/* Images */
+.article-wrap img { max-width: 100%; height: auto; display: block; margin: 2rem auto; border-radius: 4px; }
+
+/* CTA Méthode Reset */
+.article-wrap p > a[href*="methode-reset"],
+.article-wrap p > a[href*="/methode-reset/"] { display: inline-block; background: var(--bleu); color: #fff; padding: 0.8rem 2rem; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; transition: background 0.25s; border-radius: 2px; margin-top: 0.5rem; }
+.article-wrap p > a[href*="methode-reset"]:hover,
+.article-wrap p > a[href*="/methode-reset/"]:hover { background: var(--noir); color: #fff; }
+
+/* Image infographie */
+.info-img-wrap { margin: 3rem 0; }
+.info-img-wrap img { width: 100%; border-radius: 4px; border: 1px solid var(--gris-clair); }
+.info-img-caption { font-size: 0.78rem; color: var(--gris); text-align: center; margin-top: 0.6rem; font-style: italic; }
+
+/* Carte auteur */
+.author-card { background: var(--bleu-pale); border: 1px solid rgba(0,99,178,0.2); border-top: 3px solid var(--bleu); padding: 1.5rem; margin-top: 4rem; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start; }
+.author-initial { width: 52px; height: 52px; background: var(--bleu); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-style: italic; flex-shrink: 0; }
+.author-info h4 { font-size: 0.88rem; color: var(--noir); font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
+.author-info p { font-size: 0.82rem; color: var(--gris); margin-bottom: 0; text-indent: 0 !important; }
+
+/* ── FOOTER ── */
+footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-top: 4rem; }
+@media (max-width: 768px) { footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; } }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: rgba(245,240,232,0.5); text-decoration: none; }
+.footer-logo span { color: var(--bleu-clair); }
+.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--bleu-clair); }
+.footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="nav-links">
+    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
+    <li><a href="/pme-ia/">PME &amp; IA</a></li>
+    <li><a href="/sante-metabolique/" class="actif">Santé métabolique</a></li>
+  </ul>
+  <a href="/#newsletter" class="nav-cta">Infolettre</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Santé métabolique{% if page.tag %} &nbsp;·&nbsp; {{ page.tag }}{% endif %}</p>
+    <h1>{{ page.title }}</h1>
+    <p class="hero-chapeau">{{ page.description }}</p>
+    <div class="hero-meta">
+      <span>Pascal Gagnon</span>
+      <span>{{ page.date }}</span>
+      {% if page.reading_time %}<span>{{ page.reading_time }} de lecture</span>{% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE HERO -->
+{% if page.image_hero %}
+<img class="article-hero-img"
+     src="/assets/img/sante-metabolique/{{ page.image_hero }}"
+     alt="{{ page.image_hero_alt }}"
+     width="1280" height="720"
+     loading="eager">
+{% endif %}
+
+<!-- RETOUR -->
+<div class="retour-bar">
+  <a href="/sante-metabolique/">&#8592; Santé métabolique</a>
+</div>
+
+<!-- CORPS -->
+<div class="article-wrap">
+  {{ content }}
+
+  <!-- Image infographie -->
+  {% if page.image_info %}
+  <div class="info-img-wrap">
+    <img src="/assets/img/sante-metabolique/{{ page.image_info }}"
+         alt="{{ page.image_info_alt }}"
+         width="1280" height="720"
+         loading="lazy">
+    {% if page.image_info_alt %}<p class="info-img-caption">{{ page.image_info_alt }}</p>{% endif %}
+  </div>
+  {% endif %}
+
+  <!-- Carte auteur -->
+  <div class="author-card">
+    <div class="author-initial">P</div>
+    <div class="author-info">
+      <h4>Pascal Gagnon</h4>
+      <p>Directeur de compte corporatif Desjardins Entreprise · Conseiller municipal, Roberval · Analyste économique régional, Lac-Saint-Jean</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
+  <ul class="footer-links">
+    <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
+    <li><a href="/sante-metabolique/">Santé métabolique</a></li>
+    <li><a href="/blog/">Tous les articles</a></li>
+    <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+    <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Pascal Gagnon</p>
+</footer>
+
+</body>
+</html>
