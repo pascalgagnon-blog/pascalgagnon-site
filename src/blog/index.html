@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Articles — Pascal Gagnon</title>
-<meta name="description" content="Analyses sur l'économie, l'énergie et les PME du Québec. Écrits depuis le terrain du Lac-Saint-Jean.">
+<meta name="description" content="Analyses sur l'économie, l'énergie, les PME et la santé métabolique. Écrits depuis le terrain du Lac-Saint-Jean.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,82 +30,46 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .nav-links a:hover { color: var(--bleu); }
 .nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
 .nav-cta:hover { background: var(--bleu); color: #fff; }
-@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+.nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--noir); margin: 5px 0; transition: transform 0.3s; }
+.nav-mobile { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--creme); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+.nav-mobile.ouvert { display: flex; }
+.nav-mobile a { font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--noir); text-decoration: none; transition: color 0.3s; }
+.nav-mobile a:hover { color: var(--bleu); }
+.nav-mobile-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; cursor: pointer; font-size: 1.8rem; color: var(--gris); line-height: 1; padding: 0.4rem; }
+@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .nav-cta { display: none; } .nav-hamburger { display: block; } }
 
 /* ── EN-TÊTE ── */
-.page-header { padding-top: 140px; padding-bottom: 4rem; padding-left: 4rem; padding-right: 4rem; max-width: var(--max); margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.page-header { padding-top: 140px; padding-bottom: 4rem; padding-left: 4rem; padding-right: 4rem; max-width: var(--max); margin: 0 auto; }
 @media (max-width: 768px) { .page-header { padding: 120px 1.5rem 3rem; } }
 .page-eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
 .page-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--bleu-clair); }
-.page-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 900; line-height: 1.05; color: var(--noir); letter-spacing: -0.02em; }
+.page-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 900; line-height: 1.05; color: var(--noir); letter-spacing: -0.02em; margin-bottom: 1.2rem; }
 .page-title em { font-style: italic; color: var(--bleu); }
-.article-count { font-size: 0.75rem; color: var(--gris); letter-spacing: 0.08em; white-space: nowrap; padding-bottom: 0.5rem; }
+.page-desc { font-size: 1.1rem; line-height: 1.85; color: #3a3a3a; max-width: 600px; }
 
 /* ── DIVIDER ── */
 .section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--bleu-clair), transparent); margin: 0 4rem; opacity: 0.4; }
 
-/* ── FILTRES ── */
-.filtres { padding: 2.5rem 4rem; max-width: var(--max); margin: 0 auto; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
-@media (max-width: 768px) { .filtres { padding: 2rem 1.5rem; } }
-.filtre-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); margin-right: 0.6rem; }
-.filtre-btn { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 1.1rem; border: 1px solid var(--gris-clair); color: var(--gris); background: transparent; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
-.filtre-btn:hover, .filtre-btn.actif { border-color: var(--bleu); color: var(--bleu); background: var(--bleu-pale); }
+/* ── VERTICAUX ── */
+.verticaux { padding: 5rem 4rem 8rem; max-width: var(--max); margin: 0 auto; }
+@media (max-width: 768px) { .verticaux { padding: 3rem 1.5rem 5rem; } }
 
-/* ── ARTICLE VEDETTE ── */
-.article-vedette { padding: 4rem 4rem 5rem; max-width: var(--max); margin: 0 auto; }
-@media (max-width: 768px) { .article-vedette { padding: 3rem 1.5rem 4rem; } }
-.vedette-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; padding-bottom: 4rem; border-bottom: 1px solid var(--gris-clair); }
-@media (max-width: 768px) { .vedette-inner { grid-template-columns: 1fr; gap: 2rem; } }
-.vedette-meta {}
-.vedette-tag { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bleu); display: block; margin-bottom: 0.8rem; }
-.vedette-badge { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.3rem 0.8rem; border: 1px solid var(--bleu); color: var(--bleu); display: inline-block; margin-bottom: 1.5rem; }
-.vedette-temps { font-size: 0.82rem; color: var(--gris); display: block; }
-.vedette-content {}
-.section-label { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu-clair); display: block; margin-bottom: 1.8rem; }
-.vedette-titre { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
-.vedette-titre em { font-style: italic; color: var(--bleu); }
-.vedette-chapeau { font-size: 1.1rem; line-height: 1.85; color: #3a3a3a; margin-bottom: 2rem; }
-.lire-lien { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s; }
-.lire-lien:hover { color: var(--noir); }
+.verticaux-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+@media (max-width: 960px) { .verticaux-grille { grid-template-columns: 1fr; gap: 2rem; } }
 
-/* ── LISTE ARTICLES ── */
-.articles-liste { padding: 4rem 4rem 7rem; max-width: var(--max); margin: 0 auto; }
-@media (max-width: 768px) { .articles-liste { padding: 3rem 1.5rem 5rem; } }
-.liste-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; }
-.liste-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; }
+.vertical-card { display: flex; flex-direction: column; border-top: 3px solid var(--bleu); padding-top: 2.5rem; padding-bottom: 2.5rem; padding-right: 2rem; transition: border-color 0.25s, background 0.25s; position: relative; }
+.vertical-card:hover { background: var(--bleu-pale); }
 
-.articles-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem 4rem; }
-@media (max-width: 900px) { .articles-grille { grid-template-columns: 1fr; gap: 2.5rem; } }
-
-.article-card { display: flex; flex-direction: column; border-top: 2px solid var(--gris-clair); padding-top: 2rem; transition: border-color 0.25s; }
-.article-card:hover { border-color: var(--bleu); }
-.article-card.a-venir { opacity: 0.45; pointer-events: none; }
-.card-vertical { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bleu); margin-bottom: 0.8rem; }
-.card-titre { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; line-height: 1.25; color: var(--noir); text-decoration: none; display: block; margin-bottom: 0.9rem; transition: color 0.2s; }
-.article-card:hover .card-titre { color: var(--bleu); }
-.card-chapeau { font-size: 1rem; line-height: 1.75; color: #4a4a4a; margin-bottom: 1.2rem; flex: 1; }
-.card-bas { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.card-meta { font-size: 0.75rem; color: var(--gris); letter-spacing: 0.04em; }
-.card-lire { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bleu); text-decoration: none; transition: letter-spacing 0.2s; white-space: nowrap; }
-.card-lire:hover { letter-spacing: 0.2em; }
-
-/* Carte "À venir" */
-.card-titre-venir { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--gris-clair); display: block; margin-bottom: 0.8rem; }
-
-/* ── INFOLETTRE ── */
-.newsletter { padding: 7rem 4rem; border-top: 1px solid var(--gris-clair); }
-@media (max-width: 768px) { .newsletter { padding: 4rem 1.5rem; } }
-.newsletter-inner { max-width: 520px; margin: 0 auto; text-align: center; }
-.nl-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 2.6vw, 2.3rem); font-weight: 700; line-height: 1.2; color: var(--noir); margin-bottom: 1rem; letter-spacing: -0.01em; }
-.nl-h2 em { font-style: italic; color: var(--bleu); }
-.nl-desc { font-size: 1rem; line-height: 1.85; color: var(--gris); margin-bottom: 2.4rem; }
-.nl-form { display: flex; flex-direction: column; gap: 0.8rem; }
-.nl-form input { background: transparent; border: 1px solid var(--gris-clair); padding: 0.95rem 1.2rem; font-size: 1rem; color: var(--noir); font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; text-align: center; }
-.nl-form input::placeholder { color: var(--gris-clair); }
-.nl-form input:focus { border-color: var(--bleu); }
-.nl-form button { background: var(--bleu); color: #fff; border: none; padding: 1rem 1.2rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.25s; }
-.nl-form button:hover { background: var(--noir); }
-.nl-note { font-size: 0.72rem; color: var(--gris-clair); margin-top: 0.6rem; }
+.vertical-numero { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 1.4rem; }
+.vertical-titre { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 700; line-height: 1.15; color: var(--noir); margin-bottom: 1.2rem; letter-spacing: -0.01em; }
+.vertical-titre em { font-style: italic; color: var(--bleu); }
+.vertical-desc { font-size: 1rem; line-height: 1.75; color: #4a4a4a; margin-bottom: 2rem; flex: 1; }
+.vertical-themes { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }
+.theme-tag { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.25rem 0.7rem; border: 1px solid var(--gris-clair); color: var(--gris); }
+.vertical-lien { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); text-decoration: none; transition: gap 0.2s; align-self: flex-start; }
+.vertical-lien:hover { gap: 1rem; }
+.vertical-lien::after { content: '→'; }
 
 /* ── FOOTER ── */
 footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
@@ -115,7 +79,6 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
 .footer-links a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--bleu-clair); }
-.footer-ref { font-size: 0.65rem; color: rgba(245,240,232,0.18); font-style: italic; }
 .footer-copy { font-size: 0.65rem; color: rgba(245,240,232,0.2); }
 
 /* ── ANIMATIONS ── */
@@ -133,108 +96,70 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
     <li><a href="/pme-ia/">PME &amp; IA</a></li>
     <li><a href="/sante-metabolique/">Santé métabolique</a></li>
   </ul>
-  <a href="#newsletter" class="nav-cta">Infolettre</a>
+  <a href="/#newsletter" class="nav-cta">Infolettre</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
 </nav>
+<!-- MENU MOBILE -->
+<div class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" onclick="toggleMenu()" aria-label="Fermer">&times;</button>
+  <a href="/economie-energie/" onclick="toggleMenu()">Économie &amp; Énergie</a>
+  <a href="/pme-ia/" onclick="toggleMenu()">PME &amp; IA</a>
+  <a href="/sante-metabolique/" onclick="toggleMenu()">Santé métabolique</a>
+  <a href="/#newsletter" onclick="toggleMenu()" style="margin-top:1rem;color:var(--bleu);border:1px solid var(--bleu);padding:0.7rem 1.8rem;font-size:0.78rem;letter-spacing:0.1em;">Infolettre</a>
+</div>
 
 <!-- EN-TÊTE -->
-<header class="page-header">
-  <div>
-    <p class="page-eyebrow">Articles</p>
-    <h1 class="page-title">Ce que j'observe<br><em>depuis le terrain.</em></h1>
-  </div>
-  <p class="article-count">3 articles publiés</p>
+<header class="page-header reveal">
+  <p class="page-eyebrow">Articles</p>
+  <h1 class="page-title">Trois angles.<br><em>Un seul terrain.</em></h1>
+  <p class="page-desc">J'écris sur ce que j'observe directement depuis Roberval et le Lac-Saint-Jean. Chaque vertical est une lentille différente sur la même réalité économique et humaine.</p>
 </header>
 
 <div class="section-divider"></div>
 
-<!-- FILTRES -->
-<div class="filtres reveal">
-  <span class="filtre-label">Thèmes —</span>
-  <button class="filtre-btn actif" onclick="filtrer(this, 'tous')">Tous</button>
-  <button class="filtre-btn" onclick="filtrer(this, 'economie-energie')">Économie &amp; Énergie</button>
-  <button class="filtre-btn" onclick="filtrer(this, 'pme-ia')">PME &amp; IA</button>
-  <button class="filtre-btn" onclick="filtrer(this, 'sante-metabolique')">Santé métabolique</button>
-</div>
+<!-- VERTICAUX -->
+<section class="verticaux">
+  <div class="verticaux-grille">
 
-<!-- ARTICLE VEDETTE -->
-<section class="article-vedette reveal">
-  <span class="section-label">À lire en premier ——</span>
-  <div class="vedette-inner" data-vertical="economie-energie">
-    <div class="vedette-meta">
-      <span class="vedette-tag">◆ Économie &amp; Énergie</span>
-      <span class="vedette-badge">Article de fond</span>
-      <span class="vedette-temps">Lecture : ~8 min</span>
-    </div>
-    <div class="vedette-content">
-      <h2 class="vedette-titre">L'énergie est le fondement de l'économie —<em> et personne n'en parle.</em></h2>
-      <p class="vedette-chapeau">Ce que la théorie économique dominante omet depuis 150 ans — et pourquoi cette omission explique la stagnation, les crises financières, et les limites réelles de la croissance. Un cadre de lecture indispensable pour quiconque prend des décisions économiques aujourd'hui.</p>
-      <a href="/lenergie-est-le-fondement-de-leconomie-pascal-gagnon/" class="lire-lien">Lire l'article →</a>
-    </div>
-  </div>
-</section>
-
-<!-- LISTE ARTICLES -->
-<section class="articles-liste reveal">
-  <div class="liste-header">
-    <h2>Tous les articles</h2>
-  </div>
-  <div class="articles-grille">
-
-    <article class="article-card" data-vertical="economie-energie">
-      <span class="card-vertical">Économie &amp; Énergie</span>
-      <a href="/leolien-forestier-le-chainon-manquant-de-la-decarbonation/" class="card-titre">L'électrification de la machinerie forestière : le chaînon manquant de la décarbonation</a>
-      <p class="card-chapeau">Une éolienne tourne en forêt pendant qu'une abatteuse brûle vingt-cinq litres de diesel à l'heure. L'une est le symbole de la transition. L'autre en est l'angle mort.</p>
-      <div class="card-bas">
-        <span class="card-meta">Mars 2026 &nbsp;·&nbsp; 6 min</span>
-        <a href="/leolien-forestier-le-chainon-manquant-de-la-decarbonation/" class="card-lire">Lire →</a>
+    <article class="vertical-card reveal">
+      <span class="vertical-numero">01 ——</span>
+      <h2 class="vertical-titre">Économie<br><em>&amp; Énergie</em></h2>
+      <p class="vertical-desc">L'énergie n'est pas un input parmi d'autres — c'est le fondement de toute activité économique. J'analyse la transition énergétique québécoise, la forêt, l'électrification et les angles morts que la théorie économique dominante ignore.</p>
+      <div class="vertical-themes">
+        <span class="theme-tag">Biophysique économique</span>
+        <span class="theme-tag">Transition énergétique</span>
+        <span class="theme-tag">Foresterie</span>
+        <span class="theme-tag">Ressources naturelles</span>
       </div>
+      <a href="/economie-energie/" class="vertical-lien">Lire les articles</a>
     </article>
 
-    <article class="article-card" data-vertical="pme-ia">
-      <span class="card-vertical">PME &amp; IA</span>
-      <a href="/articles/vos-formations-ignorent-la-science-du-jeu-video/" class="card-titre">Vos formations d'entreprise ignorent la science du jeu vidéo — et ça vous coûte cher</a>
-      <p class="card-chapeau">La mécanique de récompense qui retient 40 millions de joueurs actifs peut transformer vos parcours d'apprentissage. Voici comment l'appliquer concrètement.</p>
-      <div class="card-bas">
-        <span class="card-meta">26 mars 2026 &nbsp;·&nbsp; 10 min</span>
-        <a href="/articles/vos-formations-ignorent-la-science-du-jeu-video/" class="card-lire">Lire →</a>
+    <article class="vertical-card reveal">
+      <span class="vertical-numero">02 ——</span>
+      <h2 class="vertical-titre">PME<br><em>&amp; IA</em></h2>
+      <p class="vertical-desc">L'intelligence artificielle ne remplace pas les PME régionales — elle les oblige à se redéfinir. J'écris sur l'adoption concrète de l'IA dans les entreprises québécoises : ce qui fonctionne vraiment, pas les promesses des conférences.</p>
+      <div class="vertical-themes">
+        <span class="theme-tag">IA appliquée</span>
+        <span class="theme-tag">PME québécoises</span>
+        <span class="theme-tag">Formation</span>
+        <span class="theme-tag">Productivité</span>
       </div>
+      <a href="/pme-ia/" class="vertical-lien">Lire les articles</a>
     </article>
 
-    <article class="article-card a-venir" data-vertical="marketing-numerique">
-      <span class="card-vertical">Marketing numérique</span>
-      <span class="card-titre-venir">Prochain article</span>
-      <p class="card-chapeau" style="color:var(--gris-clair);font-style:italic;">À paraître prochainement.</p>
-      <div class="card-bas">
-        <span class="card-meta">&nbsp;</span>
+    <article class="vertical-card reveal">
+      <span class="vertical-numero">03 ——</span>
+      <h2 class="vertical-titre">Santé<br><em>métabolique</em></h2>
+      <p class="vertical-desc">Perdre 45 lb, les reprendre, les reperdre — et comprendre pourquoi. J'écris sur la santé métabolique avec la même rigueur que mes analyses économiques : données, mécanismes, et ce que ça change concrètement dans une vie d'adulte actif.</p>
+      <div class="vertical-themes">
+        <span class="theme-tag">Métabolisme</span>
+        <span class="theme-tag">Alimentation</span>
+        <span class="theme-tag">Performance</span>
+        <span class="theme-tag">Longévité</span>
       </div>
+      <a href="/sante-metabolique/" class="vertical-lien">Lire les articles</a>
     </article>
 
-    <article class="article-card a-venir" data-vertical="economie-energie">
-      <span class="card-vertical">Économie &amp; Énergie</span>
-      <span class="card-titre-venir">Prochain article</span>
-      <p class="card-chapeau" style="color:var(--gris-clair);font-style:italic;">À paraître prochainement.</p>
-      <div class="card-bas">
-        <span class="card-meta">&nbsp;</span>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- INFOLETTRE -->
-<section class="newsletter reveal" id="newsletter">
-  <div class="newsletter-inner">
-    <span class="section-label">Infolettre ——</span>
-    <h2 class="nl-h2">Ce que j'observe sur le terrain,<em> une fois par mois.</em></h2>
-    <p class="nl-desc">Pas de contenu recyclé. Pas de promotion. Des analyses qui prennent position sur l'économie, l'énergie et les PME du Québec.</p>
-    <div class="nl-form">
-      <input type="text" placeholder="Votre prénom">
-      <input type="email" placeholder="Votre courriel">
-      <button type="button">Je m'abonne</button>
-      <p class="nl-note">Désabonnement en un clic. Conforme à la Loi 25.</p>
-    </div>
   </div>
 </section>
 
@@ -246,36 +171,20 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
     <li><a href="/blog/">Articles</a></li>
     <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
     <li><a href="/a-propos/">À propos</a></li>
-    <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
   </ul>
-  <span class="footer-ref">Ibn Khaldoun · Biophysique économique · Terrain québécois</span>
   <p class="footer-copy">© 2026 Pascal Gagnon</p>
 </footer>
 
 <script>
-// Animations
+function toggleMenu() {
+  var m = document.getElementById('navMobile');
+  m.classList.toggle('ouvert');
+  document.body.style.overflow = m.classList.contains('ouvert') ? 'hidden' : '';
+}
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Filtres
-function filtrer(btn, vertical) {
-  document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('actif'));
-  btn.classList.add('actif');
-  const vedette = document.querySelector('.article-vedette');
-  const cards = document.querySelectorAll('.article-card');
-  if (vertical === 'tous') {
-    vedette.style.display = '';
-    cards.forEach(c => c.closest('.article-card') && (c.style.display = ''));
-  } else {
-    const vVertical = vedette.querySelector('[data-vertical]') || vedette;
-    vedette.style.display = vVertical.dataset.vertical === vertical ? '' : 'none';
-    cards.forEach(c => {
-      c.style.display = c.dataset.vertical === vertical ? '' : 'none';
-    });
-  }
-}
 </script>
 </body>
 </html>

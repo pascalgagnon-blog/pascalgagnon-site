@@ -30,7 +30,14 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .nav-links a:hover { color: var(--bleu); }
 .nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
 .nav-cta:hover { background: var(--bleu); color: #fff; }
-@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } }
+.nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--noir); margin: 5px 0; transition: transform 0.3s; }
+.nav-mobile { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--creme); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+.nav-mobile.ouvert { display: flex; }
+.nav-mobile a { font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--noir); text-decoration: none; transition: color 0.3s; }
+.nav-mobile a:hover { color: var(--bleu); }
+.nav-mobile-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; cursor: pointer; font-size: 1.8rem; color: var(--gris); line-height: 1; padding: 0.4rem; }
+@media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .nav-cta { display: none; } .nav-hamburger { display: block; } }
 
 /* ── HERO ── */
 .hero { min-height: 80vh; display: flex; align-items: center; padding-top: 80px; background: var(--creme); }
@@ -124,7 +131,16 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
     <li><a href="/sante-metabolique/">Santé métabolique</a></li>
   </ul>
   <a href="#newsletter" class="nav-cta">Infolettre</a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
 </nav>
+<!-- MENU MOBILE -->
+<div class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" onclick="toggleMenu()" aria-label="Fermer">&times;</button>
+  <a href="/economie-energie/" onclick="toggleMenu()">Économie &amp; Énergie</a>
+  <a href="/pme-ia/" onclick="toggleMenu()">PME &amp; IA</a>
+  <a href="/sante-metabolique/" onclick="toggleMenu()">Santé métabolique</a>
+  <a href="#newsletter" onclick="toggleMenu()" style="margin-top:1rem;color:var(--bleu);border:1px solid var(--bleu);padding:0.7rem 1.8rem;font-size:0.78rem;letter-spacing:0.1em;">Infolettre</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -203,13 +219,18 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
     <li><a href="/blog/">Articles</a></li>
     <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
     <li><a href="/a-propos/">À propos</a></li>
-    <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
+    <li><a href="/a-propos/">Contact</a></li>
   </ul>
   <span class="footer-ref">Économie &amp; Énergie · PME régionales et IA · Santé métabolique</span>
   <p class="footer-copy">© 2026 Pascal Gagnon</p>
 </footer>
 
 <script>
+function toggleMenu() {
+  var m = document.getElementById('navMobile');
+  m.classList.toggle('ouvert');
+  document.body.style.overflow = m.classList.contains('ouvert') ? 'hidden' : '';
+}
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
