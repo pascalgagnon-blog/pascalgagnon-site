@@ -104,4 +104,4 @@ Changer le déjeuner en premier — œufs et fromage plutôt que granola et jus 
 
 La liste des aliments qui gardent l'insuline basse, les substitutions pratiques pour les repas québécois de tous les jours, les erreurs à éviter — c'est ce que couvre la section alimentation de la Méthode Reset.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)

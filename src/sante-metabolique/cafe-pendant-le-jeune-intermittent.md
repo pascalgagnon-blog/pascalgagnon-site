@@ -102,4 +102,4 @@ Si tu te demandes si ton café brise ton jeûne, c'est souvent le signe que tu a
 
 Le café est l'outil le plus simple du jeûne. Mais l'outil ne remplace pas le protocole. La Méthode Reset, c'est la structure complète : fenêtre alimentaire, choix d'aliments, progression sur 12 semaines — adaptée à une vie réelle avec une famille, un travail et un agenda chargé.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)

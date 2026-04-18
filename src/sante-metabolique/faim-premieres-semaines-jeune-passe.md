@@ -99,4 +99,4 @@ Aujourd'hui, la faim matinale est absente. Je peux passer 20-22 heures facilemen
 
 Les 4 premières semaines sont les plus déterminantes. Avoir un plan clair pour chaque palier — quoi attendre, comment réagir, quand ajuster — fait toute la différence entre abandonner et s'installer dans une nouvelle normale. C'est ce que la Méthode Reset te donne.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)

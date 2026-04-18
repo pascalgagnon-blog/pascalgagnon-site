@@ -101,4 +101,4 @@ Aujourd'hui, je peux passer 18 à 20 heures sans manger et fonctionner à pleine
 
 La Méthode Reset est construite autour de ce mécanisme : développer ta flexibilité métabolique progressivement, semaine par semaine, pour passer durablement du mode sucre au mode gras.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)

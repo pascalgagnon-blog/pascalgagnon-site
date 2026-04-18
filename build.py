@@ -127,10 +127,30 @@ def build():
                 template = env.get_template("article.html.j2")
             md.reset()
             content_html = md.convert(body)
+
+            # Injecter l'image_info entre la section 1 et la section 2
+            # On sépare le contenu après le 2e <hr /> pour positionner l'image
+            # au centre de l'article plutôt qu'en bas de page.
+            content_before = content_html
+            content_after = ""
+            if meta.get("image_info"):
+                hr_tag = "<hr />"
+                split_position = meta.get("image_info_after_section", 2)
+                hr_parts = content_html.split(hr_tag)
+                if len(hr_parts) > split_position:
+                    content_before = hr_tag.join(hr_parts[:split_position]) + hr_tag
+                    content_after = hr_tag.join(hr_parts[split_position:])
+
             slug = meta.get("slug", md_file.stem)
             out_dir = DIST / "sante-metabolique" / slug
             out_dir.mkdir(exist_ok=True)
-            html = template.render(site=site, page=meta, content=content_html, articles=articles)
+            html = template.render(
+                site=site, page=meta,
+                content=content_html,          # conservé pour rétrocompatibilité
+                content_before=content_before,
+                content_after=content_after,
+                articles=articles
+            )
             (out_dir / "index.html").write_text(html, encoding="utf-8")
             print(f"✓ sante-metabolique/{slug}/index.html")
 

@@ -99,4 +99,4 @@ Ce changement de perspective est plus utile que n'importe quel comptage de calor
 
 La Méthode Reset est construite autour d'un principe simple : baisser l'insuline chronique par le jeûne et l'alimentation ciblée. Pas de médicament, pas de régime draconien — une mécanique.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)

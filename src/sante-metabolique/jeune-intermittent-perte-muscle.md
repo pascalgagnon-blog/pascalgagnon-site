@@ -98,4 +98,4 @@ Ce que j'ai compris, c'est que le risque musculaire vient du manque de protéine
 
 Timing des repas autour de l'activité physique, apport protéique dans la fenêtre, ajustements selon ton objectif — la Méthode Reset couvre tout ça dans un protocole progressif adapté aux hommes de 40 à 55 ans.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)

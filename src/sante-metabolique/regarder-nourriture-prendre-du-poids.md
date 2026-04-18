@@ -103,4 +103,4 @@ La personne qui "regarde la nourriture et grossit" n'est pas faible — elle a u
 
 La Méthode Reset inclut un protocole de gestion des signaux alimentaires pendant la période d'adaptation, avec des stratégies concrètes pour traverser les premières semaines sans te battre inutilement contre ta biochimie.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)

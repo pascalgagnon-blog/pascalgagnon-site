@@ -97,4 +97,4 @@ Trois mois de 16:8 cohérent plus une réduction des glucides raffinés, et ma g
 
 La Méthode Reset est structurée spécifiquement pour ce profil : homme de 40 à 55 ans avec résistance à l'insuline légère à modérée. Protocole progressif, alimentation adaptée, suivi des métriques qui comptent vraiment.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)

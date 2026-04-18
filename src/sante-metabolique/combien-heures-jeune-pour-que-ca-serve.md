@@ -99,4 +99,4 @@ Le 16:8, c'est ma base depuis presque 10 ans. La majorité du temps, je pousse �
 
 Connaître les seuils, c'est une chose. Avoir un protocole progressif qui tient compte de ta réalité — famille, déjeuners d'affaires, voyages — c'en est une autre. La Méthode Reset part du 16:8 et t'amène progressivement là où ton corps peut aller.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)

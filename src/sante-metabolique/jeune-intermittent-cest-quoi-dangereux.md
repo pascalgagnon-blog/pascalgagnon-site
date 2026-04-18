@@ -96,4 +96,4 @@ La famille, les repas en société, les dîners d'affaires à Roberval comme à 
 
 Comprendre le principe, c'est un début. Avoir un protocole progressif sur 12 semaines qui tient compte de ta réalité — famille, travail, social — c'est autre chose. La Méthode Reset, c'est ça.
 
-→ [Découvrir la Méthode Reset](/methode-reset/)
+→ [Découvrir la Méthode Reset](https://pascalgagnon.ca/reset-method/a/)
