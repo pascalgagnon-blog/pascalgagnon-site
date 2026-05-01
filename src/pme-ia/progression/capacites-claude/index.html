@@ -208,7 +208,7 @@
 
 <div class="page-title">Capacités Claude — Pascal Gagnon</div>
 <div class="divider"></div>
-<div class="subtitle">Couverture théorique vs utilisation observée · Mars 2026</div>
+<div class="subtitle">Couverture théorique vs utilisation observée · Avril 2026</div>
 
 <div class="chart-container">
     <canvas id="radar" width="700" height="620"></canvas>
@@ -230,7 +230,7 @@
 <div class="zones">
     <div class="zone actif">
         <span class="zone-title">✅ Zones activées — usage fort</span>
-        <strong style="color:var(--gold-light)">Création d'articles &amp; Apprentissage IA</strong> : usage proche du plafond théorique. Le système skill-pg + fichiers contexte + chapeaux a transformé Claude en co-auteur réel. L'apprentissage structuré (série Meunier, agents, vault) est la deuxième zone forte.
+        <strong style="color:var(--gold-light)">Création d'articles, Zettelkasten &amp; Apprentissage IA</strong> : usage proche du plafond théorique. Le système skill-pg + fichiers contexte + chapeaux a transformé Claude en co-auteur réel. Z3 complété, Z4–Z8 tous actifs simultanément — le vault devient un vrai second cerveau.
     </div>
     <div class="zone potentiel">
         <span class="zone-title">🔵 Zone dormante — potentiel intact</span>
@@ -238,7 +238,7 @@
     </div>
     <div class="zone levier">
         <span class="zone-title">⚡ Zones à fort levier — gains immédiats</span>
-        <strong style="color:#e8a0a0">Analyse économique, Refaçonnage contenu, Pipeline publication, Diffusion réseaux</strong> : écart élevé entre ce que Claude peut faire et ce qui est utilisé. Ce sont les prochains déblocages les plus rentables.
+        <strong style="color:#e8a0a0">Analyse économique &amp; Refaçonnage contenu</strong> : écart encore élevé. Diffusion et pipeline publication ont progressé (workflow n8n actif), mais le potentiel analytique (ISQ, Stats Canada, synthèses économiques régionales) reste quasi inexploité.
     </div>
 </div>
 
@@ -257,7 +257,7 @@
     <tbody id="gap-rows"></tbody>
 </table>
 
-<div class="page-footer-dark">Mars 2026 · <a href="/pme-ia/progression/" style="color:#7a6040;text-decoration:none;">← Retour à la progression</a></div>
+<div class="page-footer-dark">Avril 2026 · <a href="/pme-ia/progression/" style="color:#7a6040;text-decoration:none;">← Retour à la progression</a></div>
 
 </div>
 
@@ -278,14 +278,14 @@
 const dims = [
     { label: ["Création", "d'articles"],       theo: 0.95, obs: 0.82, note: "Système skill-pg + charte éditoriale. Usage quasi optimal.",                                                    prio: "Maintenir"     },
     { label: ["Apprentissage", "IA"],           theo: 0.80, obs: 0.75, note: "Série Meunier, agents créés, vault structuré. Très actif.",                                                    prio: "Maintenir"     },
-    { label: ["Gestion vault", "& Zettelkasten"],theo:0.85, obs: 0.50, note: "Infrastructure solide (Z1–Z2). Atomicité (Z3) en cours.",                                                      prio: "Z3 → actif"    },
-    { label: ["Développement", "web"],          theo: 0.80, obs: 0.28, note: "Pipeline Jinja2/VPS actif. Pas de flux régulier côté frontend.",                                              prio: "Secondaire"    },
-    { label: ["Agents IA", "& auto."],          theo: 0.90, obs: 0.32, note: "Agents créés (N6). Flux Dokploy (S2) à déployer.",                                                           prio: "S2 → actif"    },
+    { label: ["Gestion vault", "& Zettelkasten"],theo:0.85, obs: 0.72, note: "Z3 complété (98 concepts). Z4–Z8 tous en cours simultané. Quartz = jardin numérique public en construction.",  prio: "Z5–Z8 actifs"   },
+    { label: ["Développement", "web"],          theo: 0.80, obs: 0.35, note: "Pipeline Jinja2/VPS actif. Restructuration Quartz en cours (P3). Frontend en progression.",                  prio: "Secondaire"    },
+    { label: ["Agents IA", "& auto."],          theo: 0.90, obs: 0.55, note: "N8N en production. Workflow LinkedIn/Telegram opérationnel. N9 actif.",                                      prio: "N9 → actif"    },
     { label: ["Analyse", "économique"],         theo: 0.88, obs: 0.12, note: "ISQ, Stats Canada, données MERN — Claude peut préparer des synthèses chiffrées. Quasi inexploité.",           prio: "⚡ Fort levier" },
-    { label: ["Refaçonnage", "contenu"],        theo: 0.88, obs: 0.14, note: "1 article → 5 formats (LinkedIn, X, infolettre, résumé, citation). Pipeline inexistant.",                    prio: "⚡ Fort levier" },
-    { label: ["Pipeline", "publication"],       theo: 0.85, obs: 0.18, note: "De l'article au post planifié. Claude peut générer le calendrier et les textes. P2 non démarré.",            prio: "⚡ Fort levier" },
+    { label: ["Refaçonnage", "contenu"],        theo: 0.88, obs: 0.25, note: "1 article → 5 formats (LinkedIn, X, infolettre, résumé, citation). Amorcé via workflow n8n.",                prio: "⚡ Fort levier" },
+    { label: ["Pipeline", "publication"],       theo: 0.85, obs: 0.38, note: "Workflow n8n LinkedIn/Telegram opérationnel. Calendrier produit. Processus en développement.",               prio: "⚡ Fort levier" },
     { label: ["Production", "podcast"],         theo: 0.82, obs: 0.05, note: "Épisodes rédigés (.docx), mais H1 non lancé. Claude peut faire scripts, show notes, transcriptions.",        prio: "H1 → démarrer" },
-    { label: ["Diffusion", "réseaux sociaux"],  theo: 0.78, obs: 0.08, note: "LinkedIn, Facebook — posts adaptés au ton Pascal. Processus P2 et H4 non construits.",                      prio: "⚡ Fort levier" }
+    { label: ["Diffusion", "réseaux sociaux"],  theo: 0.78, obs: 0.32, note: "LinkedIn actif via n8n. Workflow approbation Telegram → publication en production.",                          prio: "Maintenir"     }
 ];
 
 const canvas = document.getElementById('radar');
@@ -400,8 +400,8 @@ ctx.fill();
 const prioColor = {
     'Maintenir':    '#6da86d',
     '⚡ Fort levier': '#c86060',
-    'S2 → actif':   '#b87820',
-    'Z3 → actif':   '#b87820',
+    'N9 → actif':   '#b87820',
+    'Z5–Z8 actifs': '#b87820',
     'H1 → démarrer':'#b87820',
     'Secondaire':   '#7a6040',
 };
