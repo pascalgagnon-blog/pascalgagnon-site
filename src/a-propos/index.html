@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>À propos — Pascal Gagnon</title>
-<meta name="description" content="Pascal Gagnon est directeur de compte Desjardins Entreprise, conseiller municipal à Roberval et analyste économique ancré au Lac-Saint-Jean.">
+<title>À propos — Pascal Gagnon · Analyste de systèmes complexes</title>
+<meta name="description" content="Pascal Gagnon est analyste de systèmes complexes ancré au Lac-Saint-Jean. Il connecte énergie, économie, IA, géopolitique, santé et persuasion dans un Zettelkasten de 100+ concepts atomiques.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -49,17 +49,22 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 @media (max-width: 768px) { .contenu { padding: 4rem 1.5rem; } }
 
 .contenu-grille { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start; }
-@media (max-width: 768px) { .contenu-grille { grid-template-columns: 1fr; gap: 3rem; } }
+@media (max-width: 900px) { .contenu-grille { grid-template-columns: 1fr; gap: 3rem; } }
 
-/* Colonne gauche */
+/* ── COLONNE GAUCHE ── */
 .colonne-gauche { position: sticky; top: 120px; }
-.roles { display: flex; flex-direction: column; gap: 1.2rem; }
-.role-item { display: flex; flex-direction: column; gap: 0.2rem; border-left: 2px solid var(--bleu); padding-left: 1rem; }
-.role-titre { font-size: 0.82rem; font-weight: 500; color: var(--noir); }
-.role-org { font-size: 0.75rem; color: var(--gris); }
+.photo-wrapper { margin-bottom: 2rem; }
+.photo-wrapper img { width: 100%; display: block; border-top: 3px solid var(--bleu); }
 
-/* Colonne droite */
-.colonne-droite { display: flex; flex-direction: column; gap: 4rem; }
+.terrain-label { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu-clair); display: block; margin-bottom: 1.2rem; }
+.terrain-items { display: flex; flex-direction: column; gap: 1.2rem; }
+.terrain-item { border-left: 2px solid var(--bleu); padding-left: 1rem; }
+.terrain-titre { font-size: 0.82rem; font-weight: 500; color: var(--noir); display: block; }
+.terrain-org { font-size: 0.72rem; color: var(--gris); display: block; margin-bottom: 0.2rem; }
+.terrain-note { font-size: 0.7rem; color: var(--bleu-clair); font-style: italic; }
+
+/* ── COLONNE DROITE ── */
+.colonne-droite { display: flex; flex-direction: column; gap: 4.5rem; }
 
 .bio-section {}
 .section-label { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu-clair); display: block; margin-bottom: 1.8rem; }
@@ -68,22 +73,52 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .bio-section p { font-size: 1.05rem; line-height: 1.9; color: #3a3a3a; margin-bottom: 1.2rem; }
 .bio-section p:last-child { margin-bottom: 0; }
 
-/* Bloc chiffres */
+/* ── GRAPPES DE SYSTÈMES ── */
+.grappes-section {}
+.grappes-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 700; line-height: 1.2; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+.grappes-section h2 em { font-style: italic; color: var(--bleu); }
+.grappes-intro { font-size: 0.95rem; color: var(--gris); line-height: 1.7; margin-bottom: 2.5rem; }
+
+.grappes-grille {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 1100px) { .grappes-grille { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grappes-grille { grid-template-columns: 1fr; } }
+
+.grappe-carte {
+  background: #fff;
+  border-top: 3px solid var(--bleu);
+  padding: 1.2rem 1.2rem 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.grappe-carte:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,99,178,0.1); }
+
+.grappe-header { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.6rem; }
+.grappe-badge {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
+  padding: 0.2rem 0.5rem; color: #fff; white-space: nowrap;
+  flex-shrink: 0;
+}
+.grappe-nom { font-size: 0.78rem; font-weight: 500; color: var(--noir); line-height: 1.3; }
+
+.grappe-stats { font-size: 0.68rem; color: var(--gris); margin-bottom: 0.6rem; display: flex; gap: 0.6rem; }
+.grappe-stats span:first-child { font-weight: 500; color: var(--bleu); }
+
+.grappe-barre-wrap { height: 3px; background: var(--gris-clair); margin-bottom: 0.7rem; border-radius: 2px; overflow: hidden; }
+.grappe-barre { height: 100%; border-radius: 2px; }
+
+.grappe-tags { font-size: 0.67rem; color: var(--gris); font-style: italic; line-height: 1.5; }
+
+/* ── BLOC CHIFFRES ── */
 .chiffres { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem; background: var(--bleu-pale); border-top: 3px solid var(--bleu); }
 @media (max-width: 480px) { .chiffres { grid-template-columns: 1fr; } }
-.chiffre-item {}
 .chiffre-valeur { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900; color: var(--bleu); line-height: 1; display: block; margin-bottom: 0.3rem; }
 .chiffre-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris); }
 
-/* Thèmes */
-.themes { display: flex; flex-direction: column; gap: 1.2rem; }
-.theme-item { display: grid; grid-template-columns: 2.4rem 1fr; gap: 1.2rem; align-items: start; padding-bottom: 1.2rem; border-bottom: 1px solid var(--gris-clair); }
-.theme-item:last-child { border-bottom: none; padding-bottom: 0; }
-.theme-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--bleu-clair); font-weight: 700; }
-.theme-titre { font-size: 0.88rem; font-weight: 500; color: var(--noir); margin-bottom: 0.25rem; letter-spacing: 0.02em; }
-.theme-desc { font-size: 0.88rem; color: var(--gris); line-height: 1.65; }
-
-/* CTA */
+/* ── CTA ── */
 .cta-bloc { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; padding-top: 1rem; }
 .btn-primary { background: var(--bleu); color: #fff; padding: 1rem 2.2rem; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; font-family: 'DM Sans', sans-serif; border: 1px solid var(--bleu); }
 .btn-primary:hover { background: var(--noir); border-color: var(--noir); color: #fff; }
@@ -122,8 +157,8 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 <!-- EN-TÊTE -->
 <header class="page-header">
   <p class="page-eyebrow">À propos</p>
-  <h1 class="page-title">Pascal Gagnon —<br><em>depuis le terrain.</em></h1>
-  <p class="page-subtitle">Directeur de compte · Conseiller municipal · Analyste économique</p>
+  <h1 class="page-title">Pascal Gagnon —<br><em>les systèmes, depuis le terrain.</em></h1>
+  <p class="page-subtitle">Analyste de systèmes complexes · Lac-Saint-Jean, portée provinciale</p>
 </header>
 
 <div class="section-divider"></div>
@@ -134,19 +169,25 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 
     <!-- COLONNE GAUCHE -->
     <aside class="colonne-gauche">
-      <img src="/assets/images/pascal-gagnon.jpg" alt="Pascal Gagnon" style="width:100%;display:block;border-top:3px solid var(--bleu);">
-      <div class="roles">
-        <div class="role-item">
-          <span class="role-titre">Directeur de compte</span>
-          <span class="role-org">Desjardins Entreprise · Lac-Saint-Jean</span>
+      <div class="photo-wrapper">
+        <img src="/assets/images/pascal-gagnon.jpg" alt="Pascal Gagnon — analyste de systèmes complexes, Lac-Saint-Jean">
+      </div>
+      <span class="terrain-label">Terrain d'observation ——</span>
+      <div class="terrain-items">
+        <div class="terrain-item">
+          <span class="terrain-titre">Directeur de compte</span>
+          <span class="terrain-org">Desjardins Entreprise · Lac-Saint-Jean</span>
+          <span class="terrain-note">20+ ans de financement PME — décisions réelles, contraintes réelles</span>
         </div>
-        <div class="role-item">
-          <span class="role-titre">Conseiller municipal</span>
-          <span class="role-org">Ville de Roberval · Élu 2021</span>
+        <div class="terrain-item">
+          <span class="terrain-titre">Conseiller municipal</span>
+          <span class="terrain-org">Ville de Roberval · Élu 2021</span>
+          <span class="terrain-note">La politique locale comme laboratoire de systèmes de gouvernance</span>
         </div>
-        <div class="role-item">
-          <span class="role-titre">Analyste économique</span>
-          <span class="role-org">pascalgagnon.ca · Depuis 2024</span>
+        <div class="terrain-item">
+          <span class="terrain-titre">Auteur &amp; analyste</span>
+          <span class="terrain-org">pascalgagnon.ca · Depuis 2024</span>
+          <span class="terrain-note">Écrire pour fixer, connecter et forcer la réflexion</span>
         </div>
       </div>
     </aside>
@@ -154,64 +195,230 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
     <!-- COLONNE DROITE -->
     <div class="colonne-droite">
 
+      <!-- BIO — POSITIONNEMENT SYSTÈMES -->
       <section class="bio-section">
-        <span class="section-label">Qui je suis ——</span>
-        <h2>J'observe l'économie québécoise<em> depuis l'intérieur.</em></h2>
-        <p>Je travaille au quotidien avec des entrepreneurs du Lac-Saint-Jean — PME forestières, manufacturiers, détaillants, coopératives agricoles. Depuis mon bureau de directeur de compte chez Desjardins Entreprise, je vois les décisions de financement, les projets d'expansion, les restructurations. Je vois l'économie telle qu'elle fonctionne réellement, pas telle qu'elle est modélisée.</p>
-        <p>Parallèlement, comme conseiller municipal à Roberval depuis 2021, j'observe comment les décisions politiques locales s'articulent — ou non — avec les réalités économiques régionales. L'écart entre les deux est souvent révélateur.</p>
-        <p>J'écris pour fixer ces observations. Pas pour informer au sens journalistique — pour analyser, prendre position, forcer la réflexion. La règle d'or de chaque texte : qu'est-ce que le lecteur fera différemment après l'avoir lu?</p>
+        <span class="section-label">Comment je développe ma pensée ——</span>
+        <h2>Je ne suis pas la somme de mes fonctions.<em> Je suis la somme des systèmes que j'observe.</em></h2>
+        <p>Depuis plusieurs années, je construis ma pensée à partir d'un Zettelkasten — un système de notes atomiques interconnectées. Chaque concept que j'apprends, chaque donnée que j'observe, chaque décision que j'analyse s'ajoute à ce réseau. Aujourd'hui, ce réseau comprend 12 grappes de systèmes distincts, reliés entre eux par des fils que je tisse article après article.</p>
+        <p>Mes trois fonctions — directeur de compte, conseiller municipal, auteur — ne sont pas mon identité. Elles sont mon terrain d'observation. Depuis ce terrain, je vois l'économie telle qu'elle fonctionne réellement : les décisions de financement de PME forestières et manufacturières, les arbitrages politiques locaux, l'impact concret de la transition énergétique sur des entreprises qui ont des noms et des adresses.</p>
+        <p>L'ancrage est le Lac-Saint-Jean. La méthode est la connexion des systèmes. La règle d'or de chaque texte : qu'est-ce que le lecteur fera différemment après l'avoir lu?</p>
       </section>
 
+      <!-- 12 GRAPPES DE SYSTÈMES -->
+      <section class="grappes-section reveal">
+        <span class="section-label">Architecture de la pensée ——</span>
+        <h2>12 grappes de systèmes,<em> un seul fil conducteur.</em></h2>
+        <p class="grappes-intro">Le Zettelkasten révèle des regroupements naturels — des grappes qui émergent de l'accumulation des concepts, pas d'une taxonomie imposée. Plus une grappe est dense, plus elle est centrale dans ma pensée. Les grappes se croisent : l'énergie traverse l'économie, la géographie traverse l'innovation, la persuasion traverse tout le reste.</p>
+
+        <div class="grappes-grille">
+
+          <!-- C1 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#0063b2">C1</span>
+              <span class="grappe-nom">Persuasion &amp; Marketing</span>
+            </div>
+            <div class="grappe-stats">
+              <span>40 tags</span>
+              <span>·</span>
+              <span>10 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:100%;background:#0063b2"></div></div>
+            <div class="grappe-tags">persuasion, copywriting, vente, influence, biais, cialdini</div>
+          </div>
+
+          <!-- C2 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#1a85d6">C2</span>
+              <span class="grappe-nom">Biophysique &amp; Intelligence Distribuée</span>
+            </div>
+            <div class="grappe-stats">
+              <span>38 tags</span>
+              <span>·</span>
+              <span>16 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:95%;background:#1a85d6"></div></div>
+            <div class="grappe-tags">énergie, biophysique, complexité, EROEI, systèmes, information</div>
+          </div>
+
+          <!-- C3 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#003d6e">C3</span>
+              <span class="grappe-nom">IA &amp; Contenu</span>
+            </div>
+            <div class="grappe-stats">
+              <span>20 tags</span>
+              <span>·</span>
+              <span>12 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:50%;background:#003d6e"></div></div>
+            <div class="grappe-tags">IA, contenu, workflow, Zettelkasten, automatisation, production</div>
+          </div>
+
+          <!-- C4 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#0080cc">C4</span>
+              <span class="grappe-nom">IA &amp; Économie Politique</span>
+            </div>
+            <div class="grappe-stats">
+              <span>19 tags</span>
+              <span>·</span>
+              <span>7 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:48%;background:#0080cc"></div></div>
+            <div class="grappe-tags">IA, économie, politique, démocratie, gouvernance, disruption</div>
+          </div>
+
+          <!-- C5 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#c0392b">C5</span>
+              <span class="grappe-nom">Guerre, Drones &amp; Géopolitique</span>
+            </div>
+            <div class="grappe-stats">
+              <span>18 tags</span>
+              <span>·</span>
+              <span>8 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:45%;background:#c0392b"></div></div>
+            <div class="grappe-tags">guerre, drones, géopolitique, Ukraine, Russie, Chine</div>
+          </div>
+
+          <!-- C6 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#8e44ad">C6</span>
+              <span class="grappe-nom">Métabolisme &amp; Santé</span>
+            </div>
+            <div class="grappe-stats">
+              <span>14 tags</span>
+              <span>·</span>
+              <span>5 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:35%;background:#8e44ad"></div></div>
+            <div class="grappe-tags">métabolisme, santé, glucose, insuline, mitochondries, cétose</div>
+          </div>
+
+          <!-- C7 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#16a085">C7</span>
+              <span class="grappe-nom">Géographie &amp; Densité</span>
+            </div>
+            <div class="grappe-stats">
+              <span>13 tags</span>
+              <span>·</span>
+              <span>5 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:33%;background:#16a085"></div></div>
+            <div class="grappe-tags">géographie, densité, urbanisme, knowledge-spillovers, territoire</div>
+          </div>
+
+          <!-- C8 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#2980b9">C8</span>
+              <span class="grappe-nom">Communication &amp; Storytelling</span>
+            </div>
+            <div class="grappe-stats">
+              <span>12 tags</span>
+              <span>·</span>
+              <span>4 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:30%;background:#2980b9"></div></div>
+            <div class="grappe-tags">communication, storytelling, pitch, présentation, worldview</div>
+          </div>
+
+          <!-- C9 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#d35400">C9</span>
+              <span class="grappe-nom">Innovation &amp; Contrainte Énergétique</span>
+            </div>
+            <div class="grappe-stats">
+              <span>12 tags</span>
+              <span>·</span>
+              <span>5 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:30%;background:#d35400"></div></div>
+            <div class="grappe-tags">innovation, contrainte, rupture, Y=f(K·EN), modèle biophysique</div>
+          </div>
+
+          <!-- C10 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#7f8c8d">C10</span>
+              <span class="grappe-nom">Linguistique &amp; Histoire</span>
+            </div>
+            <div class="grappe-stats">
+              <span>10 tags</span>
+              <span>·</span>
+              <span>4 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:25%;background:#7f8c8d"></div></div>
+            <div class="grappe-tags">linguistique, histoire, onomastique, proto-indo-européen, migration</div>
+          </div>
+
+          <!-- C11 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#27ae60">C11</span>
+              <span class="grappe-nom">Organisation &amp; Culture</span>
+            </div>
+            <div class="grappe-stats">
+              <span>10 tags</span>
+              <span>·</span>
+              <span>2 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:25%;background:#27ae60"></div></div>
+            <div class="grappe-tags">organisation, performance, plaisir, motivation, leadership</div>
+          </div>
+
+          <!-- C12 -->
+          <div class="grappe-carte">
+            <div class="grappe-header">
+              <span class="grappe-badge" style="background:#e67e22">C12</span>
+              <span class="grappe-nom">EROEI &amp; Transition Énergétique</span>
+            </div>
+            <div class="grappe-stats">
+              <span>9 tags</span>
+              <span>·</span>
+              <span>2 zettels</span>
+            </div>
+            <div class="grappe-barre-wrap"><div class="grappe-barre" style="width:22%;background:#e67e22"></div></div>
+            <div class="grappe-tags">EROEI, transition, biocarburant, pétrole, énergie nette</div>
+          </div>
+
+        </div><!-- /grappes-grille -->
+      </section>
+
+      <!-- BLOC CHIFFRES -->
       <div class="chiffres reveal">
         <div class="chiffre-item">
-          <span class="chiffre-valeur">20+</span>
-          <span class="chiffre-label">ans dans le financement d'entreprises</span>
+          <span class="chiffre-valeur">12</span>
+          <span class="chiffre-label">grappes de systèmes actives</span>
         </div>
         <div class="chiffre-item">
-          <span class="chiffre-valeur">3</span>
-          <span class="chiffre-label">mandats d'implication municipale</span>
+          <span class="chiffre-valeur">100+</span>
+          <span class="chiffre-label">concepts atomiques (Zettelkasten)</span>
+        </div>
+        <div class="chiffre-item">
+          <span class="chiffre-valeur">20+</span>
+          <span class="chiffre-label">ans d'observation terrain PME</span>
         </div>
         <div class="chiffre-item">
           <span class="chiffre-valeur">LSJ</span>
           <span class="chiffre-label">ancrage Lac-Saint-Jean, portée provinciale</span>
         </div>
-        <div class="chiffre-item">
-          <span class="chiffre-valeur">QC</span>
-          <span class="chiffre-label">économie, énergie, PME du Québec</span>
-        </div>
       </div>
 
-      <section class="bio-section reveal">
-        <span class="section-label">Ce que j'écris ——</span>
-        <h2>Trois verticalités,<em> une cohérence.</em></h2>
-        <div class="themes">
-          <div class="theme-item">
-            <span class="theme-num">01</span>
-            <div>
-              <p class="theme-titre">Économie &amp; Énergie</p>
-              <p class="theme-desc">La transition énergétique vue comme une réalité économique, pas comme un débat idéologique. Hydro-Québec, décarbonation industrielle, biophysique économique appliquée au Québec.</p>
-            </div>
-          </div>
-          <div class="theme-item">
-            <span class="theme-num">02</span>
-            <div>
-              <p class="theme-titre">PME régionales et IA</p>
-              <p class="theme-desc">Vous voulez savoir à quoi peut servir les derniers outils IA pour votre PME? Suivez en direct ma progression dans l'apprentissage des outils et des projets reliés.</p>
-            </div>
-          </div>
-          <div class="theme-item">
-            <span class="theme-num">03</span>
-            <div>
-              <p class="theme-titre">Santé métabolique</p>
-              <p class="theme-desc">Perdre du poids a toujours été un défi pour moi. Je vulgarise les dernières recherches au niveau de la résistance à l'insuline, le diabète et l'ensemble des moyens que vous pouvez appliquer afin d'améliorer ma santé.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <!-- CTA -->
       <section class="bio-section reveal">
         <div class="cta-bloc">
-          <a href="/blog/" class="btn-primary">Lire les articles</a>
+          <a href="/" class="btn-primary">Lire les articles</a>
           <a href="mailto:pascal@pascalgagnon.ca" class="btn-secondary">Me contacter →</a>
         </div>
       </section>
@@ -227,7 +434,7 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
   <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
   <ul class="footer-links">
     <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
-    <li><a href="/blog/">Articles</a></li>
+    <li><a href="/">Articles</a></li>
     <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
     <li><a href="/a-propos/">À propos</a></li>
     <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
