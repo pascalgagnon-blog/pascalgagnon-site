@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer les systèmes — Pascal Gagnon · Analyste de systèmes complexes</title>
+<meta name="description" content="12 systèmes de pensée, 200+ concepts atomiques connectés. Explorez la carte des idées de Pascal Gagnon — économie, énergie, IA, géopolitique, santé, persuasion.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --noir:       #0a0a0a;
+  --creme:      #f5f0e8;
+  --blanc:      #ffffff;
+  --bleu:       #0063b2;
+  --bleu-clair: #4d92c9;
+  --bleu-pale:  #e6eff7;
+  --gris:       #6b6b6b;
+  --gris-clair: #d4cfc6;
+  --gris-bord:  #e0e0e0;
+  --max:        1200px;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--creme);
+  color: var(--noir);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: rgba(245,240,232,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,99,178,0.2);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--noir); text-decoration: none;
+}
+.nav-logo span { color: var(--bleu); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gris); text-decoration: none; font-weight: 400;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--bleu); }
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 130px 4rem 3.5rem;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+@media (max-width: 768px) { .hero { padding: 110px 1.5rem 2.5rem; } }
+.hero-eyebrow {
+  font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--bleu-clair); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.hero-eyebrow::before {
+  content: ''; display: block; width: 36px; height: 1px; background: var(--bleu-clair);
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 900; line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--noir);
+  margin-bottom: 1rem;
+}
+.hero-sub {
+  font-size: 1rem; color: var(--gris); max-width: 560px; line-height: 1.6;
+}
+
+/* ── EXPLORER WRAPPER ── */
+.explorer-wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 4rem 5rem;
+}
+@media (max-width: 900px) { .explorer-wrap { padding: 0 1.5rem 4rem; } }
+
+/* ── GRILLE 3 COLONNES ── */
+.explorer-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr 260px;
+  gap: 0;
+  border: 1px solid rgba(0,99,178,0.18);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--blanc);
+  min-height: 520px;
+}
+@media (max-width: 900px) {
+  .explorer-grid { grid-template-columns: 1fr; }
+  .col-detail { display: none; }
+}
+
+/* ── COLONNE GAUCHE — liste systèmes ── */
+.col-list {
+  border-right: 1px solid rgba(0,99,178,0.12);
+  padding: 18px 12px;
+  background: var(--bleu-pale);
+  overflow-y: auto;
+}
+.col-label {
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gris);
+  margin-bottom: 12px; padding: 0 4px;
+}
+.sys-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 6px;
+  cursor: pointer; margin-bottom: 2px;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+.sys-item:hover, .sys-item.active {
+  background: var(--blanc);
+  border-color: rgba(0,99,178,0.15);
+}
+.sys-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.sys-name {
+  font-size: 0.72rem; color: var(--noir); line-height: 1.3;
+  flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.sys-count {
+  font-size: 0.65rem; color: var(--gris); flex-shrink: 0;
+}
+.voir-tous {
+  display: block; font-size: 0.68rem; color: var(--bleu);
+  padding: 8px 8px 0; margin-top: 8px;
+  border-top: 1px solid var(--gris-bord);
+  cursor: pointer; text-decoration: none;
+  font-weight: 500; transition: color 0.2s;
+}
+.voir-tous:hover { color: var(--bleu-clair); }
+
+/* ── COLONNE CENTRE — graphe D3 ── */
+.col-graph {
+  padding: 16px;
+  display: flex; flex-direction: column;
+  background: var(--blanc);
+  min-height: 480px;
+}
+.graph-hint {
+  font-size: 0.65rem; color: var(--gris);
+  text-align: center; letter-spacing: 0.08em;
+  margin-bottom: 8px; text-transform: uppercase;
+}
+#bubble-svg {
+  width: 100%; flex: 1;
+}
+
+/* ── COLONNE DROITE — panneau détail ── */
+.col-detail {
+  border-left: 1px solid rgba(0,99,178,0.12);
+  padding: 18px 16px;
+  background: var(--blanc);
+  overflow-y: auto;
+}
+.detail-placeholder {
+  font-size: 0.82rem; color: var(--gris);
+  text-align: center; padding-top: 60px; line-height: 1.8;
+}
+.detail-header {
+  border-left: 3px solid var(--bleu);
+  padding-left: 10px; margin-bottom: 14px;
+}
+.detail-name {
+  font-size: 0.88rem; font-weight: 600; color: var(--noir);
+  margin-bottom: 3px;
+}
+.detail-meta {
+  font-size: 0.7rem; color: var(--gris);
+}
+.detail-articles { margin-top: 4px; }
+.detail-article {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gris-bord);
+}
+.detail-article:last-child { border-bottom: none; }
+.detail-article-title {
+  font-size: 0.78rem; color: var(--noir); line-height: 1.4; margin-bottom: 3px;
+}
+.detail-article-link {
+  font-size: 0.68rem; color: var(--bleu);
+  text-decoration: none; font-weight: 500;
+  transition: color 0.2s;
+}
+.detail-article-link:hover { color: var(--bleu-clair); }
+.detail-concept {
+  font-size: 0.72rem; color: var(--gris);
+  font-style: italic; line-height: 1.4; margin-top: 2px;
+}
+
+/* ── FOOTER NOTE ── */
+.explorer-note {
+  margin-top: 2rem;
+  padding: 1.2rem 1.6rem;
+  background: var(--blanc);
+  border: 1px solid rgba(0,99,178,0.15);
+  border-radius: 8px;
+  display: flex; align-items: flex-start; gap: 1rem;
+  flex-wrap: wrap;
+}
+.note-text {
+  font-size: 0.8rem; color: var(--gris); line-height: 1.6; flex: 1; min-width: 200px;
+}
+.note-text strong { color: var(--noir); font-weight: 500; }
+.note-cta {
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.55rem 1.4rem;
+  border: 1px solid var(--bleu); color: var(--bleu);
+  text-decoration: none; border-radius: 4px;
+  font-weight: 500; white-space: nowrap;
+  transition: all 0.2s; align-self: center;
+}
+.note-cta:hover { background: var(--bleu); color: var(--blanc); }
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--noir); color: rgba(255,255,255,0.5);
+  padding: 2.5rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.78rem; flex-wrap: wrap; gap: 1rem;
+}
+@media (max-width: 768px) { .site-footer { padding: 2rem 1.5rem; } }
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; color: var(--blanc);
+  text-decoration: none; font-weight: 700;
+}
+.footer-logo span { color: var(--bleu-clair); }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo">Pascal <span>Gagnon</span></a>
+  <ul class="nav-links">
+    <li><a href="/articles/">Articles</a></li>
+    <li><a href="/systemes/explorer.html" class="active">Systèmes</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow">Carte des idées</div>
+  <h1>12 systèmes.<br>200+ connexions.</h1>
+  <p class="hero-sub">Les articles de ce site ne sont pas isolés — ils appartiennent à des systèmes de pensée interconnectés. Cliquez une bulle pour explorer.</p>
+</section>
+
+<!-- ── EXPLORER ── -->
+<div class="explorer-wrap">
+  <div class="explorer-grid">
+
+    <!-- Gauche : liste systèmes -->
+    <div class="col-list">
+      <div class="col-label">Systèmes</div>
+      <div id="sys-nav"></div>
+      <a class="voir-tous" id="voir-tous-btn">+ 8 autres systèmes →</a>
+    </div>
+
+    <!-- Centre : graphe D3 -->
+    <div class="col-graph">
+      <div class="graph-hint">Cliquez une bulle pour explorer le système</div>
+      <svg id="bubble-svg" viewBox="0 0 400 400"></svg>
+    </div>
+
+    <!-- Droite : détail -->
+    <div class="col-detail" id="detail-panel">
+      <div class="detail-placeholder" id="detail-ph">
+        Sélectionnez un<br>système pour voir<br>les articles &amp; concepts
+      </div>
+      <div id="detail-content" style="display:none"></div>
+    </div>
+
+  </div>
+
+  <!-- Note de bas de page -->
+  <div class="explorer-note">
+    <p class="note-text">
+      <strong>Chaque système est un cluster de concepts atomiques.</strong>
+      Les articles publiés ici sont le produit fini — la synthèse distillée.
+      Les carnets de pensée (200+ zettels bruts) seront accessibles sur
+      <em>carnets.pascalgagnon.ca</em> prochainement.
+    </p>
+    <a href="/articles/" class="note-cta">Lire les articles →</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <a href="/" class="footer-logo">Pascal <span>Gagnon</span></a>
+  <span>© 2026 · Lac-Saint-Jean, Québec</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+// ── Données des 12 systèmes ──────────────────────────────────────────
+const SYSTEMES = [
+  {
+    id: 1, code: "c1",
+    name: "Persuasion & Marketing", short: "Persuasion",
+    tags: 40, concepts: 10, color: "#0063b2",
+    articles: [
+      { title: "Vos formations ignorent la science du jeu vidéo", url: "/articles/vos_formations_ignorent_la_science_du_jeu_video/" }
+    ],
+    concepts_list: [
+      "Le framework PASTOR — toute copy qui convertit suit la même structure",
+      "En publicité, les consonnes explosives accrochent l'attention",
+      "Pour gagner contre la compétition, devenir l'avocat du verdict"
+    ]
+  },
+  {
+    id: 2, code: "c2",
+    name: "Biophysique & Intelligence", short: "Biophysique",
+    tags: 38, concepts: 16, color: "#1a85d6",
+    articles: [
+      { title: "12 livres en 2 semaines à 49 ans", url: "/articles/12_livres_2_semaines_49_ans/" }
+    ],
+    concepts_list: [
+      "La capacité de stocker de la nourriture génère le temps libre",
+      "Smil — l'énergie ne se substitue pas, elle se superpose",
+      "L'herbe africaine à silice a restructuré l'évolution de la mâchoire"
+    ]
+  },
+  {
+    id: 3, code: "c3",
+    name: "IA & Contenu", short: "IA & Contenu",
+    tags: 20, concepts: 12, color: "#2c5f8a",
+    articles: [
+      { title: "Gouvernance IA au Québec — le guide manquant", url: "/articles/gouvernance_ia_quebec_guide_manquant/" }
+    ],
+    concepts_list: [
+      "Le contenu authentique va devenir rare — et donc précieux",
+      "Le paradoxe cake mix — la friction crée de la valeur perçue",
+      "Mythos détecté à 29% — les 71% restants sont de la dissimulation"
+    ]
+  },
+  {
+    id: 4, code: "c4",
+    name: "IA & Économie Politique", short: "IA & Éco.",
+    tags: 19, concepts: 7, color: "#0080cc",
+    articles: [
+      { title: "1929, l'IA et l'effondrement-redistribution", url: "/articles/1929-ia-effondrement-redistribution/" }
+    ],
+    concepts_list: [
+      "L'IA reproduit la structure économique de 1925-1929",
+      "L'horizon d'autonomie des agents IA double tous les 7 mois",
+      "Le fordisme comme mécanisme de bouclage demand-side"
+    ]
+  },
+  {
+    id: 5, code: "c5",
+    name: "Guerre & Géopolitique", short: "Géopolitique",
+    tags: 18, concepts: 8, color: "#c0392b",
+    articles: [],
+    concepts_list: [
+      "Le retard canadien en guerre de drones",
+      "Magyar élu sur 77,8% de participation — la menace existentielle mobilise",
+      "Le coût unitaire du drone FPV descend sous 400$"
+    ]
+  },
+  {
+    id: 6, code: "c6",
+    name: "Métabolisme & Santé", short: "Métabolisme",
+    tags: 14, concepts: 5, color: "#8e44ad",
+    articles: [],
+    concepts_list: [
+      "La course à jeun déclenche la GH — lipolyse et préservation musculaire",
+      "Les cellules cancéreuses sont dépendantes du glucose",
+      "La satiété lipidique coupe l'appétit plus vite que les glucides"
+    ]
+  },
+  {
+    id: 7, code: "c7",
+    name: "Géographie & Densité", short: "Géographie",
+    tags: 13, concepts: 5, color: "#16a085",
+    articles: [],
+    concepts_list: [
+      "Territoire physique contraint — territoire économique multiplié",
+      "La densité cognitive comme multiplicateur d'innovation",
+      "L'institution comme convertisseur densité → valeur"
+    ]
+  },
+  {
+    id: 8, code: "c8",
+    name: "Communication & Storytelling", short: "Storytelling",
+    tags: 12, concepts: 4, color: "#2980b9",
+    articles: [],
+    concepts_list: [
+      "La star d'un pitch, c'est l'auditoire",
+      "Le client est le héros — la marque est le guide",
+      "Le worldview précède le message"
+    ]
+  },
+  {
+    id: 9, code: "c9",
+    name: "Innovation & Énergie", short: "Innovation",
+    tags: 12, concepts: 5, color: "#d35400",
+    articles: [
+      { title: "Électrification de la machinerie forestière", url: "/articles/electrification_machinerie_forestiere/" }
+    ],
+    concepts_list: [
+      "Le coefficient η — l'efficience de conversion comme variable systémique",
+      "La contrainte comme condition nécessaire de la rupture",
+      "La rente énergétique réduit le coefficient η"
+    ]
+  },
+  {
+    id: 10, code: "c10",
+    name: "Linguistique & Histoire", short: "Linguistique",
+    tags: 10, concepts: 4, color: "#7f8c8d",
+    articles: [],
+    concepts_list: [
+      "Les noms de famille sont une invention tardive de l'État",
+      "L'écrit fige la langue, l'oral évolue",
+      "La fertilité du sol dicte la complexité économique"
+    ]
+  },
+  {
+    id: 11, code: "c11",
+    name: "Organisation & Culture", short: "Organisation",
+    tags: 8, concepts: 3, color: "#27ae60",
+    articles: [],
+    concepts_list: [
+      "La culture est le système d'exploitation de l'organisation",
+      "Les règles implicites survivent aux règles explicites",
+      "L'équipe optimale ressemble moins à une famille qu'à un film"
+    ]
+  },
+  {
+    id: 12, code: "c12",
+    name: "EROEI & Transition", short: "EROEI",
+    tags: 7, concepts: 3, color: "#e67e22",
+    articles: [],
+    concepts_list: [
+      "L'EROEI du solaire PV chute avec la diffusion de masse",
+      "La transition énergétique est une superposition, pas une substitution",
+      "Le charbon a doublé la productivité agricole mondiale"
+    ]
+  }
+];
+
+// ── Sidebar : 4 systèmes prioritaires par défaut ────────────────────
+const SIDEBAR_DEFAULT = [SYSTEMES[5], SYSTEMES[1], SYSTEMES[2], SYSTEMES[8]];
+let showAll = false;
+let selectedId = null;
+
+// ── Construction de la nav latérale ─────────────────────────────────
+function buildNav() {
+  const nav = document.getElementById('sys-nav');
+  nav.innerHTML = '';
+  const items = showAll ? SYSTEMES : SIDEBAR_DEFAULT;
+  items.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'sys-item' + (s.id === selectedId ? ' active' : '');
+    el.dataset.id = s.id;
+    el.innerHTML = `
+      <div class="sys-dot" style="background:${s.color}"></div>
+      <div class="sys-name">${s.name}</div>
+      <div class="sys-count">${s.concepts}</div>
+    `;
+    el.addEventListener('click', () => selectSystem(s.id));
+    nav.appendChild(el);
+  });
+}
+
+buildNav();
+
+document.getElementById('voir-tous-btn').addEventListener('click', function() {
+  showAll = !showAll;
+  buildNav();
+  this.textContent = showAll ? '← Réduire la liste' : '+ 8 autres systèmes →';
+});
+
+// ── Graphe D3 bubble chart ───────────────────────────────────────────
+function waitForD3(cb) {
+  if (window.d3) cb();
+  else setTimeout(() => waitForD3(cb), 80);
+}
+
+waitForD3(() => {
+  const svgEl = document.getElementById('bubble-svg');
+  const W = svgEl.parentElement.clientWidth - 32 || 400;
+  const H = Math.max(360, W * 0.85);
+  svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+  const svg = d3.select('#bubble-svg');
+  const pack = d3.pack().size([W, H]).padding(5);
+  const root = d3.hierarchy({ children: SYSTEMES }).sum(d => d.tags || 0);
+  const nodes = pack(root).leaves();
+
+  const g = svg.selectAll('g')
+    .data(nodes)
+    .join('g')
+    .attr('transform', d => `translate(${d.x},${d.y})`)
+    .style('cursor', 'pointer')
+    .on('click', (e, d) => selectSystem(d.data.id));
+
+  g.append('circle')
+    .attr('class', 'bcirc')
+    .attr('data-id', d => d.data.id)
+    .attr('r', d => d.r)
+    .attr('fill', d => d.data.color + '22')
+    .attr('stroke', d => d.data.color)
+    .attr('stroke-width', 1.5);
+
+  // Texte court (short) pour les grandes bulles
+  g.append('text')
+    .attr('class', 'btxt')
+    .attr('data-id', d => d.data.id)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('fill', d => d.data.color)
+    .attr('font-size', d => Math.min(11, d.r * 0.36))
+    .attr('font-family', "'DM Sans', sans-serif")
+    .attr('font-weight', '500')
+    .attr('pointer-events', 'none')
+    .text(d => d.data.short);
+
+  // Badge article si au moins 1 article publié
+  g.filter(d => d.data.articles && d.data.articles.length > 0)
+    .append('circle')
+    .attr('r', 4)
+    .attr('cx', d => d.r * 0.55)
+    .attr('cy', d => -d.r * 0.55)
+    .attr('fill', d => d.data.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .attr('pointer-events', 'none');
+
+  window._svgReady = true;
+});
+
+// ── Sélection d'un système ───────────────────────────────────────────
+function selectSystem(id) {
+  selectedId = id;
+  const s = SYSTEMES.find(x => x.id === id);
+
+  // Mise en évidence D3
+  if (window._svgReady) {
+    d3.selectAll('.bcirc')
+      .attr('opacity', d => d.data.id === id ? 1 : 0.2)
+      .attr('stroke-width', d => d.data.id === id ? 2.5 : 1)
+      .attr('fill', d => d.data.id === id ? d.data.color + '44' : d.data.color + '22');
+    d3.selectAll('.btxt')
+      .attr('opacity', d => d.data.id === id ? 1 : 0.25);
+  }
+
+  // Nav latérale
+  document.querySelectorAll('.sys-item').forEach(el =>
+    el.classList.toggle('active', parseInt(el.dataset.id) === id)
+  );
+
+  // Panneau détail
+  document.getElementById('detail-ph').style.display = 'none';
+  const dc = document.getElementById('detail-content');
+  dc.style.display = 'block';
+
+  // Articles publiés
+  let articlesHTML = '';
+  if (s.articles && s.articles.length > 0) {
+    articlesHTML = s.articles.map(a => `
+      <div class="detail-article">
+        <div class="detail-article-title">${a.title}</div>
+        <a class="detail-article-link" href="${a.url}">→ Lire l'article</a>
+      </div>
+    `).join('');
+  } else {
+    articlesHTML = `<div class="detail-article">
+      <div class="detail-concept" style="color:var(--gris)">Aucun article publié dans ce système pour l'instant — bientôt disponible.</div>
+    </div>`;
+  }
+
+  // Concepts atomiques
+  const conceptsHTML = s.concepts_list.map(c =>
+    `<div class="detail-article">
+      <div class="detail-concept">— ${c}</div>
+    </div>`
+  ).join('');
+
+  dc.innerHTML = `
+    <div class="detail-header" style="border-left-color:${s.color}">
+      <div class="detail-name">${s.name}</div>
+      <div class="detail-meta">${s.tags} tags · ${s.concepts} concepts · ${s.code.toUpperCase()}</div>
+    </div>
+    <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gris);margin-bottom:6px">Articles publiés</div>
+    <div class="detail-articles">${articlesHTML}</div>
+    <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gris);margin:12px 0 6px">Concepts atomiques</div>
+    <div class="detail-articles">${conceptsHTML}</div>
+  `;
+}
+</script>
+</body>
+</html>
