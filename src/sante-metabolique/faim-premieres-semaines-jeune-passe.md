@@ -18,6 +18,7 @@ image_info: "faim-premieres-semaines-jeune-passe-info.webp"
 image_info_alt: "Courbe d'adaptation de la faim par semaine — jeûne intermittent"
 cta: "methode-reset"
 layout: sante-metabolique.html.j2
+system: c6
 vertical: Santé métabolique
 reading_time: 5 min
 tag: GUIDE PRATIQUE

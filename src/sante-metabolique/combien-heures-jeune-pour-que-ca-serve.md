@@ -18,6 +18,7 @@ image_info: "combien-heures-jeune-pour-que-ca-serve-info.webp"
 image_info_alt: "Tableau comparatif des protocoles 16:8, OMAD et 5:2 avec effets métaboliques"
 cta: "methode-reset"
 layout: sante-metabolique.html.j2
+system: c6
 vertical: Santé métabolique
 reading_time: 5 min
 tag: GUIDE PRATIQUE

@@ -122,6 +122,22 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .article-wrap p strong a:hover,
 .article-wrap p > a[href$=".pdf"]:hover { background: var(--noir); color: #fff; }
 
+/* ── PILL SYSTÈME ── */
+.system-pill-wrap { margin: 3rem 0 1rem; }
+.system-pill-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gris); margin-bottom: 0.7rem; }
+.system-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  border: 1px solid currentColor;
+  text-decoration: none;
+  font-size: 0.78rem; font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.system-pill:hover { background: var(--bleu-pale); }
+.system-pill-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
 /* Carte auteur (fin d'article) */
 .author-card { background: var(--bleu-pale); border: 1px solid rgba(0,99,178,0.2); border-top: 3px solid var(--bleu); padding: 1.5rem; margin-top: 4rem; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start; }
 .author-initial { width: 52px; height: 52px; background: var(--bleu); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-style: italic; flex-shrink: 0; }
@@ -145,20 +161,16 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 <nav>
   <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
   <ul class="nav-links">
-    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
-    <li><a href="/pme-ia/">PME &amp; IA</a></li>
-    <li><a href="/sante-metabolique/">Santé métabolique</a></li>
+    <li><a href="/systemes/explorer.html">Explorer</a></li>
+    <li><a href="/a-propos/">À propos</a></li>
   </ul>
-  <a href="/#newsletter" class="nav-cta">Infolettre</a>
   <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
 </nav>
 <!-- MENU MOBILE -->
 <div class="nav-mobile" id="navMobile">
   <button class="nav-mobile-close" onclick="toggleMenu()" aria-label="Fermer">&times;</button>
-  <a href="/economie-energie/" onclick="toggleMenu()">Économie &amp; Énergie</a>
-  <a href="/pme-ia/" onclick="toggleMenu()">PME &amp; IA</a>
-  <a href="/sante-metabolique/" onclick="toggleMenu()">Santé métabolique</a>
-  <a href="/#newsletter" onclick="toggleMenu()" style="margin-top:1rem;color:var(--bleu);border:1px solid var(--bleu);padding:0.7rem 1.8rem;font-size:0.78rem;letter-spacing:0.1em;">Infolettre</a>
+  <a href="/systemes/explorer.html" onclick="toggleMenu()">Explorer</a>
+  <a href="/a-propos/" onclick="toggleMenu()">À propos</a>
 </div>
 
 <!-- HERO -->
@@ -183,6 +195,17 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 <!-- CORPS -->
 <div class="article-wrap">
   {{ content }}
+
+  <!-- Pill système -->
+  {% if page.system %}
+  <div class="system-pill-wrap">
+    <div class="system-pill-label">Système de pensée</div>
+    <a href="/systemes/{{ page.system }}/" class="system-pill" style="color:var(--bleu)">
+      <span class="system-pill-dot" style="background:var(--bleu)"></span>
+      {{ page.system|upper }} — Explorer ce système
+    </a>
+  </div>
+  {% endif %}
 
   <!-- Carte auteur -->
   <div class="author-card">

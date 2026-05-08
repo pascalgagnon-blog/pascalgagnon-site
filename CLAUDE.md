@@ -1,6 +1,6 @@
 # Architecture technique — Pascal Gagnon
 
-**Dernière mise à jour :** 2026-03-24 (migration pascalgagnon.ca : Netlify → VPS Hostinger)
+**Dernière mise à jour :** 2026-04-19 (correction chemin vault + ajout sante-metabolique layout + section Méthode Reset/Brevo)
 
 ---
 
@@ -30,6 +30,7 @@ n8n.pascalgagnon.ca      → N8N + PostgreSQL → Docker → Dokploy → VPS Hos
 | **Webhook Dokploy** | `http://187.124.233.114:3000/api/deploy/CgUrlmKfMWMnO8-c0JGin` |
 
 > ⚠️ Netlify supprimé le 2026-03-24 — ne plus utiliser `75.2.60.5` ni `pascalgagnon-site.netlify.app`
+> ⚠️ `netlify.toml` encore présent à la racine du vault — fichier obsolète, peut être supprimé
 
 **Page d'accueil — logique `build.py` :**
 - `src/index.md` → rendu via `src/_layouts/home.html.j2` (Jinja2 + données `articles.yaml`)
@@ -43,10 +44,16 @@ n8n.pascalgagnon.ca      → N8N + PostgreSQL → Docker → Dokploy → VPS Hos
 - Template article : `src/_layouts/article.html.j2` (hero sombre + corps crème, palette inline)
 - Le H1 du corps `.md` est masqué par CSS — le titre est affiché dans le hero via `page.title`
 
+**Layouts disponibles (`src/_layouts/`) :**
+- `base.html.j2` — structure de base (head, nav, footer)
+- `home.html.j2` — page d'accueil (featured + recent depuis `articles.yaml`)
+- `article.html.j2` — article standard (hero sombre + corps crème)
+- `sante-metabolique.html.j2` — layout spécifique vertical santé métabolique
+
 **Palette (inline dans les templates, pas dans main.css) :**
 - `--creme: #f5f0e8` · `--noir: #0a0a0a` · `--bleu: #0063b2` · `--bleu-clair: #4d92c9` · `--bleu-pale: #e6eff7`
 
-**Vault local :** `C:\Users\Acer\OneDrive\Claude_rajotte\pascalgagnon-site\` → synchro manuelle vers repo GitHub
+**Vault local :** `C:\Users\Acer\Documents\Claude_rajotte\pascalgagnon-site` → synchro manuelle vers repo GitHub
 
 ---
 
@@ -114,6 +121,34 @@ GENERIC_TIMEZONE=America/Toronto
 ```
 
 **Bug connu résolu (2026-03-23) :** `N8N_PORT` absent du `.env` → N8N se liait à un port aléatoire → Traefik pointait sur 5678 → Bad Gateway. Fix : ajouter `N8N_PORT=5678`.
+
+---
+
+## Méthode Reset — Lead Magnet & Automatisation (Brevo + N8N)
+
+Projet de capture et nurturing d'abonnés autour du produit **Méthode Reset** (Gumroad).
+
+| Élément | Détail |
+|---|---|
+| **Email marketing** | Brevo ✅ configuré |
+| **Mail forwarding** | Configuré ✅ |
+| **Produit** | `wolfric6.gumroad.com/l/methode-reset` |
+| **Lead magnet** | Tableau Reset (PDF) — offert en échange du courriel |
+| **Dossier de travail** | `C:\Users\Acer\Documents\Claude_rajotte\N8N Brevo pour Method Reset` |
+
+**Séquence d'emails Brevo (3 emails) :**
+- **Email 1 — Livraison immédiate** : Livraison du Tableau Reset PDF
+- **Email 2 — J+2** : La vraie raison de l'épuisement → teaser Méthode Reset
+- **Email 3 — J+4** : Résultat concret + offre finale → lien Gumroad
+
+**Placeholders à remplacer dans les templates Brevo :**
+- `LIEN_TABLEAU_PDF` → lien direct de téléchargement du tableau
+- `LIEN_GUMROAD` → `wolfric6.gumroad.com/l/methode-reset`
+
+**À compléter :**
+- [ ] Page / formulaire de capture de courriel (landing page)
+- [ ] Relier formulaire → Brevo via N8N ou webhook natif Brevo
+- [ ] Tester la séquence complète end-to-end
 
 ---
 

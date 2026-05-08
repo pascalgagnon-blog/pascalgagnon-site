@@ -18,6 +18,7 @@ image_info: "insuline-cest-quoi-pourquoi-important-info.webp"
 image_info_alt: "Cycle repas — insuline haute, stockage, puis insuline basse, brûlage"
 cta: "methode-reset"
 layout: sante-metabolique.html.j2
+system: c6
 vertical: Santé métabolique
 reading_time: 5 min
 tag: GUIDE PRATIQUE

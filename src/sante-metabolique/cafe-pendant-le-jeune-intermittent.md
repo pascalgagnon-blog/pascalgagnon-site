@@ -17,6 +17,7 @@ image_info: "cafe-pendant-le-jeune-intermittent-info.webp"
 image_info_alt: "Infographie impact insuline des boissons pendant le jeûne — eau café thé jus"
 cta: "methode-reset"
 layout: sante-metabolique.html.j2
+system: c6
 vertical: Santé métabolique
 reading_time: 5 min
 tag: GUIDE PRATIQUE

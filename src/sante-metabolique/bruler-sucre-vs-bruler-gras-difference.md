@@ -18,6 +18,7 @@ image_info: "bruler-sucre-vs-bruler-gras-difference-info.webp"
 image_info_alt: "Tableau comparatif mode sucre vs mode gras — autonomie, faim, énergie"
 cta: "methode-reset"
 layout: sante-metabolique.html.j2
+system: c6
 vertical: Santé métabolique
 reading_time: 5 min
 tag: GUIDE PRATIQUE

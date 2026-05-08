@@ -18,6 +18,7 @@ image_info: "jeune-intermittent-perte-muscle-info.webp"
 image_info_alt: "Graphique hormone de croissance — augmentation pendant le jeûne de 24 heures"
 cta: "methode-reset"
 layout: sante-metabolique.html.j2
+system: c6
 vertical: Santé métabolique
 reading_time: 5 min
 tag: GUIDE PRATIQUE

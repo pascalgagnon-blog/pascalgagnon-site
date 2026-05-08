@@ -7,6 +7,7 @@ vertical: Intelligence artificielle
 tag: ENTREVUE
 slug: 1929-ia-effondrement-redistribution
 layout: article.html.j2
+system: c4
 ---
 
 **INTELLIGENCE ARTIFICIELLE · ÉCONOMIE BIOPHYSIQUE · HISTOIRE**

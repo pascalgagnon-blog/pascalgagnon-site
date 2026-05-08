@@ -1,4 +1,4 @@
-#\!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Generateur de site statique pour pascalgagnon.ca
 Stack : Python + Jinja2 + Markdown + PyYAML
@@ -41,10 +41,55 @@ def load_data(name):
     return {}
 
 
+def collect_all_articles(src):
+    """Scanne tous les .md et retourne ceux qui ont un champ system:."""
+    all_articles = []
+    scan_dirs = [src / "articles", src / "sante-metabolique"]
+    skip = {"_layouts","_includes","_data","assets","sante-metabolique","articles",
+            "systemes","reset-method","blog","posts"}
+    for d in sorted(src.iterdir()):
+        if d.is_dir() and d.name not in skip and not d.name.startswith("_"):
+            scan_dirs.append(d)
+    for d in scan_dirs:
+        if not d.exists():
+            continue
+        for md_file in sorted(d.glob("*.md")):
+            meta, _ = load_yaml_frontmatter(md_file)
+            if not meta.get("system"):
+                continue
+            meta["src_dir"] = d.name
+            meta.setdefault("slug", md_file.stem)
+            all_articles.append(meta)
+    return all_articles
+
+
+def build_systems(env, site, all_articles, dist):
+    """Genere /systemes/cX/index.html pour les 12 systemes."""
+    systemes_data = load_data("systemes")
+    systemes = systemes_data.get("systemes", {})
+    if not systemes:
+        print("! build_systems: systemes.yaml introuvable ou vide")
+        return
+    template = env.get_template("systeme.html.j2")
+    systemes_dist = dist / "systemes"
+    systemes_dist.mkdir(exist_ok=True)
+    by_system = {}
+    for art in all_articles:
+        sid = art.get("system")
+        if sid:
+            by_system.setdefault(sid, []).append(art)
+    for sid, sys_meta in systemes.items():
+        arts = by_system.get(sid, [])
+        out_dir = systemes_dist / sid
+        out_dir.mkdir(exist_ok=True)
+        html = template.render(site=site, system=sys_meta, articles=arts)
+        (out_dir / "index.html").write_text(html, encoding="utf-8")
+        print(f"+ systemes/{sid}/index.html ({len(arts)} article(s))")
+
+
 def build_vertical(src_dir, dist_dir, env, site, articles, default_layout="article.html.j2"):
     dist_dir.mkdir(exist_ok=True)
     vname = src_dir.name
-
     for item in sorted(src_dir.iterdir()):
         if item.is_dir():
             dest = dist_dir / item.name
@@ -52,7 +97,6 @@ def build_vertical(src_dir, dist_dir, env, site, articles, default_layout="artic
                 shutil.rmtree(dest)
             shutil.copytree(item, dest)
             print(f"+ {vname}/{item.name}/ (static)")
-
         elif item.suffix == ".md":
             meta, body = load_yaml_frontmatter(item)
             layout_name = meta.get("layout", default_layout)
@@ -65,12 +109,9 @@ def build_vertical(src_dir, dist_dir, env, site, articles, default_layout="artic
             slug = meta.get("slug", item.stem)
             out_dir = dist_dir / slug
             out_dir.mkdir(exist_ok=True)
-            html = template.render(
-                site=site, page=meta, content=content_html, articles=articles
-            )
+            html = template.render(site=site, page=meta, content=content_html, articles=articles)
             (out_dir / "index.html").write_text(html, encoding="utf-8")
             print(f"+ {vname}/{slug}/index.html")
-
         elif item.is_file() and item.suffix.lower() not in SKIP_COPY_EXTENSIONS:
             shutil.copy(item, dist_dir / item.name)
             if item.name == "index.html":
@@ -118,7 +159,7 @@ def build():
         (DIST / "index.html").write_text(html, encoding="utf-8")
         print("+ index.html")
 
-    # Pages racine .md (ex: a-propos.md)
+    # Pages racine .md
     for md_file in sorted(SRC.glob("*.md")):
         if md_file.name == "index.md":
             continue
@@ -178,13 +219,30 @@ def build():
             print(f"+ sante-metabolique/{slug}/index.html")
 
     # Tous les autres verticaux (generique)
-    SKIP_VERTICALS = {"_layouts", "_includes", "_data", "assets", "sante-metabolique"}
+    SKIP_VERTICALS = {
+        "_layouts", "_includes", "_data", "assets",
+        "sante-metabolique", "systemes",
+    }
     for vertical_dir in sorted(SRC.iterdir()):
         if not vertical_dir.is_dir():
             continue
         if vertical_dir.name in SKIP_VERTICALS or vertical_dir.name.startswith("_"):
             continue
         build_vertical(vertical_dir, DIST / vertical_dir.name, env, site, articles)
+
+    # Pages systemes auto-generees (/systemes/c1/, /systemes/c2/, ...)
+    all_articles_meta = collect_all_articles(SRC)
+    build_systems(env, site, all_articles_meta, DIST)
+
+    # Copier les fichiers statiques de src/systemes/ (explorer.html, etc.)
+    src_systemes = SRC / "systemes"
+    if src_systemes.exists():
+        dist_systemes = DIST / "systemes"
+        dist_systemes.mkdir(exist_ok=True)
+        for f in src_systemes.iterdir():
+            if f.is_file() and f.suffix.lower() not in SKIP_COPY_EXTENSIONS:
+                shutil.copy(f, dist_systemes / f.name)
+                print(f"+ systemes/{f.name} (static)")
 
     print(f"\nSite genere dans /{DIST}")
 

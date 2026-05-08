@@ -18,6 +18,7 @@ image_info: "pourquoi-grossir-meme-manger-sante-info.webp"
 image_info_alt: "Tableau index insulinique — aliments santé vs aliments réels"
 cta: "methode-reset"
 layout: sante-metabolique.html.j2
+system: c6
 vertical: Santé métabolique
 reading_time: 5 min
 tag: GUIDE PRATIQUE

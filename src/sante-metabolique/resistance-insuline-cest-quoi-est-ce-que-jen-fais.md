@@ -18,6 +18,7 @@ image_info: "resistance-insuline-cest-quoi-est-ce-que-jen-fais-info.webp"
 image_info_alt: "5 symptômes de la résistance à l'insuline — auto-diagnostic visuel"
 cta: "methode-reset"
 layout: sante-metabolique.html.j2
+system: c6
 vertical: Santé métabolique
 reading_time: 5 min
 tag: GUIDE PRATIQUE

@@ -7,6 +7,7 @@ vertical: "Économie forestière"
 tag: "ANALYSE DE DOSSIER"
 slug: "electrification_machinerie_forestiere"
 layout: article.html.j2
+system: c9
 ---
 
 **ÉCONOMIE FORESTIÈRE · TRANSITION ÉNERGÉTIQUE**

@@ -18,6 +18,7 @@ image_info: "jeune-intermittent-cest-quoi-dangereux-info.webp"
 image_info_alt: "Tableau comparatif des protocoles de jeûne 16:8, OMAD et 5:2"
 cta: "methode-reset"
 layout: sante-metabolique.html.j2
+system: c6
 vertical: Santé métabolique
 reading_time: 5 min
 tag: GUIDE PRATIQUE

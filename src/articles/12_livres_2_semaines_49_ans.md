@@ -7,6 +7,7 @@ vertical: "Santé métabolique"
 tag: "TÉMOIGNAGE"
 slug: "12-livres-2-semaines-49-ans"
 layout: article.html.j2
+system: c6
 ---
 
 **SANTÉ MÉTABOLIQUE · HOMME 45+**

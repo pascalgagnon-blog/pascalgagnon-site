@@ -1,0 +1,111 @@
+## Données des 12 systèmes de pensée
+## Utilisé par build.py (build_systems) et systeme.html.j2
+
+systemes:
+  c1:
+    id: c1
+    name: "Persuasion & Marketing"
+    short: "Persuasion"
+    color: "#0063b2"
+    description: "Les mécanismes de l'influence, du copywriting et de la décision d'achat. Comment les messages qui convertissent sont construits."
+    tags: 40
+    concepts: 10
+
+  c2:
+    id: c2
+    name: "Biophysique & Intelligence"
+    short: "Biophysique"
+    color: "#1a85d6"
+    description: "L'intelligence comme phénomène biologique. Énergie, stockage, évolution et la physique de la cognition."
+    tags: 38
+    concepts: 16
+
+  c3:
+    id: c3
+    name: "IA & Contenu"
+    short: "IA & Contenu"
+    color: "#2c5f8a"
+    description: "L'intelligence artificielle comme outil de création et de gouvernance du contenu. Ce que l'IA change dans la production de sens."
+    tags: 20
+    concepts: 12
+
+  c4:
+    id: c4
+    name: "IA & Économie Politique"
+    short: "IA & Éco."
+    color: "#0080cc"
+    description: "L'IA comme force de redistribution économique. Les parallèles historiques, les dynamiques de concentration et les scénarios de rupture."
+    tags: 19
+    concepts: 7
+
+  c5:
+    id: c5
+    name: "Guerre & Géopolitique"
+    short: "Géopolitique"
+    color: "#c0392b"
+    description: "La technologie militaire comme révélateur de rapports de force. Drones, doctrine, mobilisation et la nouvelle géographie du conflit."
+    tags: 18
+    concepts: 8
+
+  c6:
+    id: c6
+    name: "Métabolisme & Santé"
+    short: "Métabolisme"
+    color: "#8e44ad"
+    description: "La biologie du métabolisme appliquée. Insuline, jeûne, énergie cellulaire — la science que votre médecin n'a pas le temps de vous expliquer."
+    tags: 14
+    concepts: 5
+
+  c7:
+    id: c7
+    name: "Géographie & Densité"
+    short: "Géographie"
+    color: "#16a085"
+    description: "Comment la géographie physique contraint — et multiplie — l'activité économique. La densité comme variable systémique."
+    tags: 13
+    concepts: 5
+
+  c8:
+    id: c8
+    name: "Communication & Storytelling"
+    short: "Storytelling"
+    color: "#2980b9"
+    description: "La structure narrative comme technologie. Comment les histoires qui fonctionnent sont construites — et pourquoi les autres échouent."
+    tags: 12
+    concepts: 4
+
+  c9:
+    id: c9
+    name: "Innovation & Énergie"
+    short: "Innovation"
+    color: "#d35400"
+    description: "L'innovation comme réponse à la contrainte énergétique. L'efficience de conversion (η) comme variable systémique de toute rupture technologique."
+    tags: 12
+    concepts: 5
+
+  c10:
+    id: c10
+    name: "Linguistique & Histoire"
+    short: "Linguistique"
+    color: "#7f8c8d"
+    description: "La langue comme mémoire collective. Comment les mots, les noms et l'écriture encodent l'histoire des sociétés."
+    tags: 10
+    concepts: 4
+
+  c11:
+    id: c11
+    name: "Organisation & Culture"
+    short: "Organisation"
+    color: "#27ae60"
+    description: "La culture organisationnelle comme système d'exploitation. Les règles implicites qui survivent aux règles explicites."
+    tags: 8
+    concepts: 3
+
+  c12:
+    id: c12
+    name: "EROEI & Transition"
+    short: "EROEI"
+    color: "#e67e22"
+    description: "Le retour énergétique sur investissement comme contrainte fondamentale de la transition. Pourquoi la substitution est un mythe et la superposition une réalité."
+    tags: 7
+    concepts: 3
