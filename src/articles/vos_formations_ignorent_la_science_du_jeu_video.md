@@ -7,7 +7,7 @@ vertical: "PME & IA"
 tag: "ARTICLE DE FOND"
 slug: "vos-formations-ignorent-la-science-du-jeu-video"
 layout: article.html.j2
-system: c1
+system: c3
 ---
 
 **FORMATION · PME · NEUROSCIENCES · LAC-SAINT-JEAN**

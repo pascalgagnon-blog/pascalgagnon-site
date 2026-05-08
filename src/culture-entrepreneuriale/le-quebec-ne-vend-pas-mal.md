@@ -7,6 +7,7 @@ vertical: "Culture entrepreneuriale"
 tag: "ANALYSE DE DOSSIER"
 slug: "le-quebec-ne-vend-pas-mal"
 layout: article.html.j2
+system: c11
 ---
 
 **LANGUE DES AFFAIRES · CULTURE ENTREPRENEURIALE · SÉRIE : LA LANGUE DES AFFAIRES — ARTICLE 1/3**

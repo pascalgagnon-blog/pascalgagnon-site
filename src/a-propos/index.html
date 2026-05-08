@@ -94,6 +94,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
   transition: transform 0.2s, box-shadow 0.2s;
   position: relative;
 }
+.grappe-carte { cursor: pointer; }
 .grappe-carte:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,99,178,0.1); }
 
 .grappe-header { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.6rem; }
@@ -418,7 +419,7 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
       <!-- CTA -->
       <section class="bio-section reveal">
         <div class="cta-bloc">
-          <a href="/" class="btn-primary">Lire les articles</a>
+          <a href="/systemes/explorer.html" class="btn-primary">Explorer les systèmes →</a>
           <a href="mailto:pascal@pascalgagnon.ca" class="btn-secondary">Me contacter →</a>
         </div>
       </section>
@@ -434,12 +435,12 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
   <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
   <ul class="footer-links">
     <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
-    <li><a href="/">Articles</a></li>
+    <li><a href="/systemes/explorer.html">Explorer</a></li>
     <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
     <li><a href="/a-propos/">À propos</a></li>
     <li><a href="mailto:pascal@pascalgagnon.ca">Contact</a></li>
   </ul>
-  <span class="footer-ref">Économie &amp; Énergie · PME régionales et IA · Santé métabolique</span>
+  <span class="footer-ref">12 systèmes de pensée · Lac-Saint-Jean · Portée provinciale</span>
   <p class="footer-copy">© 2026 Pascal Gagnon</p>
 </footer>
 
@@ -448,6 +449,13 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Cartes systèmes cliquables
+const _sids = ['c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11','c12'];
+document.querySelectorAll('.grappe-carte').forEach((el, i) => {
+  el.addEventListener('click', () => { window.location.href = '/systemes/' + _sids[i] + '/'; });
+});
+
 </script>
 </body>
 </html>

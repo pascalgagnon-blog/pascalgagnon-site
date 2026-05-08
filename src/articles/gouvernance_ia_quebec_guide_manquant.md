@@ -7,7 +7,7 @@ vertical: "Gouvernance IA"
 tag: "ARTICLE DE FOND"
 slug: "gouvernance-ia-quebec-guide-manquant"
 layout: article.html.j2
-system: c3
+system: c4
 ---
 
 **GOUVERNANCE IA · PME & MUNICIPALITÉS**
