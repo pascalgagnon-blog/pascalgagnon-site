@@ -31,7 +31,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--bleu); color: var(--bleu); text-decoration: none; transition: all 0.3s; }
 .nav-cta:hover { background: var(--bleu); color: #fff; }
 .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; }
-.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--noir); margin: 5px 0; transition: transform 0.3s; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--noir); margin: 5px 0; }
 .nav-mobile { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--creme); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
 .nav-mobile.ouvert { display: flex; }
 .nav-mobile a { font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--noir); text-decoration: none; transition: color 0.3s; }
@@ -48,7 +48,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 4.5vw, 5rem); font-weight: 900; line-height: 1.0; margin-bottom: 0.3rem; color: var(--noir); letter-spacing: -0.02em; }
 .hero-title em { font-style: italic; color: var(--bleu); }
 .hero-subtitle { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 1.6vw, 1.4rem); font-weight: 400; font-style: italic; color: var(--gris); margin-bottom: 1.8rem; margin-top: 0.5rem; }
-.hero-verticaux { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 2.8rem; line-height: 1.5; }
+.hero-eyeline { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bleu-clair); margin-bottom: 2.8rem; line-height: 1.5; }
 .hero-actions { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
 .btn-primary { background: var(--bleu); color: #fff; padding: 1rem 2.2rem; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; font-family: 'DM Sans', sans-serif; border: 1px solid var(--bleu); }
 .btn-primary:hover { background: var(--noir); border-color: var(--noir); color: #fff; }
@@ -58,36 +58,64 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 /* ── DIVIDER ── */
 .section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--bleu-clair), transparent); margin: 0 4rem; opacity: 0.4; }
 
+/* ── CONTENT BODY (sidebar + main) ── */
+.content-body { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 210px 1fr; align-items: start; }
+@media (max-width: 900px) { .content-body { grid-template-columns: 1fr; } }
+
+/* ── SIDEBAR SYSTÈMES ── */
+.sys-sidebar { position: sticky; top: 80px; padding: 2.5rem 1.2rem 2.5rem 4rem; border-right: 1px solid var(--gris-clair); max-height: calc(100vh - 80px); overflow-y: auto; }
+@media (max-width: 900px) { .sys-sidebar { display: none; } }
+.sidebar-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gris); margin-bottom: 1rem; }
+.sidebar-sys-list { list-style: none; }
+.sidebar-sys-list li { margin-bottom: 1px; }
+.sidebar-sys-list a { display: flex; align-items: flex-start; gap: 8px; padding: 5px 8px; border-radius: 4px; font-size: 0.7rem; color: var(--noir); text-decoration: none; line-height: 1.3; transition: background 0.15s, color 0.15s; }
+.sidebar-sys-list a:hover { background: var(--bleu-pale); color: var(--bleu); }
+.sys-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+.sidebar-explorer { display: block; margin-top: 1rem; padding: 0.7rem 8px 0; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bleu); text-decoration: none; font-weight: 500; border-top: 1px solid var(--gris-clair); transition: color 0.2s; }
+.sidebar-explorer:hover { color: var(--bleu-clair); }
+
+/* ── MAIN COLUMN ── */
+.main-col { min-width: 0; }
+
 /* ── ARTICLE VEDETTE ── */
-.article-central { padding: 7rem 4rem; max-width: var(--max); margin: 0 auto; }
+.article-central { padding: 5rem 3.5rem; }
 @media (max-width: 768px) { .article-central { padding: 4rem 1.5rem; } }
 .section-label { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bleu-clair); display: block; margin-bottom: 2rem; }
-.central-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+.central-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
 @media (max-width: 768px) { .central-inner { grid-template-columns: 1fr; gap: 2rem; } }
 .central-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bleu); display: block; margin-bottom: 0.8rem; }
 .central-temps { font-size: 0.82rem; color: var(--gris); }
-.central-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+.central-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 2.5vw, 2.6rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
 .central-content h2 em { font-style: italic; color: var(--bleu); }
-.central-chapeau { font-size: 1.15rem; line-height: 1.85; color: #3a3a3a; margin-bottom: 2rem; }
+.central-chapeau { font-size: 1.05rem; line-height: 1.85; color: #3a3a3a; margin-bottom: 2rem; }
 .central-lien { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s; }
 .central-lien:hover { color: var(--noir); }
 
 /* ── ARTICLES RÉCENTS ── */
-.articles-recents { padding: 0 4rem 7rem; max-width: var(--max); margin: 0 auto; }
+.articles-recents { padding: 0 3.5rem 6rem; }
 @media (max-width: 768px) { .articles-recents { padding: 0 1.5rem 4rem; } }
 .articles-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; border-top: 1px solid var(--gris-clair); padding-top: 2.5rem; }
 .articles-header h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
 .voir-tout { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); text-decoration: none; transition: letter-spacing 0.3s; }
 .voir-tout:hover { letter-spacing: 0.22em; }
 .articles-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-@media (max-width: 768px) { .articles-grille { grid-template-columns: 1fr; gap: 2rem; } }
+@media (max-width: 600px) { .articles-grille { grid-template-columns: 1fr; gap: 2rem; } }
 .article-card { display: flex; flex-direction: column; border-top: 2px solid var(--gris-clair); padding-top: 1.8rem; transition: border-color 0.25s; }
 .article-card:hover { border-color: var(--bleu); }
 .card-vertical { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bleu); margin-bottom: 0.8rem; }
-.card-titre { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; line-height: 1.25; color: var(--noir); text-decoration: none; display: block; margin-bottom: 0.9rem; transition: color 0.2s; }
+.card-titre { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.25; color: var(--noir); text-decoration: none; display: block; margin-bottom: 0.9rem; transition: color 0.2s; }
 .article-card:hover .card-titre { color: var(--bleu); }
-.card-extrait { font-size: 1rem; line-height: 1.75; color: #4a4a4a; margin-bottom: 1.2rem; flex: 1; }
+.card-extrait { font-size: 0.95rem; line-height: 1.75; color: #4a4a4a; margin-bottom: 1.2rem; flex: 1; }
 .card-meta { font-size: 0.75rem; color: var(--gris); letter-spacing: 0.04em; }
+
+/* ── SYSTÈMES MOBILE (caché sur desktop) ── */
+.systemes-mobile { display: none; padding: 2.5rem 1.5rem 3rem; border-top: 1px solid var(--gris-clair); }
+@media (max-width: 900px) { .systemes-mobile { display: block; } }
+.sm-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gris); margin-bottom: 1rem; }
+.sm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 1rem; }
+.sm-grid a { display: flex; align-items: flex-start; gap: 7px; padding: 7px 8px; font-size: 0.72rem; color: var(--noir); text-decoration: none; border-radius: 4px; transition: background 0.15s; line-height: 1.3; }
+.sm-grid a:hover { background: var(--bleu-pale); color: var(--bleu); }
+.sm-explorer { display: inline-block; margin-top: 0.8rem; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bleu); text-decoration: none; font-weight: 500; }
 
 /* ── INFOLETTRE ── */
 .newsletter { padding: 7rem 4rem; border-top: 1px solid var(--gris-clair); }
@@ -126,9 +154,7 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 <nav>
   <a href="/" class="nav-logo">Pascal<span>.</span>Gagnon</a>
   <ul class="nav-links">
-    <li><a href="/economie-energie/">Économie &amp; Énergie</a></li>
-    <li><a href="/pme-ia/">PME &amp; IA</a></li>
-    <li><a href="/sante-metabolique/">Santé métabolique</a></li>
+    <li><a href="/systemes/explorer.html">Explorer</a></li>
   </ul>
   <a href="#newsletter" class="nav-cta">Infolettre</a>
   <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
@@ -136,9 +162,7 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 <!-- MENU MOBILE -->
 <div class="nav-mobile" id="navMobile">
   <button class="nav-mobile-close" onclick="toggleMenu()" aria-label="Fermer">&times;</button>
-  <a href="/economie-energie/" onclick="toggleMenu()">Économie &amp; Énergie</a>
-  <a href="/pme-ia/" onclick="toggleMenu()">PME &amp; IA</a>
-  <a href="/sante-metabolique/" onclick="toggleMenu()">Santé métabolique</a>
+  <a href="/systemes/explorer.html" onclick="toggleMenu()">Explorer</a>
   <a href="#newsletter" onclick="toggleMenu()" style="margin-top:1rem;color:var(--bleu);border:1px solid var(--bleu);padding:0.7rem 1.8rem;font-size:0.78rem;letter-spacing:0.1em;">Infolettre</a>
 </div>
 
@@ -148,51 +172,100 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
     <p class="hero-eyebrow">Directeur de compte Desjardins Entreprise · Conseiller municipal, Roberval</p>
     <h1 class="hero-title">Le Lac-Saint-Jean<br><em>se transforme.</em></h1>
     <p class="hero-subtitle">J'observe depuis l'intérieur, j'écris ce que je vois.</p>
-    <p class="hero-verticaux">Économie &amp; Énergie &nbsp;·&nbsp; PME régionales et IA &nbsp;·&nbsp; Santé métabolique</p>
+    <p class="hero-eyeline">12 systèmes de pensée &nbsp;·&nbsp; Économie &amp; Énergie &nbsp;·&nbsp; IA &nbsp;·&nbsp; Santé &nbsp;·&nbsp; Géopolitique</p>
     <div class="hero-actions">
-      <a href="/blog/" class="btn-primary">Lire les articles</a>
-      <a href="/a-propos/" class="btn-secondary">À propos →</a>
+      <a href="/systemes/explorer.html" class="btn-primary">Explorer les systèmes</a>
+      <a href="#newsletter" class="btn-secondary">Infolettre →</a>
     </div>
   </div>
 </section>
 
 <div class="section-divider"></div>
 
-<!-- ARTICLE VEDETTE -->
-<section class="article-central reveal">
-  <span class="section-label">À lire en premier ——</span>
-  <div class="central-inner">
-    <div>
-      <span class="central-tag">◆ {{ articles.featured.vertical }}</span>
-      <span class="central-temps">Lecture : ~{{ articles.featured.reading_time }}</span>
-    </div>
-    <div class="central-content">
-      <h2>{{ articles.featured.title }}</h2>
-      <p class="central-chapeau">{{ articles.featured.chapeau }}</p>
-      <a href="{{ articles.featured.url if articles.featured.url else '/articles/' + articles.featured.slug + '/' }}" class="central-lien">Lire l'article →</a>
-    </div>
-  </div>
-</section>
+<!-- CONTENU : SIDEBAR + MAIN -->
+<div class="content-body">
 
-<div class="section-divider"></div>
+  <!-- SIDEBAR GAUCHE — 12 systèmes (desktop uniquement) -->
+  <aside class="sys-sidebar">
+    <div class="sidebar-label">Systèmes de pensée</div>
+    <ul class="sidebar-sys-list">
+      <li><a href="/systemes/c1/"><span class="sys-dot" style="background:#0063b2"></span>Persuasion &amp; Marketing</a></li>
+      <li><a href="/systemes/c2/"><span class="sys-dot" style="background:#1a85d6"></span>Biophysique &amp; Intelligence</a></li>
+      <li><a href="/systemes/c3/"><span class="sys-dot" style="background:#2c5f8a"></span>IA &amp; Contenu</a></li>
+      <li><a href="/systemes/c4/"><span class="sys-dot" style="background:#0080cc"></span>IA &amp; Économie Politique</a></li>
+      <li><a href="/systemes/c5/"><span class="sys-dot" style="background:#c0392b"></span>Guerre &amp; Géopolitique</a></li>
+      <li><a href="/systemes/c6/"><span class="sys-dot" style="background:#8e44ad"></span>Métabolisme &amp; Santé</a></li>
+      <li><a href="/systemes/c7/"><span class="sys-dot" style="background:#16a085"></span>Géographie &amp; Densité</a></li>
+      <li><a href="/systemes/c8/"><span class="sys-dot" style="background:#2980b9"></span>Communication &amp; Storytelling</a></li>
+      <li><a href="/systemes/c9/"><span class="sys-dot" style="background:#d35400"></span>Innovation &amp; Énergie</a></li>
+      <li><a href="/systemes/c10/"><span class="sys-dot" style="background:#7f8c8d"></span>Linguistique &amp; Histoire</a></li>
+      <li><a href="/systemes/c11/"><span class="sys-dot" style="background:#27ae60"></span>Organisation &amp; Culture</a></li>
+      <li><a href="/systemes/c12/"><span class="sys-dot" style="background:#e67e22"></span>EROEI &amp; Transition</a></li>
+    </ul>
+    <a href="/systemes/explorer.html" class="sidebar-explorer">Explorer la carte →</a>
+  </aside>
 
-<!-- ARTICLES RÉCENTS -->
-<section class="articles-recents reveal">
-  <div class="articles-header">
-    <h2>Articles récents</h2>
-    <a href="/blog/" class="voir-tout">Tous les articles →</a>
-  </div>
-  <div class="articles-grille">
-    {% for article in articles.recent %}
-    <article class="article-card">
-      <span class="card-vertical">{{ article.vertical }}</span>
-      <a href="{{ article.url if article.url else '/articles/' + article.slug + '/' }}" class="card-titre">{{ article.title }}</a>
-      <p class="card-extrait">{{ article.chapeau }}</p>
-      <span class="card-meta">{{ article.date }} &nbsp;·&nbsp; {{ article.reading_time }}</span>
-    </article>
-    {% endfor %}
-  </div>
-</section>
+  <!-- COLONNE PRINCIPALE -->
+  <div class="main-col">
+
+    <!-- ARTICLE VEDETTE -->
+    <section class="article-central reveal">
+      <span class="section-label">À lire en premier ——</span>
+      <div class="central-inner">
+        <div>
+          <span class="central-tag">◆ {{ articles.featured.vertical }}</span>
+          <span class="central-temps">Lecture : ~{{ articles.featured.reading_time }}</span>
+        </div>
+        <div class="central-content">
+          <h2>{{ articles.featured.title }}</h2>
+          <p class="central-chapeau">{{ articles.featured.chapeau }}</p>
+          <a href="{{ articles.featured.url if articles.featured.url else '/articles/' + articles.featured.slug + '/' }}" class="central-lien">Lire l'article →</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" style="margin:0 3.5rem;"></div>
+
+    <!-- ARTICLES RÉCENTS -->
+    <section class="articles-recents reveal">
+      <div class="articles-header">
+        <h2>Articles récents</h2>
+        <a href="/systemes/explorer.html" class="voir-tout">Explorer →</a>
+      </div>
+      <div class="articles-grille">
+        {% for article in articles.recent %}
+        <article class="article-card">
+          <span class="card-vertical">{{ article.vertical }}</span>
+          <a href="{{ article.url if article.url else '/articles/' + article.slug + '/' }}" class="card-titre">{{ article.title }}</a>
+          <p class="card-extrait">{{ article.chapeau }}</p>
+          <span class="card-meta">{{ article.date }} &nbsp;·&nbsp; {{ article.reading_time }}</span>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- SYSTÈMES MOBILE (caché sur desktop, affiché sur mobile sous les articles) -->
+    <section class="systemes-mobile">
+      <div class="sm-label">12 systèmes de pensée</div>
+      <div class="sm-grid">
+        <a href="/systemes/c1/"><span class="sys-dot" style="background:#0063b2"></span>Persuasion &amp; Marketing</a>
+        <a href="/systemes/c2/"><span class="sys-dot" style="background:#1a85d6"></span>Biophysique &amp; Intelligence</a>
+        <a href="/systemes/c3/"><span class="sys-dot" style="background:#2c5f8a"></span>IA &amp; Contenu</a>
+        <a href="/systemes/c4/"><span class="sys-dot" style="background:#0080cc"></span>IA &amp; Économie Politique</a>
+        <a href="/systemes/c5/"><span class="sys-dot" style="background:#c0392b"></span>Guerre &amp; Géopolitique</a>
+        <a href="/systemes/c6/"><span class="sys-dot" style="background:#8e44ad"></span>Métabolisme &amp; Santé</a>
+        <a href="/systemes/c7/"><span class="sys-dot" style="background:#16a085"></span>Géographie &amp; Densité</a>
+        <a href="/systemes/c8/"><span class="sys-dot" style="background:#2980b9"></span>Communication &amp; Storytelling</a>
+        <a href="/systemes/c9/"><span class="sys-dot" style="background:#d35400"></span>Innovation &amp; Énergie</a>
+        <a href="/systemes/c10/"><span class="sys-dot" style="background:#7f8c8d"></span>Linguistique &amp; Histoire</a>
+        <a href="/systemes/c11/"><span class="sys-dot" style="background:#27ae60"></span>Organisation &amp; Culture</a>
+        <a href="/systemes/c12/"><span class="sys-dot" style="background:#e67e22"></span>EROEI &amp; Transition</a>
+      </div>
+      <a href="/systemes/explorer.html" class="sm-explorer">Explorer la carte complète →</a>
+    </section>
+
+  </div><!-- /.main-col -->
+</div><!-- /.content-body -->
 
 <div class="section-divider"></div>
 
@@ -216,12 +289,11 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
   <a href="/" class="footer-logo">Pascal<span>.</span>Gagnon</a>
   <ul class="footer-links">
     <li><a href="https://www.linkedin.com/in/pascalgagnon/" target="_blank">LinkedIn</a></li>
-    <li><a href="/blog/">Articles</a></li>
+    <li><a href="/systemes/explorer.html">Explorer</a></li>
     <li><a href="https://histoire.pascalgagnon.ca/">Histoire · Saints</a></li>
     <li><a href="/a-propos/">À propos</a></li>
-    <li><a href="/a-propos/">Contact</a></li>
   </ul>
-  <span class="footer-ref">Économie &amp; Énergie · PME régionales et IA · Santé métabolique</span>
+  <span class="footer-ref">12 systèmes de pensée · Lac-Saint-Jean</span>
   <p class="footer-copy">© 2026 Pascal Gagnon</p>
 </footer>
 

@@ -256,7 +256,7 @@ nav {
   <a href="/" class="nav-logo">Pascal <span>Gagnon</span></a>
   <ul class="nav-links">
     <li><a href="/systemes/explorer.html" class="active">Explorer</a></li>
-    <li><a href="/a-propos/">À propos</a></li>
+    <li><a href="/#newsletter">Infolettre</a></li>
   </ul>
 </nav>
 
@@ -320,9 +320,7 @@ const SYSTEMES = [
     id: 1, code: "c1",
     name: "Persuasion & Marketing", short: "Persuasion",
     tags: 40, concepts: 10, color: "#0063b2",
-    articles: [
-      { title: "Vos formations ignorent la science du jeu vidéo", url: "/articles/vos_formations_ignorent_la_science_du_jeu_video/" }
-    ],
+    articles: [],
     concepts_list: [
       "Le framework PASTOR — toute copy qui convertit suit la même structure",
       "En publicité, les consonnes explosives accrochent l'attention",
@@ -333,9 +331,7 @@ const SYSTEMES = [
     id: 2, code: "c2",
     name: "Biophysique & Intelligence", short: "Biophysique",
     tags: 38, concepts: 16, color: "#1a85d6",
-    articles: [
-      { title: "12 livres en 2 semaines à 49 ans", url: "/articles/12_livres_2_semaines_49_ans/" }
-    ],
+    articles: [],
     concepts_list: [
       "La capacité de stocker de la nourriture génère le temps libre",
       "Smil — l'énergie ne se substitue pas, elle se superpose",
@@ -347,7 +343,7 @@ const SYSTEMES = [
     name: "IA & Contenu", short: "IA & Contenu",
     tags: 20, concepts: 12, color: "#2c5f8a",
     articles: [
-      { title: "Gouvernance IA au Québec — le guide manquant", url: "/articles/gouvernance_ia_quebec_guide_manquant/" }
+      { title: "Vos formations ignorent la science du jeu vidéo", url: "/articles/vos_formations_ignorent_la_science_du_jeu_video/" }
     ],
     concepts_list: [
       "Le contenu authentique va devenir rare — et donc précieux",
@@ -360,7 +356,8 @@ const SYSTEMES = [
     name: "IA & Économie Politique", short: "IA & Éco.",
     tags: 19, concepts: 7, color: "#0080cc",
     articles: [
-      { title: "1929, l'IA et l'effondrement-redistribution", url: "/articles/1929-ia-effondrement-redistribution/" }
+      { title: "1929, l'IA et l'effondrement-redistribution", url: "/articles/1929-ia-effondrement-redistribution/" },
+      { title: "Gouvernance IA au Québec — le guide manquant", url: "/articles/gouvernance_ia_quebec_guide_manquant/" }
     ],
     concepts_list: [
       "L'IA reproduit la structure économique de 1925-1929",
@@ -383,7 +380,11 @@ const SYSTEMES = [
     id: 6, code: "c6",
     name: "Métabolisme & Santé", short: "Métabolisme",
     tags: 14, concepts: 5, color: "#8e44ad",
-    articles: [],
+    articles: [
+      { title: "12 livres en 2 semaines à 49 ans", url: "/articles/12_livres_2_semaines_49_ans/" },
+      { title: "C'est quoi le jeûne intermittent — et est-ce dangereux?", url: "/sante-metabolique/jeune-intermittent-cest-quoi-dangereux/" },
+      { title: "Résistance à l'insuline : c'est quoi?", url: "/sante-metabolique/resistance-insuline-cest-quoi-est-ce-que-jen-fais/" }
+    ],
     concepts_list: [
       "La course à jeun déclenche la GH — lipolyse et préservation musculaire",
       "Les cellules cancéreuses sont dépendantes du glucose",
@@ -416,9 +417,7 @@ const SYSTEMES = [
     id: 9, code: "c9",
     name: "Innovation & Énergie", short: "Innovation",
     tags: 12, concepts: 5, color: "#d35400",
-    articles: [
-      { title: "Électrification de la machinerie forestière", url: "/articles/electrification_machinerie_forestiere/" }
-    ],
+    articles: [],
     concepts_list: [
       "Le coefficient η — l'efficience de conversion comme variable systémique",
       "La contrainte comme condition nécessaire de la rupture",
@@ -440,7 +439,9 @@ const SYSTEMES = [
     id: 11, code: "c11",
     name: "Organisation & Culture", short: "Organisation",
     tags: 8, concepts: 3, color: "#27ae60",
-    articles: [],
+    articles: [
+      { title: "Le Québec ne vend pas mal — il vend différemment", url: "/culture-entrepreneuriale/le-quebec-ne-vend-pas-mal/" }
+    ],
     concepts_list: [
       "La culture est le système d'exploitation de l'organisation",
       "Les règles implicites survivent aux règles explicites",
@@ -451,7 +452,9 @@ const SYSTEMES = [
     id: 12, code: "c12",
     name: "EROEI & Transition", short: "EROEI",
     tags: 7, concepts: 3, color: "#e67e22",
-    articles: [],
+    articles: [
+      { title: "L'électrification des chantiers forestiers québécois", url: "/articles/electrification_machinerie_forestiere/" }
+    ],
     concepts_list: [
       "L'EROEI du solaire PV chute avec la diffusion de masse",
       "La transition énergétique est une superposition, pas une substitution",
@@ -461,7 +464,7 @@ const SYSTEMES = [
 ];
 
 // ── Sidebar : 4 systèmes prioritaires par défaut ────────────────────
-const SIDEBAR_DEFAULT = [SYSTEMES[5], SYSTEMES[1], SYSTEMES[2], SYSTEMES[8]];
+const SIDEBAR_DEFAULT = [SYSTEMES[3], SYSTEMES[5], SYSTEMES[2], SYSTEMES[11]];
 let showAll = false;
 let selectedId = null;
 
@@ -602,6 +605,7 @@ function selectSystem(id) {
     <div class="detail-header" style="border-left-color:${s.color}">
       <div class="detail-name">${s.name}</div>
       <div class="detail-meta">${s.tags} tags · ${s.concepts} concepts · ${s.code.toUpperCase()}</div>
+      <a href="/systemes/${s.code}/" style="display:inline-block;margin-top:6px;font-size:0.68rem;color:var(--bleu);text-decoration:none;font-weight:500;letter-spacing:0.08em;">Voir tous les articles →</a>
     </div>
     <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gris);margin-bottom:6px">Articles publiés</div>
     <div class="detail-articles">${articlesHTML}</div>
@@ -612,3 +616,4 @@ function selectSystem(id) {
 </script>
 </body>
 </html>
+                                                
