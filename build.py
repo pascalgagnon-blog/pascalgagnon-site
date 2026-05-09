@@ -42,22 +42,35 @@ def load_data(name):
 
 
 def collect_all_articles(src):
-    """Scanne tous les .md et retourne ceux qui ont un champ system:."""
+    """Scanne tous les .md et retourne ceux qui ont un champ system:.
+    Cherche d'abord dans src/systemes/cX/ (nouvelle architecture),
+    puis dans les anciens verticaux restants (retro-compatibilite).
+    """
     all_articles = []
-    scan_dirs = [src / "articles", src / "sante-metabolique"]
-    skip = {"_layouts","_includes","_data","assets","sante-metabolique","articles",
-            "systemes","reset-method","blog","posts"}
+    scan_dirs = []
+
+    # Nouvelle architecture : src/systemes/cX/
+    src_systemes = src / "systemes"
+    if src_systemes.exists():
+        for cx_dir in sorted(src_systemes.iterdir()):
+            if cx_dir.is_dir():
+                scan_dirs.append((cx_dir, "systemes/" + cx_dir.name))
+
+    # Anciens verticaux (retro-compatibilite si des .md y restent)
+    skip = {"_layouts", "_includes", "_data", "assets", "sante-metabolique", "articles",
+            "systemes", "reset-method", "blog", "posts"}
     for d in sorted(src.iterdir()):
         if d.is_dir() and d.name not in skip and not d.name.startswith("_"):
-            scan_dirs.append(d)
-    for d in scan_dirs:
+            scan_dirs.append((d, d.name))
+
+    for d, src_dir_name in scan_dirs:
         if not d.exists():
             continue
         for md_file in sorted(d.glob("*.md")):
             meta, _ = load_yaml_frontmatter(md_file)
             if not meta.get("system"):
                 continue
-            meta["src_dir"] = d.name
+            meta["src_dir"] = src_dir_name
             meta.setdefault("slug", md_file.stem)
             all_articles.append(meta)
     return all_articles
@@ -84,7 +97,49 @@ def build_systems(env, site, all_articles, dist):
         out_dir.mkdir(exist_ok=True)
         html = template.render(site=site, system=sys_meta, articles=arts)
         (out_dir / "index.html").write_text(html, encoding="utf-8")
-        print(f"+ systemes/{sid}/index.html ({len(arts)} article(s))")
+        print("+ systemes/" + sid + "/index.html (" + str(len(arts)) + " article(s))")
+
+
+def build_system_articles(env, site, articles_data, dist):
+    """Genere /systemes/cX/[slug]/index.html pour chaque article .md dans src/systemes/cX/.
+    Supporte le layout sante-metabolique.html.j2 (injection d image entre sections).
+    """
+    src_systemes = SRC / "systemes"
+    if not src_systemes.exists():
+        return
+    for cx_dir in sorted(src_systemes.iterdir()):
+        if not cx_dir.is_dir():
+            continue
+        for md_file in sorted(cx_dir.glob("*.md")):
+            meta, body = load_yaml_frontmatter(md_file)
+            layout_name = meta.get("layout", "article.html.j2")
+            try:
+                template = env.get_template(layout_name)
+            except Exception:
+                template = env.get_template("article.html.j2")
+            md.reset()
+            content_html = md.convert(body)
+            content_before = content_html
+            content_after = ""
+            if layout_name == "sante-metabolique.html.j2" and meta.get("image_info"):
+                hr_tag = "<hr />"
+                split_position = meta.get("image_info_after_section", 2)
+                hr_parts = content_html.split(hr_tag)
+                if len(hr_parts) > split_position:
+                    content_before = hr_tag.join(hr_parts[:split_position]) + hr_tag
+                    content_after = hr_tag.join(hr_parts[split_position:])
+            slug = meta.get("slug", md_file.stem)
+            out_dir = dist / "systemes" / cx_dir.name / slug
+            out_dir.mkdir(parents=True, exist_ok=True)
+            html = template.render(
+                site=site, page=meta,
+                content=content_html,
+                content_before=content_before,
+                content_after=content_after,
+                articles=articles_data
+            )
+            (out_dir / "index.html").write_text(html, encoding="utf-8")
+            print("+ systemes/" + cx_dir.name + "/" + slug + "/index.html")
 
 
 def build_vertical(src_dir, dist_dir, env, site, articles, default_layout="article.html.j2"):
@@ -96,7 +151,7 @@ def build_vertical(src_dir, dist_dir, env, site, articles, default_layout="artic
             if dest.exists():
                 shutil.rmtree(dest)
             shutil.copytree(item, dest)
-            print(f"+ {vname}/{item.name}/ (static)")
+            print("+ " + vname + "/" + item.name + "/ (static)")
         elif item.suffix == ".md":
             meta, body = load_yaml_frontmatter(item)
             layout_name = meta.get("layout", default_layout)
@@ -111,11 +166,11 @@ def build_vertical(src_dir, dist_dir, env, site, articles, default_layout="artic
             out_dir.mkdir(exist_ok=True)
             html = template.render(site=site, page=meta, content=content_html, articles=articles)
             (out_dir / "index.html").write_text(html, encoding="utf-8")
-            print(f"+ {vname}/{slug}/index.html")
+            print("+ " + vname + "/" + slug + "/index.html")
         elif item.is_file() and item.suffix.lower() not in SKIP_COPY_EXTENSIONS:
             shutil.copy(item, dist_dir / item.name)
             if item.name == "index.html":
-                print(f"+ {vname}/index.html (static)")
+                print("+ " + vname + "/index.html (static)")
 
 
 def build():
@@ -144,7 +199,7 @@ def build():
     site = load_data("site")
     articles = load_data("articles")
 
-    # Page d'accueil
+    # Page d accueil
     index_html_path = SRC / "index.html"
     index_md_path = SRC / "index.md"
     if index_html_path.exists():
@@ -176,9 +231,9 @@ def build():
         out_dir.mkdir(exist_ok=True)
         html = template.render(site=site, page=meta, content=content_html, articles=articles)
         (out_dir / "index.html").write_text(html, encoding="utf-8")
-        print(f"+ {slug}/index.html")
+        print("+ " + slug + "/index.html")
 
-    # Sante-metabolique (special: injection image entre sections)
+    # Sante-metabolique (retro-compatibilite + redirections)
     sante_src = SRC / "sante-metabolique"
     if sante_src.exists():
         sante_dist = DIST / "sante-metabolique"
@@ -216,7 +271,16 @@ def build():
                 articles=articles
             )
             (out_dir / "index.html").write_text(html, encoding="utf-8")
-            print(f"+ sante-metabolique/{slug}/index.html")
+            print("+ sante-metabolique/" + slug + "/index.html")
+        # Copier les redirections meta-refresh (sous-dossiers avec index.html)
+        for sub in sorted(sante_src.iterdir()):
+            if sub.is_dir():
+                redirect_index = sub / "index.html"
+                if redirect_index.exists():
+                    dest = sante_dist / sub.name
+                    dest.mkdir(exist_ok=True)
+                    shutil.copy(redirect_index, dest / "index.html")
+                    print("+ sante-metabolique/" + sub.name + "/index.html (redirect)")
 
     # Tous les autres verticaux (generique)
     SKIP_VERTICALS = {
@@ -234,6 +298,9 @@ def build():
     all_articles_meta = collect_all_articles(SRC)
     build_systems(env, site, all_articles_meta, DIST)
 
+    # Articles individuels dans /systemes/cX/[slug]/
+    build_system_articles(env, site, articles, DIST)
+
     # Copier les fichiers statiques de src/systemes/ (explorer.html, etc.)
     src_systemes = SRC / "systemes"
     if src_systemes.exists():
@@ -242,9 +309,9 @@ def build():
         for f in src_systemes.iterdir():
             if f.is_file() and f.suffix.lower() not in SKIP_COPY_EXTENSIONS:
                 shutil.copy(f, dist_systemes / f.name)
-                print(f"+ systemes/{f.name} (static)")
+                print("+ systemes/" + f.name + " (static)")
 
-    print(f"\nSite genere dans /{DIST}")
+    print("\nSite genere dans /" + str(DIST))
 
 
 if __name__ == "__main__":
