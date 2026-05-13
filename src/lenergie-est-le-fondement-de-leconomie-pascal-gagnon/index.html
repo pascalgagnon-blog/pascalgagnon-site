@@ -127,7 +127,8 @@ blockquote cite { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppe
 .author-card { background: var(--bleu-pale); border: 1px solid rgba(0,99,178,0.2); border-top: 3px solid var(--bleu); padding: 1.5rem; margin-top: 3rem; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start; }
 .author-initial { width: 52px; height: 52px; background: var(--bleu); color: #fff; font-family: 'Playfair Display', serif; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; font-style: italic; }
 .author-info h4 { margin-top: 0; font-size: 0.88rem; color: var(--noir); font-weight: 500; letter-spacing: 0.04em; }
-.author-info p { font-size: 0.82rem; color: var(--gris); margin-bottom: 0; text-indent: 0 !important; }
+.author-info p { font-size: 0.82rem; color: var(--gris); margin-bottom: 0.9rem; text-indent: 0 !important; }
+.author-info p:last-child { margin-bottom: 0; }
 
 /* Lien retour */
 .retour { padding: 3rem 2rem 0; max-width: var(--max); margin: 0 auto; }
@@ -256,12 +257,13 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
     <p>Une modification mineure mais fondamentale de la fonction de production révèle ce que la théorie standard masque :</p>
 
     <div class="formula">
-      <span class="eq">Y = f ( K, E·N )</span>
+      <span class="eq">Y = f ( K, EN × η )</span>
       <span class="legend">
         Y = Production totale<br>
         K = Capital<br>
         N = Travail humain<br>
-        E = <strong>Énergie</strong> (en remplacement du facteur A)
+        E = <strong>Énergie</strong> (en remplacement du facteur A)<br>
+        η = Coefficient d'efficacité institutionnelle
       </span>
     </div>
 
@@ -341,6 +343,24 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
       </svg>
       <p class="figure-caption">La corrélation entre consommation d'énergie primaire per capita et PIB per capita est remarquablement stable de 1820 à 1973. Après le premier choc pétrolier, le PIB continue d'augmenter en termes nominaux, mais la croissance réelle de la productivité ralentit significativement — ce que l'économiste Tyler Cowen a nommé la « grande stagnation ».<sup><a href="#ref7">[7]</a></sup></p>
     </div>
+
+    <h3>Le paramètre manquant : η, l'efficacité institutionnelle</h3>
+
+    <p>Hall et Klitgaard s'arrêtent à <em>Y = f(K, E·N)</em>. Cette formule est puissante, mais elle contient une lacune : deux sociétés disposant du même stock de capital, de la même main-d'œuvre et du même accès à l'énergie peuvent produire des résultats économiques radicalement différents. La Norvège et le Nigeria sont tous deux d'importants producteurs pétroliers. L'URSS des années 1980 consommait autant d'énergie par habitant que les États-Unis. Pourtant, les écarts de production sont abyssaux.</p>
+
+    <p>Ce que la formule ne capture pas, c'est la qualité des institutions — leur capacité à convertir efficacement l'énergie disponible en production réelle. C'est ce paramètre, noté η (êta), que j'ai introduit pour compléter la fonction :</p>
+
+    <div class="formula">
+      <span class="eq">Y = f ( K, EN × η )</span>
+    </div>
+
+    <p>η n'est pas un facteur résiduel mystérieux comme le « A » néoclassique. C'est un coefficient mesurable : qualité du droit des contrats, efficacité de l'allocation du capital, corruption, cohésion sociale, capacité d'adaptation technologique. Un η faible signifie que l'énergie disponible se dissipe en rentes, en inefficacités bureaucratiques, en conflits — avant même d'atteindre la production.</p>
+
+    <p>L'intuition s'est cristallisée en analysant un cas concret : le conflit russo-ukrainien depuis 2022. Un drone FPV ukrainien coûte entre 400 et 800 $ US et peut neutraliser des chars, des systèmes TOR et BUK, des stations radar, des véhicules blindés et des citernes dont la valeur cumulée dépasse de mille fois son coût de fabrication. L'EROI militaire de ce système est extraordinaire — mais ce qui le rend possible, c'est un η institutionnel élevé côté ukrainien : adaptation rapide, décentralisation des décisions tactiques, intégration civile-militaire des filières de production. La Russie dispose d'un stock d'énergie et de capital sans commune mesure — et pourtant son rendement au combat est structurellement inférieur, précisément parce que son η institutionnel comprime la conversion de ces ressources en capacité réelle.</p>
+
+    <p>Ce rapport d'efficience favorable à l'acteur institutionnellement agile n'est pas apparu en 2022. En Afghanistan (1986–1989), les missiles Stinger fournis par les États-Unis aux Moudjahidines — au coût unitaire d'environ 38 000 $ — ont neutralisé des hélicoptères Mi-24 Hind soviétiques dont le coût de remplacement dépassait dix millions de dollars. En détruisant la supériorité aérienne qui rendait l'URSS quasi-imbattable dans ce terrain, ces lance-missiles portatifs ont contribué à mettre en échec une puissance militaire dont le budget et l'avantage matériel étaient sans commune mesure avec celui des insurgés. Même mécanique : un η institutionnel élevé — connaissance du terrain, flexibilité tactique, motivation — qui compense un rapport de force matériel de un contre cent.</p>
+
+    <p>Ce que l'Ukraine démontre sur un champ de bataille en 2024, l'Afghanistan l'avait démontré en 1989 : l'énergie est nécessaire, mais η détermine combien de cette énergie se transforme réellement en richesse — ou en victoire.</p>
 
     <h3>Le principe du premier thermodynamique appliqué à l'économie</h3>
 
@@ -586,8 +606,13 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
   <div class="author-card">
     <div class="author-initial">P</div>
     <div class="author-info">
-      <h4>Pascal Gagnon</h4>
-      <p>Conseiller municipal, Ville de Roberval. Directeur de compte Desjardins Entreprise, Lac-Saint-Jean. Auteur du rapport <em>Le déclin de l'économie pétrolière</em> (UQAC, 2006).</p>
+      <h4>Note personnelle — Pascal Gagnon</h4>
+      <p>En 2006, je déposais un rapport d'économie à l'UQAC sans mesurer pleinement ce que je venais de construire. Ce que je croyais être une analyse conjoncturelle du pétrole était en réalité un cadre analytique que j'allais appliquer, presque instinctivement, à presque tout le reste.</p>
+      <p>L'histoire romaine, la fonction de l'or et de l'argent comme instruments de stockage et de transport d'énergie condensée à travers le temps et l'espace, les dynamiques des conflits armés — tout finit par passer dans ce prisme. L'énergie disponible, la qualité des institutions qui la convertissent, l'écart entre les deux : la formule tourne en arrière-plan de mes analyses depuis vingt ans, même quand je ne la nomme pas.</p>
+      <p>Mais le cadre avait une lacune. La variable η — l'efficacité institutionnelle — fonctionne bien dans des conditions normales. Elle se dérègle quand les économies sont poussées à la limite, notamment en temps de guerre, là où les contraintes deviennent existentielles et où les règles habituelles du jeu sont suspendues.</p>
+      <p>C'est en observant la guerre en Ukraine que la formule a demandé à être complétée. D'un côté, une industrie de drones décentralisée, itérative, nourrie par des milliers de petites équipes qui apprennent et s'adaptent en temps réel. De l'autre, une machine de guerre centralisée, lourde, lente à intégrer ses propres leçons. Le différentiel de rendement n'était pas seulement institutionnel — il était d'un autre ordre.</p>
+      <p>Cette réflexion, comme beaucoup d'autres, m'est venue en marchant. J'accumule chaque semaine plusieurs heures de marche et de podcasts, et c'est souvent dans ce mouvement que les concepts issus de domaines différents s'entrechoquent et produisent quelque chose d'inattendu. Les outils d'IA sont devenus le filet qui attrape ces intuitions avant qu'elles ne disparaissent — et parfois, comme ici, qui aide à les formaliser.</p>
+      <p><em>Pascal Gagnon, Roberval, 2025</em></p>
     </div>
   </div>
 
