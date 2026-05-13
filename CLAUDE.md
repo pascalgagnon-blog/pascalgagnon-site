@@ -1,6 +1,6 @@
 # Architecture technique — Pascal Gagnon
 
-**Dernière mise à jour :** 2026-04-19 (correction chemin vault + ajout sante-metabolique layout + section Méthode Reset/Brevo)
+**Dernière mise à jour :** 2026-05-08 (architecture 12 systèmes, nav Explorer/Infolettre, sidebar homepage)
 
 ---
 
@@ -29,9 +29,6 @@ n8n.pascalgagnon.ca      → N8N + PostgreSQL → Docker → Dokploy → VPS Hos
 | **Déploiement** | Modifier `src/` → `git push` → Dokploy webhook → redéploie automatiquement |
 | **Webhook Dokploy** | `http://187.124.233.114:3000/api/deploy/CgUrlmKfMWMnO8-c0JGin` |
 
-> ⚠️ Netlify supprimé le 2026-03-24 — ne plus utiliser `75.2.60.5` ni `pascalgagnon-site.netlify.app`
-> ⚠️ `netlify.toml` encore présent à la racine du vault — fichier obsolète, peut être supprimé
-
 **Page d'accueil — logique `build.py` :**
 - `src/index.md` → rendu via `src/_layouts/home.html.j2` (Jinja2 + données `articles.yaml`)
 - L'accueil se met à jour automatiquement en modifiant `src/_data/articles.yaml`
@@ -39,21 +36,75 @@ n8n.pascalgagnon.ca      → N8N + PostgreSQL → Docker → Dokploy → VPS Hos
 
 **Articles — workflow complet :**
 1. Rédiger le `.md` dans `src/articles/[slug].md` avec frontmatter YAML (`layout: article.html.j2`)
-2. Mettre à jour `src/_data/articles.yaml` (champs `featured` et `recent`)
-3. `git push` → Dokploy redéploie automatiquement
+2. Ajouter le champ `system: cX` (c1 à c12) dans le frontmatter — **obligatoire**
+3. Mettre à jour `src/_data/articles.yaml` (champs `featured` et `recent`)
+4. `git push` → Dokploy redéploie automatiquement
 - Template article : `src/_layouts/article.html.j2` (hero sombre + corps crème, palette inline)
 - Le H1 du corps `.md` est masqué par CSS — le titre est affiché dans le hero via `page.title`
+- Une pill "Système de pensée" est affichée en fin d'article, avec lien vers `/systemes/cX/`
+
+**Champ `system` — frontmatter obligatoire :**
+- `system: c3` → IA & Contenu (vos_formations_ignorent_la_science_du_jeu_video)
+- `system: c4` → IA & Économie Politique (1929-ia, gouvernance_ia)
+- `system: c6` → Métabolisme & Santé (12_livres + tous les articles sante-metabolique/)
+- `system: c11` → Organisation & Culture (culture-entrepreneuriale/le-quebec-ne-vend-pas-mal)
+- `system: c12` → EROEI & Transition (electrification_machinerie_forestiere)
+- `build.py` scanne automatiquement tous les `.md` avec `system:` pour peupler les pages hub
 
 **Layouts disponibles (`src/_layouts/`) :**
 - `base.html.j2` — structure de base (head, nav, footer)
-- `home.html.j2` — page d'accueil (featured + recent depuis `articles.yaml`)
+- `home.html.j2` — page d'accueil (sidebar 12 systèmes desktop + featured + recent depuis `articles.yaml`)
 - `article.html.j2` — article standard (hero sombre + corps crème)
+- `systeme.html.j2` — page hub par système (hero coloré + liste articles + CTA explorer)
 - `sante-metabolique.html.j2` — layout spécifique vertical santé métabolique
+
+**Navigation (tous les templates) :**
+- Desktop : logo · Explorer (`/systemes/explorer.html`) · Infolettre CTA (`/#newsletter`)
+- Mobile : hamburger → Explorer · Infolettre
+- ⚠️ Les anciens liens Économie/PME/Santé/À propos ont été retirés de la nav principale
+
+**Page d'accueil — structure :**
+- Hero : pleine largeur (inchangé)
+- Corps : grille `[210px sidebar | 1fr contenu]` sur desktop
+  - Gauche (sticky) : liste des 12 systèmes avec points colorés, lien vers `/systemes/cX/`
+  - Droite : article vedette + articles récents
+- Mobile : sidebar masquée → liste compacte 2 colonnes affichée sous les articles récents
+- Newsletter : pleine largeur sous la grille
 
 **Palette (inline dans les templates, pas dans main.css) :**
 - `--creme: #f5f0e8` · `--noir: #0a0a0a` · `--bleu: #0063b2` · `--bleu-clair: #4d92c9` · `--bleu-pale: #e6eff7`
 
 **Vault local :** `C:\Users\Acer\Documents\Claude_rajotte\pascalgagnon-site` → synchro manuelle vers repo GitHub
+
+---
+
+## Architecture 12 systèmes — pascalgagnon.ca
+
+Depuis mai 2026 : tous les contenus sont organisés en 12 systèmes de pensée plutôt qu'en verticaux thématiques.
+
+| Élément | Détail |
+|---|---|
+| **Données systèmes** | `src/_data/systemes.yaml` — 12 systèmes (id, name, short, color, description, tags, concepts) |
+| **Explorer interactif** | `src/systemes/explorer.html` — page standalone D3.js (bubble chart), copiée telle quelle dans dist/ |
+| **Pages hub auto** | `dist/systemes/cX/index.html` — générées par `build_systems()` dans `build.py` |
+| **Template hub** | `src/_layouts/systeme.html.j2` — hero coloré par système, grille articles, CTA explorer |
+| **Redirections** | `src/economie-energie/`, `src/pme-ia/`, `src/culture-entrepreneuriale/`, `src/sante-metabolique/`, `src/blog/` → meta-refresh vers `/systemes/cX/` ou `/articles/` |
+
+**build.py — fonctions clés ajoutées :**
+```python
+collect_all_articles(src)   # scanne tous les .md avec system: field → retourne liste avec src_dir + slug
+build_systems(env, site, all_articles, dist)  # groupe par système → dist/systemes/cX/index.html
+```
+- `systemes` est dans `SKIP_VERTICALS` (pas traité comme vertical générique)
+- `src/systemes/*.html` sont copiés statiquement dans `dist/systemes/`
+- Lien article dans hub : `/{{ article.src_dir }}/{{ article.slug }}/`
+
+**Répertoires scannés par `collect_all_articles` :**
+- `src/articles/` · `src/sante-metabolique/` · tout autre répertoire non exclu
+
+**explorer.html — données JS :**
+- Hardcodé dans le fichier (pas depuis systemes.yaml — page standalone)
+- Pour modifier les articles listés : éditer directement la const `SYSTEMES` dans le `<script>` de explorer.html
 
 ---
 
