@@ -1,5 +1,5 @@
 ---
-title: "Recruter un PDG par courriel : les 7 principes qui ouvrent les portes"
+title: "Vendre à un PDG par courriel : les 7 principes qui ouvrent des portes"
 description: "Le courriel froid ne fonctionne pas. Le courriel personnalisé, lui, ouvre des portes que même le meilleur réseau ne peut pas forcer. Voici la méthode testée pendant des années pour décrocher des rencontres avec des dirigeants partout au Québec — sans jamais quitter Roberval."
 date: "11 mai 2026"
 reading_time: "9 min"
@@ -10,7 +10,7 @@ slug: "recruter-pdg-par-courriel"
 layout: article.html.j2
 ---
 
-# Recruter un PDG par courriel : les 7 principes qui ouvrent les portes
+# Vendre à un PDG par courriel : les 7 principes qui ouvrent des portes
 
 Le courriel froid ne fonctionne pas. Le courriel personnalisé, lui, ouvre des portes que même le meilleur réseau ne peut pas forcer. Voici la méthode testée pendant des années pour décrocher des rencontres avec des dirigeants partout au Québec — de Rivière-du-Loup à Sept-Îles, de Matane à Montmagny — sans jamais quitter Roberval.
 
