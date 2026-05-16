@@ -273,14 +273,15 @@ footer { background: var(--noir); padding: 2.5rem 4rem; display: flex; align-ite
 <section class="newsletter reveal" id="newsletter">
   <div class="newsletter-inner">
     <span class="section-label">Infolettre ——</span>
-    <h2 class="nl-h2">Ce que j'observe sur le terrain,<em> une fois par mois.</em></h2>
-    <p class="nl-desc">Pas de contenu recyclé. Pas de promotion. Des analyses qui prennent position sur l'économie, l'énergie et les PME du Québec.</p>
-    <div class="nl-form">
-      <input type="text" placeholder="Votre prénom">
-      <input type="email" placeholder="Votre courriel">
-      <button type="button">Je m'abonne</button>
+    <h2 class="nl-h2">Une idée par semaine,<em> le vendredi matin.</em></h2>
+    <p class="nl-desc">Pas de digest, pas de liste de ressources. Une lettre — une idée développée sur l'économie, l'énergie, l'IA ou la culture entrepreneuriale du Québec. Contrat 90 jours : si tu n'ouvres rien, tu sors.</p>
+    <form class="nl-form" id="nl-form" novalidate>
+      <input type="text" id="nl-prenom" name="prenom" placeholder="Votre prénom" autocomplete="given-name">
+      <input type="email" id="nl-email" name="email" placeholder="Votre courriel" autocomplete="email">
+      <button type="submit" id="nl-btn">Je m'abonne</button>
+      <p class="nl-note" id="nl-feedback" style="display:none;"></p>
       <p class="nl-note">Désabonnement en un clic. Conforme à la Loi 25.</p>
-    </div>
+    </form>
   </div>
 </section>
 
@@ -307,6 +308,64 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── INFOLETTRE — fetch vers N8N ── */
+(function() {
+  // ⚠️ Remplacer par l'URL du webhook N8N une fois le workflow activé
+  var N8N_WEBHOOK_URL = 'https://n8n.pascalgagnon.ca/webhook/brevo-subscribe';
+
+  var form     = document.getElementById('nl-form');
+  var btn      = document.getElementById('nl-btn');
+  var feedback = document.getElementById('nl-feedback');
+
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var prenom = document.getElementById('nl-prenom').value.trim();
+    var email  = document.getElementById('nl-email').value.trim();
+
+    if (!prenom || !email) {
+      showFeedback('Merci de remplir ton prénom et ton courriel.', false);
+      return;
+    }
+
+    btn.textContent = 'Envoi…';
+    btn.disabled = true;
+    hideFeedback();
+
+    fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prenom: prenom, email: email })
+    })
+    .then(function(res) {
+      if (res.ok) {
+        showFeedback('Vérifie ton courriel — un lien de confirmation t\'attend.', true);
+        form.reset();
+      } else {
+        throw new Error('Erreur ' + res.status);
+      }
+    })
+    .catch(function() {
+      showFeedback('Une erreur s\'est produite. Réessaie dans un moment.', false);
+    })
+    .finally(function() {
+      btn.textContent = 'Je m\'abonne';
+      btn.disabled = false;
+    });
+  });
+
+  function showFeedback(msg, success) {
+    feedback.textContent = msg;
+    feedback.style.color   = success ? 'var(--bleu)' : '#c0392b';
+    feedback.style.display = 'block';
+  }
+  function hideFeedback() {
+    feedback.style.display = 'none';
+  }
+})();
 </script>
 </body>
 </html>
