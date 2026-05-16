@@ -114,11 +114,9 @@ Ce qui m'a le plus surpris : la qualité de la conversation une fois la porte ou
 
 C'est ça, le vrai secret : la personnalisation n'est pas une technique de vente. C'est une marque de respect. Et les gens qui se sentent respectés, ils ouvrent les portes.
 
-Pour aller plus loin, j'ai préparé un guide complet avec les gabarits, les séquences de suivi et la structure exacte de chaque courriel.
-
 <div class="article-cta">
-  <p class="article-cta__texte">Téléchargez le guide gratuit — <strong>Le Playbook du recrutement par courriel</strong> : 7 principes, 3 gabarits et la séquence complète.</p>
-  <a href="[URL_BREVO]" class="article-cta__bouton">Obtenir le guide gratuitement →</a>
+  <p class="article-cta__texte">Si ces idées résonnent, j'envoie une réflexion par semaine — une idée, un angle, une application concrète.</p>
+  <a href="/#newsletter" class="article-cta__bouton">S'inscrire à l'infolettre →</a>
 </div>
 
 — Pascal Gagnon
