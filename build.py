@@ -175,6 +175,31 @@ def build_vertical(src_dir, dist_dir, env, site, articles, default_layout="artic
                 print("+ " + vname + "/index.html (static)")
 
 
+def _parse_date(raw, fallback):
+    """Convertit une date en ISO 8601 (YYYY-MM-DD), supporte format FR et ISO."""
+    if not raw:
+        return fallback
+    s = str(raw).strip()
+    # Deja ISO
+    import re
+    if re.match(r'\d{4}-\d{2}-\d{2}', s):
+        return s[:10]
+    # Format francais : "11 mai 2026"
+    mois_fr = {
+        "janvier": "01", "fevrier": "02", "février": "02",
+        "mars": "03", "avril": "04", "mai": "05", "juin": "06",
+        "juillet": "07", "aout": "08", "août": "08",
+        "septembre": "09", "octobre": "10", "novembre": "11", "decembre": "12", "décembre": "12"
+    }
+    parts = s.lower().split()
+    if len(parts) == 3:
+        jour, mois, annee = parts
+        m = mois_fr.get(mois)
+        if m:
+            return f"{annee}-{m}-{int(jour):02d}"
+    return fallback
+
+
 def build_sitemap(all_articles_meta, dist, site):
     """Genere dist/sitemap.xml avec toutes les pages du site."""
     base_url = site.get("url", "https://pascalgagnon.ca").rstrip("/")
@@ -194,7 +219,7 @@ def build_sitemap(all_articles_meta, dist, site):
         slug = art.get("slug", "")
         if src_dir.startswith("systemes/") and slug:
             cx = src_dir.split("/")[1]
-            art_date = str(art.get("date", today))[:10]
+            art_date = _parse_date(art.get("date"), today)
             urls.append({"loc": f"{base_url}/systemes/{cx}/{slug}/", "priority": "0.7", "changefreq": "monthly", "lastmod": art_date})
 
     articles_src = SRC / "articles"
@@ -202,7 +227,7 @@ def build_sitemap(all_articles_meta, dist, site):
         for md_file in sorted(articles_src.glob("*.md")):
             meta, _ = load_yaml_frontmatter(md_file)
             slug = meta.get("slug", md_file.stem)
-            art_date = str(meta.get("date", today))[:10]
+            art_date = _parse_date(meta.get("date"), today)
             urls.append({"loc": f"{base_url}/articles/{slug}/", "priority": "0.7", "changefreq": "monthly", "lastmod": art_date})
 
     if (SRC / "confidentialite.md").exists():
