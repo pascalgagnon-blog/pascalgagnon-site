@@ -131,6 +131,7 @@ def build_system_articles(env, site, articles_data, dist):
             slug = meta.get("slug", md_file.stem)
             out_dir = dist / "systemes" / cx_dir.name / slug
             out_dir.mkdir(parents=True, exist_ok=True)
+            meta["page_url"] = f"/systemes/{cx_dir.name}/{slug}/"
             html = template.render(
                 site=site, page=meta,
                 content=content_html,
