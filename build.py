@@ -8,6 +8,7 @@ Usage : python3 build.py
 import shutil
 import yaml
 import markdown
+from datetime import date
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
@@ -174,6 +175,55 @@ def build_vertical(src_dir, dist_dir, env, site, articles, default_layout="artic
                 print("+ " + vname + "/index.html (static)")
 
 
+def build_sitemap(all_articles_meta, dist, site):
+    """Genere dist/sitemap.xml avec toutes les pages du site."""
+    base_url = site.get("url", "https://pascalgagnon.ca").rstrip("/")
+    today = date.today().isoformat()
+    urls = []
+
+    urls.append({"loc": base_url + "/", "priority": "1.0", "changefreq": "weekly", "lastmod": today})
+    urls.append({"loc": base_url + "/systemes/explorer.html", "priority": "0.8", "changefreq": "monthly", "lastmod": today})
+
+    systemes_data = load_data("systemes")
+    systemes = systemes_data.get("systemes", {})
+    for sid in sorted(systemes.keys()):
+        urls.append({"loc": f"{base_url}/systemes/{sid}/", "priority": "0.8", "changefreq": "weekly", "lastmod": today})
+
+    for art in all_articles_meta:
+        src_dir = art.get("src_dir", "")
+        slug = art.get("slug", "")
+        if src_dir.startswith("systemes/") and slug:
+            cx = src_dir.split("/")[1]
+            art_date = str(art.get("date", today))[:10]
+            urls.append({"loc": f"{base_url}/systemes/{cx}/{slug}/", "priority": "0.7", "changefreq": "monthly", "lastmod": art_date})
+
+    articles_src = SRC / "articles"
+    if articles_src.exists():
+        for md_file in sorted(articles_src.glob("*.md")):
+            meta, _ = load_yaml_frontmatter(md_file)
+            slug = meta.get("slug", md_file.stem)
+            art_date = str(meta.get("date", today))[:10]
+            urls.append({"loc": f"{base_url}/articles/{slug}/", "priority": "0.7", "changefreq": "monthly", "lastmod": art_date})
+
+    if (SRC / "confidentialite.md").exists():
+        urls.append({"loc": f"{base_url}/confidentialite/", "priority": "0.3", "changefreq": "yearly", "lastmod": today})
+
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for u in urls:
+        lines += [
+            "  <url>",
+            f"    <loc>{u['loc']}</loc>",
+            f"    <lastmod>{u['lastmod']}</lastmod>",
+            f"    <changefreq>{u['changefreq']}</changefreq>",
+            f"    <priority>{u['priority']}</priority>",
+            "  </url>",
+        ]
+    lines.append("</urlset>")
+    (dist / "sitemap.xml").write_text("\n".join(lines), encoding="utf-8")
+    print("+ sitemap.xml (" + str(len(urls)) + " URLs)")
+
+
 def build():
     if DIST.exists():
         try:
@@ -311,6 +361,16 @@ def build():
             if f.is_file() and f.suffix.lower() not in SKIP_COPY_EXTENSIONS:
                 shutil.copy(f, dist_systemes / f.name)
                 print("+ systemes/" + f.name + " (static)")
+
+    # Fichiers statiques racine (404.html, robots.txt)
+    for fname in ["404.html", "robots.txt"]:
+        src_file = SRC / fname
+        if src_file.exists():
+            shutil.copy(src_file, DIST / fname)
+            print("+ " + fname + " (static)")
+
+    # Sitemap
+    build_sitemap(all_articles_meta, DIST, site)
 
     print("\nSite genere dans /" + str(DIST))
 

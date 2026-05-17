@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page introuvable — Pascal Gagnon</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --noir: #0a0a0a;
+  --creme: #f5f0e8;
+  --bleu: #0063b2;
+  --bleu-clair: #4d92c9;
+  --bleu-pale: #e6eff7;
+}
+html, body { height: 100%; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--creme);
+  color: var(--noir);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAV */
+nav {
+  background: var(--noir);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--creme);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.nav__links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav__links a {
+  color: rgba(245,240,232,0.75);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+.nav__links a:hover { color: var(--creme); }
+
+/* HERO */
+.hero {
+  background: var(--noir);
+  color: var(--creme);
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+}
+.hero__number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(6rem, 20vw, 12rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--bleu);
+  opacity: 0.25;
+  display: block;
+  letter-spacing: -0.04em;
+}
+.hero__title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-top: -1rem;
+  position: relative;
+  z-index: 1;
+}
+.hero__subtitle {
+  font-size: 1.05rem;
+  color: rgba(245,240,232,0.7);
+  margin-top: 1rem;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* BODY */
+.content {
+  flex: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 2rem 4rem;
+  text-align: center;
+}
+.content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--noir);
+  margin-bottom: 2rem;
+}
+.btn {
+  display: inline-block;
+  background: var(--bleu);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 1.75rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 3px;
+  transition: background 0.2s;
+  margin: 0.4rem;
+}
+.btn:hover { background: var(--bleu-clair); }
+.btn--outline {
+  background: transparent;
+  color: var(--bleu);
+  border: 1.5px solid var(--bleu);
+}
+.btn--outline:hover { background: var(--bleu-pale); }
+
+.suggestions {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(10,10,10,0.1);
+}
+.suggestions__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--noir);
+}
+.suggestions__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.suggestions__links a {
+  color: var(--bleu);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--bleu-pale);
+  border-radius: 2rem;
+  background: var(--bleu-pale);
+  transition: background 0.2s;
+}
+.suggestions__links a:hover { background: #d0e4f5; }
+
+/* FOOTER */
+footer {
+  background: var(--noir);
+  color: rgba(245,240,232,0.5);
+  text-align: center;
+  padding: 1.5rem 2rem;
+  font-size: 0.8rem;
+}
+footer a { color: rgba(245,240,232,0.5); text-decoration: none; }
+footer a:hover { color: var(--creme); }
+
+@media (max-width: 600px) {
+  nav { padding: 1rem; }
+  .nav__links { gap: 1rem; }
+  .hero { padding: 3rem 1rem 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav__logo">Pascal Gagnon</a>
+  <ul class="nav__links">
+    <li><a href="/systemes/explorer.html">Explorer</a></li>
+    <li><a href="/#newsletter">Infolettre</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <span class="hero__number">404</span>
+  <h1 class="hero__title">Cette page n'existe plus.</h1>
+  <p class="hero__subtitle">Elle a peut-être déménagé, changé de nom, ou n'a jamais existé. Les 12 systèmes sont toujours là, eux.</p>
+</div>
+
+<div class="content">
+  <p>Si tu cherches un article sur l'IA, la santé métabolique, l'économie régionale ou la persuasion — tu es au bon endroit. Utilise l'explorateur ou retourne à l'accueil.</p>
+
+  <a href="/" class="btn">Retour à l'accueil</a>
+  <a href="/systemes/explorer.html" class="btn btn--outline">Explorer les 12 systèmes</a>
+
+  <div class="suggestions">
+    <p class="suggestions__title">Destinations populaires</p>
+    <div class="suggestions__links">
+      <a href="/systemes/c3/">IA &amp; Compétitivité</a>
+      <a href="/systemes/c6/">Santé métabolique</a>
+      <a href="/systemes/c4/">Économie &amp; IA</a>
+      <a href="/systemes/c1/">Persuasion &amp; Marketing</a>
+      <a href="/systemes/c12/">EROEI &amp; Transition</a>
+      <a href="/systemes/c11/">Organisation &amp; Culture</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Pascal Gagnon · <a href="/confidentialite/">Politique de confidentialité</a></p>
+</footer>
+
+</body>
+</html>
