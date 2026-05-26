@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ page.title }} — Pascal Gagnon</title>
 <meta name="description" content="{{ page.description }}">
-<link rel="canonical" href="https://pascalgagnon.ca/sante-metabolique/{{ page.slug }}/">
+{% if page.page_url %}<link rel="canonical" href="https://pascalgagnon.ca{{ page.page_url }}">{% endif %}
 
 <!-- Open Graph -->
 <meta property="og:title" content="{{ page.title }}">
 <meta property="og:description" content="{{ page.description }}">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://pascalgagnon.ca/sante-metabolique/{{ page.slug }}/">
+<meta property="og:url" content="https://pascalgagnon.ca{{ page.page_url }}">
 {% if page.image_hero %}<meta property="og:image" content="https://pascalgagnon.ca/assets/img/sante-metabolique/{{ page.image_hero }}">{% endif %}
 
 <!-- JSON-LD Article -->
@@ -24,8 +24,8 @@
   "author": { "@type": "Person", "name": "Pascal Gagnon", "url": "https://pascalgagnon.ca/a-propos/" },
   "publisher": { "@type": "Person", "name": "Pascal Gagnon", "url": "https://pascalgagnon.ca" },
   "datePublished": "{{ page.date }}",
-  "url": "https://pascalgagnon.ca/sante-metabolique/{{ page.slug }}/",
-  "mainEntityOfPage": "https://pascalgagnon.ca/sante-metabolique/{{ page.slug }}/",
+  "url": "https://pascalgagnon.ca{{ page.page_url }}",
+  "mainEntityOfPage": "https://pascalgagnon.ca{{ page.page_url }}",
   "about": { "@type": "Thing", "name": "Santé métabolique" }{% if page.image_hero %},
   "image": "https://pascalgagnon.ca/assets/img/sante-metabolique/{{ page.image_hero }}"{% endif %}
 }

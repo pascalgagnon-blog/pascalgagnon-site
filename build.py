@@ -166,6 +166,7 @@ def build_vertical(src_dir, dist_dir, env, site, articles, default_layout="artic
             slug = meta.get("slug", item.stem)
             out_dir = dist_dir / slug
             out_dir.mkdir(exist_ok=True)
+            meta["page_url"] = f"/{vname}/{slug}/"
             html = template.render(site=site, page=meta, content=content_html, articles=articles)
             (out_dir / "index.html").write_text(html, encoding="utf-8")
             print("+ " + vname + "/" + slug + "/index.html")
