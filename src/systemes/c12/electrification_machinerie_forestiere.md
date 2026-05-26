@@ -5,7 +5,7 @@ date: "23 mars 2026"
 reading_time: "9 min"
 vertical: "Économie forestière"
 tag: "ANALYSE DE DOSSIER"
-slug: "electrification_machinerie_forestiere"
+slug: "electrification-machinerie-forestiere"
 layout: article.html.j2
 system: c12
 ---
